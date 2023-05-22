@@ -20,3 +20,76 @@ type Comment @model {
   post: Post @belongsTo
   content: String!
 }
+
+type Organization @model {
+  id: ID!
+  name: String
+  owners: [User] @hasMany
+  employees: [User] @hasMany
+}
+
+type User @model {
+  id: ID!
+  title: String
+  type: String
+  firstName: String
+  middleName: String
+  lastName: String
+  salary: String
+  organization: Organization @belongsTo
+}
+
+type Tenant @model {
+  id: ID!
+  firstName: String
+  middleName: String
+  lastName: String
+  unit: Unit
+}
+
+type Property @model {
+  id: ID!
+  name: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+  poBox: String
+  buildings: [Building] @hasMany
+}
+
+type Building @model {
+  id: ID!
+  name: String
+  number: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+  poBox: String
+  property: Property @belongsTo
+  units: [Unit] @hasMany
+}
+
+type Unit @model {
+  id: ID!
+  name: String
+  number: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+  poBox: String
+  building: Building @belongsTo
+  serviceRequests: [ServiceRequest] @hasMany
+}
+
+type ServiceRequest @model {
+  id: ID!
+  requestor: Tenant
+  handler: User
+  unit: Unit @belongsTo
+  dateCreated: String
+  dateCompleted: String
+  note: String
+}
