@@ -303,6 +303,14 @@ export const getTenant = /* GraphQL */ `
           updatedAt
           propertyBuildingsId
         }
+        tenant {
+          id
+          firstName
+          middleName
+          lastName
+          createdAt
+          updatedAt
+        }
         serviceRequests {
           nextToken
         }
@@ -526,6 +534,27 @@ export const getUnit = /* GraphQL */ `
         updatedAt
         propertyBuildingsId
       }
+      tenant {
+        id
+        firstName
+        middleName
+        lastName
+        unit {
+          id
+          name
+          number
+          city
+          state
+          country
+          zipCode
+          poBox
+          createdAt
+          updatedAt
+          buildingUnitsId
+        }
+        createdAt
+        updatedAt
+      }
       serviceRequests {
         items {
           id
@@ -572,6 +601,14 @@ export const listUnits = /* GraphQL */ `
           createdAt
           updatedAt
           propertyBuildingsId
+        }
+        tenant {
+          id
+          firstName
+          middleName
+          lastName
+          createdAt
+          updatedAt
         }
         serviceRequests {
           nextToken
@@ -649,6 +686,14 @@ export const getServiceRequest = /* GraphQL */ `
           createdAt
           updatedAt
           propertyBuildingsId
+        }
+        tenant {
+          id
+          firstName
+          middleName
+          lastName
+          createdAt
+          updatedAt
         }
         serviceRequests {
           nextToken

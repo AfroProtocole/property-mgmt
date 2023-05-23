@@ -81,6 +81,7 @@ type Unit @model {
   zipCode: String
   poBox: String
   building: Building @belongsTo
+  tenant: Tenant
   serviceRequests: [ServiceRequest] @hasMany
 }
 
