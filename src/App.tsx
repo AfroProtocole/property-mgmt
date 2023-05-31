@@ -1,32 +1,31 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { SideNavigation, TopNavigation } from "./components";
 import { Content } from "antd/es/layout/layout";
 import { SideActions } from "./components/SideActions";
+import { HomePage } from "./pages";
+import { FinancePage } from "./pages";
 
 const App: React.FC = () => {
   return (
     <Layout>
       <TopNavigation />
       <Layout>
-        <Layout style={{ padding: "0 24px 24px" }} hasSider={true}>
+        <Layout
+          style={{ padding: "0 24px 24px", display: "flex" }}
+          hasSider={true}
+        >
           <SideNavigation />
 
-          <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
-          <Content
-            style={{
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-              // background: colorBgContainer,
-            }}
-          >
-            Content
-          </Content>
+          <div style={{ flex: 1 }}>
+            <Router>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/finance" element={<FinancePage />} />
+              </Routes>
+            </Router>
+          </div>
           <SideActions />
         </Layout>
       </Layout>
