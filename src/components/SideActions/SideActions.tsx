@@ -4,11 +4,10 @@ import {
   LaptopOutlined,
   NotificationOutlined,
   UserOutlined,
-  RightOutlined,
 } from "@ant-design/icons";
 import React from "react";
 
-const SideNavigation = () => {
+const SideActions = () => {
   const { Sider } = Layout;
   const {
     token: { colorBgContainer },
@@ -35,35 +34,19 @@ const SideNavigation = () => {
       }),
     };
   });
-  const [isMenuCollapsed, setIsMenuCollpased] = React.useState(false);
   return (
     <>
-      <Sider
-        width={200}
-        style={{ background: colorBgContainer }}
-        collapsible={true}
-        collapsed={isMenuCollapsed}
-        reverseArrow={false}
-        trigger={null}
-      >
+      <Sider width={200} style={{ background: colorBgContainer }}>
         <Menu
           mode="inline"
           defaultSelectedKeys={["1"]}
           defaultOpenKeys={["sub1"]}
           style={{ height: "100%", borderRight: 0 }}
-        >
-          <Menu.Item
-            onClick={() => {
-              setIsMenuCollpased(!isMenuCollapsed);
-            }}
-          >
-            <RightOutlined />
-            {isMenuCollapsed ? "Show" : "Hide"}
-          </Menu.Item>
-        </Menu>
+          items={items2}
+        />
       </Sider>
     </>
   );
 };
 
-export default SideNavigation;
+export default SideActions;
