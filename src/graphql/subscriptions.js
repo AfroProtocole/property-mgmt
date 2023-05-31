@@ -480,6 +480,14 @@ export const onCreateTenant = /* GraphQL */ `
           updatedAt
           propertyBuildingsId
         }
+        tenant {
+          id
+          firstName
+          middleName
+          lastName
+          createdAt
+          updatedAt
+        }
         serviceRequests {
           nextToken
         }
@@ -521,6 +529,14 @@ export const onUpdateTenant = /* GraphQL */ `
           updatedAt
           propertyBuildingsId
         }
+        tenant {
+          id
+          firstName
+          middleName
+          lastName
+          createdAt
+          updatedAt
+        }
         serviceRequests {
           nextToken
         }
@@ -561,6 +577,14 @@ export const onDeleteTenant = /* GraphQL */ `
           createdAt
           updatedAt
           propertyBuildingsId
+        }
+        tenant {
+          id
+          firstName
+          middleName
+          lastName
+          createdAt
+          updatedAt
         }
         serviceRequests {
           nextToken
@@ -846,6 +870,27 @@ export const onCreateUnit = /* GraphQL */ `
         updatedAt
         propertyBuildingsId
       }
+      tenant {
+        id
+        firstName
+        middleName
+        lastName
+        unit {
+          id
+          name
+          number
+          city
+          state
+          country
+          zipCode
+          poBox
+          createdAt
+          updatedAt
+          buildingUnitsId
+        }
+        createdAt
+        updatedAt
+      }
       serviceRequests {
         items {
           id
@@ -902,6 +947,27 @@ export const onUpdateUnit = /* GraphQL */ `
         updatedAt
         propertyBuildingsId
       }
+      tenant {
+        id
+        firstName
+        middleName
+        lastName
+        unit {
+          id
+          name
+          number
+          city
+          state
+          country
+          zipCode
+          poBox
+          createdAt
+          updatedAt
+          buildingUnitsId
+        }
+        createdAt
+        updatedAt
+      }
       serviceRequests {
         items {
           id
@@ -957,6 +1023,27 @@ export const onDeleteUnit = /* GraphQL */ `
         createdAt
         updatedAt
         propertyBuildingsId
+      }
+      tenant {
+        id
+        firstName
+        middleName
+        lastName
+        unit {
+          id
+          name
+          number
+          city
+          state
+          country
+          zipCode
+          poBox
+          createdAt
+          updatedAt
+          buildingUnitsId
+        }
+        createdAt
+        updatedAt
       }
       serviceRequests {
         items {
@@ -1044,6 +1131,14 @@ export const onCreateServiceRequest = /* GraphQL */ `
           updatedAt
           propertyBuildingsId
         }
+        tenant {
+          id
+          firstName
+          middleName
+          lastName
+          createdAt
+          updatedAt
+        }
         serviceRequests {
           nextToken
         }
@@ -1128,6 +1223,14 @@ export const onUpdateServiceRequest = /* GraphQL */ `
           updatedAt
           propertyBuildingsId
         }
+        tenant {
+          id
+          firstName
+          middleName
+          lastName
+          createdAt
+          updatedAt
+        }
         serviceRequests {
           nextToken
         }
@@ -1211,6 +1314,14 @@ export const onDeleteServiceRequest = /* GraphQL */ `
           createdAt
           updatedAt
           propertyBuildingsId
+        }
+        tenant {
+          id
+          firstName
+          middleName
+          lastName
+          createdAt
+          updatedAt
         }
         serviceRequests {
           nextToken
