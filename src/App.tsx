@@ -1,10 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
-import { SideNavigation, TopNavigation } from "./components";
-import { Content } from "antd/es/layout/layout";
-import { SideActions } from "./components/SideActions";
-import { HomePage } from "./pages";
+import { Layout } from "antd";
+import { SideNavigation, TopNavigation, SideActions } from "./components";
+import { HomePage, SignUpPage } from "./pages";
 import { FinancePage } from "./pages";
 
 const App: React.FC = () => {
@@ -22,6 +20,7 @@ const App: React.FC = () => {
             <Router>
               <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/finance" element={<FinancePage />} />
               </Routes>
             </Router>

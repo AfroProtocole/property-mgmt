@@ -17,7 +17,7 @@ const HomePage = () => {
           // background: colorBgContainer,
         }}
       >
-        <Button> Create User</Button>
+        <Button href="/signUp"> Create User</Button>
       </Content>
     </>
   );
