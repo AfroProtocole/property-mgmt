@@ -9,7 +9,7 @@ const SignUpForm = () => {
     <>
       <Form form={formInstance} onFinish={formState.handleSubmit}>
         <Form.Item>
-          <Input value={"testing"} disabled={true}></Input>
+          <Input value={"testing data"} disabled={true} name="testing"></Input>
         </Form.Item>
         <Form.Item>
           <Popconfirm

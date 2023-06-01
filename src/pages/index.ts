@@ -1,3 +1,4 @@
-export { FinancePage } from "./FinancePage";
-export { HomePage } from "./HomePage";
-export { SignUpPage } from "./SignUpPage";
+export * from "./FinancePage";
+export * from "./HomePage";
+export * from "./SignUpPage";
+export * from "./CreateOrganizationPage";

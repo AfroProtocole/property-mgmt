@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import { Layout } from "antd";
 import { SideNavigation, TopNavigation, SideActions } from "./components";
-import { HomePage, SignUpPage } from "./pages";
+import { CreateOrganizationPage, HomePage, SignUpPage } from "./pages";
 import { FinancePage } from "./pages";
 
 const App: React.FC = () => {
@@ -20,6 +20,7 @@ const App: React.FC = () => {
             <Router>
               <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/testing" element={<CreateOrganizationPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/finance" element={<FinancePage />} />
               </Routes>
