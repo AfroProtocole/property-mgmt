@@ -2,33 +2,33 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
-type Blog @model {
+type Blog @model @auth(rules: [{allow: public}]) { id: ID! name: String } {
   id: ID!
   name: String!
   posts: [Post] @hasMany
 }
 
-type Post @model {
+type Post @model @auth(rules: [{allow: public}]) { id: ID! name: String } {
   id: ID!
   title: String!
   blog: Blog @belongsTo
   comments: [Comment] @hasMany
 }
 
-type Comment @model {
+type Comment @model @auth(rules: [{allow: public}]) { id: ID! name: String } {
   id: ID!
   post: Post @belongsTo
   content: String!
 }
 
-type Organization @model {
+type Organization @model @auth(rules: [{allow: public}]) { id: ID! name: String } {
   id: ID!
   name: String
   owners: [User] @hasMany
   employees: [User] @hasMany
 }
 
-type User @model {
+type User @model @auth(rules: [{allow: public}]) { id: ID! name: String } {
   id: ID!
   title: String
   type: String
@@ -39,7 +39,7 @@ type User @model {
   organization: Organization @belongsTo
 }
 
-type Tenant @model {
+type Tenant @model @auth(rules: [{allow: public}]) { id: ID! name: String } {
   id: ID!
   firstName: String
   middleName: String
@@ -47,7 +47,7 @@ type Tenant @model {
   unit: Unit
 }
 
-type Property @model {
+type Property @model @auth(rules: [{allow: public}]) { id: ID! name: String } {
   id: ID!
   name: String
   city: String
@@ -58,7 +58,7 @@ type Property @model {
   buildings: [Building] @hasMany
 }
 
-type Building @model {
+type Building @model @auth(rules: [{allow: public}]) { id: ID! name: String } {
   id: ID!
   name: String
   number: String
@@ -71,7 +71,7 @@ type Building @model {
   units: [Unit] @hasMany
 }
 
-type Unit @model {
+type Unit @model @auth(rules: [{allow: public}]) { id: ID! name: String } {
   id: ID!
   name: String
   number: String
@@ -85,7 +85,7 @@ type Unit @model {
   serviceRequests: [ServiceRequest] @hasMany
 }
 
-type ServiceRequest @model {
+type ServiceRequest @model @auth(rules: [{allow: public}]) { id: ID! name: String } {
   id: ID!
   requestor: Tenant
   handler: User

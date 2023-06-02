@@ -11,12 +11,24 @@ const App: React.FC = () => {
       <TopNavigation />
       <Layout>
         <Layout
-          style={{ padding: "0 24px 24px", display: "flex" }}
+          style={{
+            padding: "0 24px 24px",
+            display: "flex",
+            height: "100%",
+            maxHeight: 1000,
+          }}
           hasSider={true}
         >
           <SideNavigation />
 
-          <div style={{ flex: 1 }}>
+          <div
+            style={{
+              flex: 1,
+              height: "100%",
+              maxHeight: 1000,
+              paddingTop: "2rem",
+            }}
+          >
             <Router>
               <Routes>
                 <Route path="/" element={<HomePage />} />

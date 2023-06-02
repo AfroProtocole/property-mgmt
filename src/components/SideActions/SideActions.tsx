@@ -36,7 +36,14 @@ const SideActions = () => {
   });
   return (
     <>
-      <Sider width={200} style={{ background: colorBgContainer }}>
+      <Sider
+        width={200}
+        style={{
+          background: colorBgContainer,
+          marginLeft: "2rem",
+          height: "100%",
+        }}
+      >
         <Menu
           mode="inline"
           defaultSelectedKeys={["1"]}
