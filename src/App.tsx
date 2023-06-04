@@ -4,8 +4,9 @@ import { Layout } from "antd";
 import { SideNavigation, TopNavigation, SideActions } from "./components";
 import { CreateOrganizationPage, HomePage, SignUpPage } from "./pages";
 import { FinancePage } from "./pages";
-import { Auth, API } from "aws-amplify";
-
+import { Auth, API, Amplify } from "aws-amplify";
+import awsconfig from "./aws-exports";
+Amplify.configure(awsconfig);
 
 /**
  * sign-up:
@@ -32,6 +33,7 @@ try {
  * @returns 
  */
 const App: React.FC = () => {
+
   return (
     <Layout>
       <TopNavigation />

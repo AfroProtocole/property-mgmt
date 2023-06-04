@@ -1,16 +1,19 @@
 export type User = {
-  firstname: String;
-  lastname: String;
-  type: String;
-  title: String;
-  middleName?: String;
-  salary?: String;
+  firstname: string;
+  lastname: string;
+  type: string;
+  title: string;
+  middleName?: string;
+  salary?: string;
   organization?: any;
 };
 
 export type UserForm = {
-  firstname: String;
-  lastname: String;
-  middleName?: String;
+  firstname: string;
+  lastname: string;
+  middleName?: string;
   orgStatus: "joining" | "new" | "none";
+  email: string;
+  username: string;
+  password: string;
 };

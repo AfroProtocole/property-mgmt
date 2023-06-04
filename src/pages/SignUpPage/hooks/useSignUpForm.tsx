@@ -2,7 +2,7 @@ import { Form, FormInstance } from "antd";
  import { useNavigate } from "react-router-dom";
 import React from "react";
 import { createUser as createUserMutation } from "../../../graphql/mutations";
-import { API } from "aws-amplify";
+import { Auth, API } from "aws-amplify";
 import { User, UserForm } from "../types";
 
 const useSignUpForm = ({
@@ -34,6 +34,21 @@ const useSignUpForm = ({
       formData.orgStatus == "none" || formData.orgStatus == "new"
         ? "owner"
         : "employee";
+    try {
+      const params = {
+        username: formData.username,
+        password: formData.password,
+      };
+      const { user } = await Auth.signUp(
+        params,
+        formData.firstname,
+        formData.middleName || "",
+        formData.lastname
+      );
+      console.log(user);
+    } catch (error) {
+      console.log("error signing up:", error);
+    }
     await API.graphql({
       query: createUserMutation,
       variables: {
