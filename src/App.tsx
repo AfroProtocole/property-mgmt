@@ -5,11 +5,11 @@ import { SideNavigation, TopNavigation, SideActions } from "./components";
 import { CreateOrganizationPage, HomePage, SignUpPage } from "./pages";
 import { FinancePage } from "./pages";
 import { Auth, API } from "aws-amplify";
-import { Authenticator } from "@aws-amplify/ui-react";
+
 
 /**
  * sign-up:
-try {
+ * try {
     const { user } = await Auth.signUp({ username, password });
     console.log(user);
 } catch (error) {
@@ -32,12 +32,6 @@ try {
  * @returns 
  */
 const App: React.FC = () => {
-  // try {
-  //   const { user } = await Auth.signUp({ username, password });
-  //   console.log(user);
-  // } catch (error) {
-  //   console.log("error signing up:", error);
-  // }
   return (
     <Layout>
       <TopNavigation />
