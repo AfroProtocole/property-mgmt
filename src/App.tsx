@@ -4,7 +4,33 @@ import { Layout } from "antd";
 import { SideNavigation, TopNavigation, SideActions } from "./components";
 import { CreateOrganizationPage, HomePage, SignUpPage } from "./pages";
 import { FinancePage } from "./pages";
+import { Auth, API } from "aws-amplify";
 
+
+/**
+ * sign-up:
+ * try {
+    const { user } = await Auth.signUp({ username, password });
+    console.log(user);
+} catch (error) {
+    console.log('error signing up:', error);
+}
+
+sign-in:
+try {
+    const user = await Auth.signIn(username, password);
+} catch (error) {
+    console.log('error signing in', error);
+}
+
+sign-out:
+try {
+    await Auth.signOut();
+} catch (error) {
+    console.log('error signing out: ', error);
+}
+ * @returns 
+ */
 const App: React.FC = () => {
   return (
     <Layout>
