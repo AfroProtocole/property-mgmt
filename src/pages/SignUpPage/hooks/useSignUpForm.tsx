@@ -49,21 +49,25 @@ const useSignUpForm = ({
     } catch (error) {
       console.log("error signing up:", error);
     }
-    await API.graphql({
-      query: createUserMutation,
-      variables: {
-        input: {
-          title: title,
-          type: type,
-          firstName: formData.firstname,
-          middleName: formData.middleName || "",
-          lastName: formData.lastname,
-          salary: "",
-          organization:
-            formData.orgStatus != "none" ? { orgName: "pending" } : null,
-        },
-      },
-    });
+      
+      try {
+        const val = await API.graphql({
+          query: createUserMutation,
+          variables: {
+            input: {
+              title: title,
+              type: type,
+              firstName: formData.firstname,
+              middleName: formData.middleName || "",
+              lastName: formData.lastname,
+            },
+          },
+        });
+        console.log("user created", val);
+      } catch (error) {
+        console.log("error using api", error);
+      }
+
     navigate("/testing", {
       state: { test: formData.firstname || "no testing" },
     });
