@@ -3,7 +3,7 @@ import { Form, FormInstance } from "antd";
 import React from "react";
 import { createUser as createUserMutation } from "../../../graphql/mutations";
 import { Auth, API } from "aws-amplify";
-import { User, UserForm } from "../types";
+import { User, UserForm } from "../../../types";
 
 const useSignUpForm = ({
   formInstance,
@@ -26,14 +26,8 @@ const useSignUpForm = ({
 
   const handleSubmit = async (formData: UserForm) => {
     console.log("form data", formData);
-    const title =
-      formData.orgStatus == "none" || formData.orgStatus == "new"
-        ? "owner"
-        : "employee";
-    const type =
-      formData.orgStatus == "none" || formData.orgStatus == "new"
-        ? "owner"
-        : "employee";
+    const title = "owner";
+    const type = "independent";
     try {
       const params = {
         username: formData.username,
@@ -49,24 +43,24 @@ const useSignUpForm = ({
     } catch (error) {
       console.log("error signing up:", error);
     }
-      
-      try {
-        const val = await API.graphql({
-          query: createUserMutation,
-          variables: {
-            input: {
-              title: title,
-              type: type,
-              firstName: formData.firstname,
-              middleName: formData.middleName || "",
-              lastName: formData.lastname,
-            },
+
+    try {
+      const val = await API.graphql({
+        query: createUserMutation,
+        variables: {
+          input: {
+            title: title,
+            type: type,
+            firstName: formData.firstname,
+            middleName: formData.middleName || "",
+            lastName: formData.lastname,
           },
-        });
-        console.log("user created", val);
-      } catch (error) {
-        console.log("error using api", error);
-      }
+        },
+      });
+      console.log("user created", val);
+    } catch (error) {
+      console.log("error using api", error);
+    }
 
     navigate("/testing", {
       state: { test: formData.firstname || "no testing" },

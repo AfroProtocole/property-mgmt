@@ -5,8 +5,11 @@ import {
   NotificationOutlined,
   UserOutlined,
   RightOutlined,
+  DeploymentUnitOutlined,
+  UserAddOutlined,
 } from "@ant-design/icons";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SideNavigation = () => {
   const { Sider } = Layout;
@@ -14,27 +17,6 @@ const SideNavigation = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const items2: MenuProps["items"] = [
-    UserOutlined,
-    LaptopOutlined,
-    NotificationOutlined,
-  ].map((icon, index) => {
-    const key = String(index + 1);
-
-    return {
-      key: `sub${key}`,
-      icon: React.createElement(icon),
-      label: `subnav ${key}`,
-
-      children: new Array(4).fill(null).map((_, j) => {
-        const subKey = index * 4 + j + 1;
-        return {
-          key: subKey,
-          label: `option${subKey}`,
-        };
-      }),
-    };
-  });
   const [isMenuCollapsed, setIsMenuCollpased] = React.useState(false);
   return (
     <>
@@ -53,12 +35,18 @@ const SideNavigation = () => {
           style={{ height: "100%", borderRight: 0 }}
         >
           <Menu.Item
+            icon={<RightOutlined />}
             onClick={() => {
               setIsMenuCollpased(!isMenuCollapsed);
             }}
           >
-            <RightOutlined />
             {isMenuCollapsed ? "Show" : "Hide"}
+          </Menu.Item>
+          <Menu.Item icon={<UserAddOutlined />}>
+            <Link to="/signup">Create User </Link>
+          </Menu.Item>
+          <Menu.Item icon={<DeploymentUnitOutlined />}>
+            <Link to="/organization/new">Create Organization</Link>
           </Menu.Item>
         </Menu>
       </Sider>

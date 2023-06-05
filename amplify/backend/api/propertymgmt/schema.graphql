@@ -3,30 +3,41 @@
 input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 } # FOR TESTING ONLY!
-type Blog @model {
-  id: ID!
-  name: String!
-  posts: [Post] @hasMany
-}
+#type Blog @model {
+#  id: ID!
+#  name: String!
+#  posts: [Post] @hasMany
+# }
 
-type Post @model {
-  id: ID!
-  title: String!
-  blog: Blog @belongsTo
-  comments: [Comment] @hasMany
-}
+# type Post @model {
+#  id: ID!
+#  title: String!
+#  blog: Blog @belongsTo
+#  comments: [Comment] @hasMany
+# }
 
-type Comment @model {
-  id: ID!
-  post: Post @belongsTo
-  content: String!
-}
+# type Comment @model {
+#  id: ID!
+#  post: Post @belongsTo
+#  content: String!
+# }
 
 type Organization @model {
   id: ID!
   name: String
   owners: [User] @hasMany
   employees: [User] @hasMany
+}
+
+type Organization2 {
+  id: ID!
+  name: String
+  owners(num: int, after: string): OwnerConnection
+}
+
+type OwnerConnection {
+  cursor: string
+  owners: [User]
 }
 
 type User @model {

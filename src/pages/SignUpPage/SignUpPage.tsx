@@ -2,6 +2,7 @@ import { Breadcrumb } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
 import { SignUpForm } from "./components/";
 import { Authenticator } from "@aws-amplify/ui-react";
+import { Content } from "antd/es/layout/layout";
 
 const SignUpPage = () => {
   return (
@@ -48,7 +49,9 @@ const SignUpPage = () => {
           </div>
         </div>
       </Authenticator> */}
-      <SignUpForm />
+      <Content>
+        <SignUpForm />
+      </Content>
     </>
   );
 };

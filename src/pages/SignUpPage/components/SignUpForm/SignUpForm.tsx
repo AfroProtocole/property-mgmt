@@ -35,9 +35,6 @@ const SignUpForm = () => {
             <Form.Item label="Last Name" name={"lastName"}>
               <Input name="lastName" />
             </Form.Item>
-            <Form.Item label="Organization Status" name={"orgStatus"}>
-              <Select options={orgStatusOptions} />
-            </Form.Item>
             <Form.Item label="Email" name="email">
               <Input type="email" name="email" />
             </Form.Item>
