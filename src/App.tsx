@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import { Layout } from "antd";
 import { SideNavigation, TopNavigation, SideActions } from "./components";
-import { CreateOrganizationPage, HomePage, SignUpPage } from "./pages";
+import { CreateOrganizationPage, LandingPage, HomePage, SignUpPage } from "./pages";
 import { FinancePage } from "./pages";
 import { Auth, API, Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
@@ -33,6 +33,8 @@ try {
  * @returns 
  */
 const App: React.FC = () => {
+
+const loggedIn = false; 
 
   return (
     <Router>
