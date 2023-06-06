@@ -5,8 +5,8 @@ import { SideNavigation, TopNavigation, SideActions } from "./components";
 import { CreateOrganizationPage, LandingPage, HomePage, SignUpPage } from "./pages";
 import { FinancePage } from "./pages";
 import { Auth, API, Amplify } from "aws-amplify";
-import awsconfig from "./aws-exports";
-Amplify.configure(awsconfig);
+// import awsconfig from "./aws-exports";
+// Amplify.configure(awsconfig);
 
 /**
  * sign-up:
