@@ -31,6 +31,8 @@ export default function UnitUpdateForm(props) {
     country: "",
     zipCode: "",
     poBox: "",
+    buildingID: "",
+    tenantID: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [number, setNumber] = React.useState(initialValues.number);
@@ -39,6 +41,8 @@ export default function UnitUpdateForm(props) {
   const [country, setCountry] = React.useState(initialValues.country);
   const [zipCode, setZipCode] = React.useState(initialValues.zipCode);
   const [poBox, setPoBox] = React.useState(initialValues.poBox);
+  const [buildingID, setBuildingID] = React.useState(initialValues.buildingID);
+  const [tenantID, setTenantID] = React.useState(initialValues.tenantID);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = unitRecord
@@ -51,6 +55,8 @@ export default function UnitUpdateForm(props) {
     setCountry(cleanValues.country);
     setZipCode(cleanValues.zipCode);
     setPoBox(cleanValues.poBox);
+    setBuildingID(cleanValues.buildingID);
+    setTenantID(cleanValues.tenantID);
     setErrors({});
   };
   const [unitRecord, setUnitRecord] = React.useState(unitModelProp);
@@ -72,6 +78,8 @@ export default function UnitUpdateForm(props) {
     country: [],
     zipCode: [],
     poBox: [],
+    buildingID: [],
+    tenantID: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -106,6 +114,8 @@ export default function UnitUpdateForm(props) {
           country,
           zipCode,
           poBox,
+          buildingID,
+          tenantID,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -168,6 +178,8 @@ export default function UnitUpdateForm(props) {
               country,
               zipCode,
               poBox,
+              buildingID,
+              tenantID,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -198,6 +210,8 @@ export default function UnitUpdateForm(props) {
               country,
               zipCode,
               poBox,
+              buildingID,
+              tenantID,
             };
             const result = onChange(modelFields);
             value = result?.number ?? value;
@@ -228,6 +242,8 @@ export default function UnitUpdateForm(props) {
               country,
               zipCode,
               poBox,
+              buildingID,
+              tenantID,
             };
             const result = onChange(modelFields);
             value = result?.city ?? value;
@@ -258,6 +274,8 @@ export default function UnitUpdateForm(props) {
               country,
               zipCode,
               poBox,
+              buildingID,
+              tenantID,
             };
             const result = onChange(modelFields);
             value = result?.state ?? value;
@@ -288,6 +306,8 @@ export default function UnitUpdateForm(props) {
               country: value,
               zipCode,
               poBox,
+              buildingID,
+              tenantID,
             };
             const result = onChange(modelFields);
             value = result?.country ?? value;
@@ -318,6 +338,8 @@ export default function UnitUpdateForm(props) {
               country,
               zipCode: value,
               poBox,
+              buildingID,
+              tenantID,
             };
             const result = onChange(modelFields);
             value = result?.zipCode ?? value;
@@ -348,6 +370,8 @@ export default function UnitUpdateForm(props) {
               country,
               zipCode,
               poBox: value,
+              buildingID,
+              tenantID,
             };
             const result = onChange(modelFields);
             value = result?.poBox ?? value;
@@ -361,6 +385,70 @@ export default function UnitUpdateForm(props) {
         errorMessage={errors.poBox?.errorMessage}
         hasError={errors.poBox?.hasError}
         {...getOverrideProps(overrides, "poBox")}
+      ></TextField>
+      <TextField
+        label="Building id"
+        isRequired={false}
+        isReadOnly={false}
+        value={buildingID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              number,
+              city,
+              state,
+              country,
+              zipCode,
+              poBox,
+              buildingID: value,
+              tenantID,
+            };
+            const result = onChange(modelFields);
+            value = result?.buildingID ?? value;
+          }
+          if (errors.buildingID?.hasError) {
+            runValidationTasks("buildingID", value);
+          }
+          setBuildingID(value);
+        }}
+        onBlur={() => runValidationTasks("buildingID", buildingID)}
+        errorMessage={errors.buildingID?.errorMessage}
+        hasError={errors.buildingID?.hasError}
+        {...getOverrideProps(overrides, "buildingID")}
+      ></TextField>
+      <TextField
+        label="Tenant id"
+        isRequired={false}
+        isReadOnly={false}
+        value={tenantID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              number,
+              city,
+              state,
+              country,
+              zipCode,
+              poBox,
+              buildingID,
+              tenantID: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.tenantID ?? value;
+          }
+          if (errors.tenantID?.hasError) {
+            runValidationTasks("tenantID", value);
+          }
+          setTenantID(value);
+        }}
+        onBlur={() => runValidationTasks("tenantID", tenantID)}
+        errorMessage={errors.tenantID?.errorMessage}
+        hasError={errors.tenantID?.hasError}
+        {...getOverrideProps(overrides, "tenantID")}
       ></TextField>
       <Flex
         justifyContent="space-between"

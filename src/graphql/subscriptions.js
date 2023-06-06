@@ -239,38 +239,6 @@ export const onCreateOrganization = /* GraphQL */ `
     onCreateOrganization(filter: $filter) {
       id
       name
-      owners {
-        items {
-          id
-          title
-          type
-          firstName
-          middleName
-          lastName
-          salary
-          createdAt
-          updatedAt
-          organizationOwnersId
-          organizationEmployeesId
-        }
-        nextToken
-      }
-      employees {
-        items {
-          id
-          title
-          type
-          firstName
-          middleName
-          lastName
-          salary
-          createdAt
-          updatedAt
-          organizationOwnersId
-          organizationEmployeesId
-        }
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -283,38 +251,6 @@ export const onUpdateOrganization = /* GraphQL */ `
     onUpdateOrganization(filter: $filter) {
       id
       name
-      owners {
-        items {
-          id
-          title
-          type
-          firstName
-          middleName
-          lastName
-          salary
-          createdAt
-          updatedAt
-          organizationOwnersId
-          organizationEmployeesId
-        }
-        nextToken
-      }
-      employees {
-        items {
-          id
-          title
-          type
-          firstName
-          middleName
-          lastName
-          salary
-          createdAt
-          updatedAt
-          organizationOwnersId
-          organizationEmployeesId
-        }
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -327,38 +263,6 @@ export const onDeleteOrganization = /* GraphQL */ `
     onDeleteOrganization(filter: $filter) {
       id
       name
-      owners {
-        items {
-          id
-          title
-          type
-          firstName
-          middleName
-          lastName
-          salary
-          createdAt
-          updatedAt
-          organizationOwnersId
-          organizationEmployeesId
-        }
-        nextToken
-      }
-      employees {
-        items {
-          id
-          title
-          type
-          firstName
-          middleName
-          lastName
-          salary
-          createdAt
-          updatedAt
-          organizationOwnersId
-          organizationEmployeesId
-        }
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -374,22 +278,9 @@ export const onCreateUser = /* GraphQL */ `
       middleName
       lastName
       salary
-      organization {
-        id
-        name
-        owners {
-          nextToken
-        }
-        employees {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      organizationID
       createdAt
       updatedAt
-      organizationOwnersId
-      organizationEmployeesId
     }
   }
 `;
@@ -403,22 +294,9 @@ export const onUpdateUser = /* GraphQL */ `
       middleName
       lastName
       salary
-      organization {
-        id
-        name
-        owners {
-          nextToken
-        }
-        employees {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      organizationID
       createdAt
       updatedAt
-      organizationOwnersId
-      organizationEmployeesId
     }
   }
 `;
@@ -432,22 +310,9 @@ export const onDeleteUser = /* GraphQL */ `
       middleName
       lastName
       salary
-      organization {
-        id
-        name
-        owners {
-          nextToken
-        }
-        employees {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      organizationID
       createdAt
       updatedAt
-      organizationOwnersId
-      organizationEmployeesId
     }
   }
 `;
@@ -458,43 +323,7 @@ export const onCreateTenant = /* GraphQL */ `
       firstName
       middleName
       lastName
-      unit {
-        id
-        name
-        number
-        city
-        state
-        country
-        zipCode
-        poBox
-        building {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          propertyBuildingsId
-        }
-        tenant {
-          id
-          firstName
-          middleName
-          lastName
-          createdAt
-          updatedAt
-        }
-        serviceRequests {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        buildingUnitsId
-      }
+      unitID
       createdAt
       updatedAt
     }
@@ -507,43 +336,7 @@ export const onUpdateTenant = /* GraphQL */ `
       firstName
       middleName
       lastName
-      unit {
-        id
-        name
-        number
-        city
-        state
-        country
-        zipCode
-        poBox
-        building {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          propertyBuildingsId
-        }
-        tenant {
-          id
-          firstName
-          middleName
-          lastName
-          createdAt
-          updatedAt
-        }
-        serviceRequests {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        buildingUnitsId
-      }
+      unitID
       createdAt
       updatedAt
     }
@@ -556,43 +349,7 @@ export const onDeleteTenant = /* GraphQL */ `
       firstName
       middleName
       lastName
-      unit {
-        id
-        name
-        number
-        city
-        state
-        country
-        zipCode
-        poBox
-        building {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          propertyBuildingsId
-        }
-        tenant {
-          id
-          firstName
-          middleName
-          lastName
-          createdAt
-          updatedAt
-        }
-        serviceRequests {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        buildingUnitsId
-      }
+      unitID
       createdAt
       updatedAt
     }
@@ -608,22 +365,6 @@ export const onCreateProperty = /* GraphQL */ `
       country
       zipCode
       poBox
-      buildings {
-        items {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          propertyBuildingsId
-        }
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -639,22 +380,6 @@ export const onUpdateProperty = /* GraphQL */ `
       country
       zipCode
       poBox
-      buildings {
-        items {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          propertyBuildingsId
-        }
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -670,22 +395,6 @@ export const onDeleteProperty = /* GraphQL */ `
       country
       zipCode
       poBox
-      buildings {
-        items {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          propertyBuildingsId
-        }
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -702,39 +411,9 @@ export const onCreateBuilding = /* GraphQL */ `
       country
       zipCode
       poBox
-      property {
-        id
-        name
-        city
-        state
-        country
-        zipCode
-        poBox
-        buildings {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      units {
-        items {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          buildingUnitsId
-        }
-        nextToken
-      }
+      propertyID
       createdAt
       updatedAt
-      propertyBuildingsId
     }
   }
 `;
@@ -749,39 +428,9 @@ export const onUpdateBuilding = /* GraphQL */ `
       country
       zipCode
       poBox
-      property {
-        id
-        name
-        city
-        state
-        country
-        zipCode
-        poBox
-        buildings {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      units {
-        items {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          buildingUnitsId
-        }
-        nextToken
-      }
+      propertyID
       createdAt
       updatedAt
-      propertyBuildingsId
     }
   }
 `;
@@ -796,39 +445,9 @@ export const onDeleteBuilding = /* GraphQL */ `
       country
       zipCode
       poBox
-      property {
-        id
-        name
-        city
-        state
-        country
-        zipCode
-        poBox
-        buildings {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      units {
-        items {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          buildingUnitsId
-        }
-        nextToken
-      }
+      propertyID
       createdAt
       updatedAt
-      propertyBuildingsId
     }
   }
 `;
@@ -843,69 +462,10 @@ export const onCreateUnit = /* GraphQL */ `
       country
       zipCode
       poBox
-      building {
-        id
-        name
-        number
-        city
-        state
-        country
-        zipCode
-        poBox
-        property {
-          id
-          name
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-        }
-        units {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        propertyBuildingsId
-      }
-      tenant {
-        id
-        firstName
-        middleName
-        lastName
-        unit {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          buildingUnitsId
-        }
-        createdAt
-        updatedAt
-      }
-      serviceRequests {
-        items {
-          id
-          dateCreated
-          dateCompleted
-          note
-          createdAt
-          updatedAt
-          unitServiceRequestsId
-        }
-        nextToken
-      }
+      buildingID
+      tenantID
       createdAt
       updatedAt
-      buildingUnitsId
     }
   }
 `;
@@ -920,69 +480,10 @@ export const onUpdateUnit = /* GraphQL */ `
       country
       zipCode
       poBox
-      building {
-        id
-        name
-        number
-        city
-        state
-        country
-        zipCode
-        poBox
-        property {
-          id
-          name
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-        }
-        units {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        propertyBuildingsId
-      }
-      tenant {
-        id
-        firstName
-        middleName
-        lastName
-        unit {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          buildingUnitsId
-        }
-        createdAt
-        updatedAt
-      }
-      serviceRequests {
-        items {
-          id
-          dateCreated
-          dateCompleted
-          note
-          createdAt
-          updatedAt
-          unitServiceRequestsId
-        }
-        nextToken
-      }
+      buildingID
+      tenantID
       createdAt
       updatedAt
-      buildingUnitsId
     }
   }
 `;
@@ -997,69 +498,10 @@ export const onDeleteUnit = /* GraphQL */ `
       country
       zipCode
       poBox
-      building {
-        id
-        name
-        number
-        city
-        state
-        country
-        zipCode
-        poBox
-        property {
-          id
-          name
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-        }
-        units {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        propertyBuildingsId
-      }
-      tenant {
-        id
-        firstName
-        middleName
-        lastName
-        unit {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          buildingUnitsId
-        }
-        createdAt
-        updatedAt
-      }
-      serviceRequests {
-        items {
-          id
-          dateCreated
-          dateCompleted
-          note
-          createdAt
-          updatedAt
-          unitServiceRequestsId
-        }
-        nextToken
-      }
+      buildingID
+      tenantID
       createdAt
       updatedAt
-      buildingUnitsId
     }
   }
 `;
@@ -1069,89 +511,14 @@ export const onCreateServiceRequest = /* GraphQL */ `
   ) {
     onCreateServiceRequest(filter: $filter) {
       id
-      requestor {
-        id
-        firstName
-        middleName
-        lastName
-        unit {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          buildingUnitsId
-        }
-        createdAt
-        updatedAt
-      }
-      handler {
-        id
-        title
-        type
-        firstName
-        middleName
-        lastName
-        salary
-        organization {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-        organizationOwnersId
-        organizationEmployeesId
-      }
-      unit {
-        id
-        name
-        number
-        city
-        state
-        country
-        zipCode
-        poBox
-        building {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          propertyBuildingsId
-        }
-        tenant {
-          id
-          firstName
-          middleName
-          lastName
-          createdAt
-          updatedAt
-        }
-        serviceRequests {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        buildingUnitsId
-      }
+      requestorID
+      handlerID
+      unitID
       dateCreated
       dateCompleted
       note
       createdAt
       updatedAt
-      unitServiceRequestsId
     }
   }
 `;
@@ -1161,89 +528,14 @@ export const onUpdateServiceRequest = /* GraphQL */ `
   ) {
     onUpdateServiceRequest(filter: $filter) {
       id
-      requestor {
-        id
-        firstName
-        middleName
-        lastName
-        unit {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          buildingUnitsId
-        }
-        createdAt
-        updatedAt
-      }
-      handler {
-        id
-        title
-        type
-        firstName
-        middleName
-        lastName
-        salary
-        organization {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-        organizationOwnersId
-        organizationEmployeesId
-      }
-      unit {
-        id
-        name
-        number
-        city
-        state
-        country
-        zipCode
-        poBox
-        building {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          propertyBuildingsId
-        }
-        tenant {
-          id
-          firstName
-          middleName
-          lastName
-          createdAt
-          updatedAt
-        }
-        serviceRequests {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        buildingUnitsId
-      }
+      requestorID
+      handlerID
+      unitID
       dateCreated
       dateCompleted
       note
       createdAt
       updatedAt
-      unitServiceRequestsId
     }
   }
 `;
@@ -1253,89 +545,14 @@ export const onDeleteServiceRequest = /* GraphQL */ `
   ) {
     onDeleteServiceRequest(filter: $filter) {
       id
-      requestor {
-        id
-        firstName
-        middleName
-        lastName
-        unit {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          buildingUnitsId
-        }
-        createdAt
-        updatedAt
-      }
-      handler {
-        id
-        title
-        type
-        firstName
-        middleName
-        lastName
-        salary
-        organization {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-        organizationOwnersId
-        organizationEmployeesId
-      }
-      unit {
-        id
-        name
-        number
-        city
-        state
-        country
-        zipCode
-        poBox
-        building {
-          id
-          name
-          number
-          city
-          state
-          country
-          zipCode
-          poBox
-          createdAt
-          updatedAt
-          propertyBuildingsId
-        }
-        tenant {
-          id
-          firstName
-          middleName
-          lastName
-          createdAt
-          updatedAt
-        }
-        serviceRequests {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        buildingUnitsId
-      }
+      requestorID
+      handlerID
+      unitID
       dateCreated
       dateCompleted
       note
       createdAt
       updatedAt
-      unitServiceRequestsId
     }
   }
 `;

@@ -30,6 +30,7 @@ export default function BuildingCreateForm(props) {
     country: "",
     zipCode: "",
     poBox: "",
+    propertyID: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [number, setNumber] = React.useState(initialValues.number);
@@ -38,6 +39,7 @@ export default function BuildingCreateForm(props) {
   const [country, setCountry] = React.useState(initialValues.country);
   const [zipCode, setZipCode] = React.useState(initialValues.zipCode);
   const [poBox, setPoBox] = React.useState(initialValues.poBox);
+  const [propertyID, setPropertyID] = React.useState(initialValues.propertyID);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setName(initialValues.name);
@@ -47,6 +49,7 @@ export default function BuildingCreateForm(props) {
     setCountry(initialValues.country);
     setZipCode(initialValues.zipCode);
     setPoBox(initialValues.poBox);
+    setPropertyID(initialValues.propertyID);
     setErrors({});
   };
   const validations = {
@@ -57,6 +60,7 @@ export default function BuildingCreateForm(props) {
     country: [],
     zipCode: [],
     poBox: [],
+    propertyID: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -91,6 +95,7 @@ export default function BuildingCreateForm(props) {
           country,
           zipCode,
           poBox,
+          propertyID,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -152,6 +157,7 @@ export default function BuildingCreateForm(props) {
               country,
               zipCode,
               poBox,
+              propertyID,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -182,6 +188,7 @@ export default function BuildingCreateForm(props) {
               country,
               zipCode,
               poBox,
+              propertyID,
             };
             const result = onChange(modelFields);
             value = result?.number ?? value;
@@ -212,6 +219,7 @@ export default function BuildingCreateForm(props) {
               country,
               zipCode,
               poBox,
+              propertyID,
             };
             const result = onChange(modelFields);
             value = result?.city ?? value;
@@ -242,6 +250,7 @@ export default function BuildingCreateForm(props) {
               country,
               zipCode,
               poBox,
+              propertyID,
             };
             const result = onChange(modelFields);
             value = result?.state ?? value;
@@ -272,6 +281,7 @@ export default function BuildingCreateForm(props) {
               country: value,
               zipCode,
               poBox,
+              propertyID,
             };
             const result = onChange(modelFields);
             value = result?.country ?? value;
@@ -302,6 +312,7 @@ export default function BuildingCreateForm(props) {
               country,
               zipCode: value,
               poBox,
+              propertyID,
             };
             const result = onChange(modelFields);
             value = result?.zipCode ?? value;
@@ -332,6 +343,7 @@ export default function BuildingCreateForm(props) {
               country,
               zipCode,
               poBox: value,
+              propertyID,
             };
             const result = onChange(modelFields);
             value = result?.poBox ?? value;
@@ -345,6 +357,37 @@ export default function BuildingCreateForm(props) {
         errorMessage={errors.poBox?.errorMessage}
         hasError={errors.poBox?.hasError}
         {...getOverrideProps(overrides, "poBox")}
+      ></TextField>
+      <TextField
+        label="Property id"
+        isRequired={false}
+        isReadOnly={false}
+        value={propertyID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              number,
+              city,
+              state,
+              country,
+              zipCode,
+              poBox,
+              propertyID: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.propertyID ?? value;
+          }
+          if (errors.propertyID?.hasError) {
+            runValidationTasks("propertyID", value);
+          }
+          setPropertyID(value);
+        }}
+        onBlur={() => runValidationTasks("propertyID", propertyID)}
+        errorMessage={errors.propertyID?.errorMessage}
+        hasError={errors.propertyID?.hasError}
+        {...getOverrideProps(overrides, "propertyID")}
       ></TextField>
       <Flex
         justifyContent="space-between"

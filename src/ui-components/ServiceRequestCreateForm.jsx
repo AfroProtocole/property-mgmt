@@ -23,10 +23,18 @@ export default function ServiceRequestCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
+    requestorID: "",
+    handlerID: "",
+    unitID: "",
     dateCreated: "",
     dateCompleted: "",
     note: "",
   };
+  const [requestorID, setRequestorID] = React.useState(
+    initialValues.requestorID
+  );
+  const [handlerID, setHandlerID] = React.useState(initialValues.handlerID);
+  const [unitID, setUnitID] = React.useState(initialValues.unitID);
   const [dateCreated, setDateCreated] = React.useState(
     initialValues.dateCreated
   );
@@ -36,12 +44,18 @@ export default function ServiceRequestCreateForm(props) {
   const [note, setNote] = React.useState(initialValues.note);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
+    setRequestorID(initialValues.requestorID);
+    setHandlerID(initialValues.handlerID);
+    setUnitID(initialValues.unitID);
     setDateCreated(initialValues.dateCreated);
     setDateCompleted(initialValues.dateCompleted);
     setNote(initialValues.note);
     setErrors({});
   };
   const validations = {
+    requestorID: [],
+    handlerID: [],
+    unitID: [],
     dateCreated: [],
     dateCompleted: [],
     note: [],
@@ -72,6 +86,9 @@ export default function ServiceRequestCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
+          requestorID,
+          handlerID,
+          unitID,
           dateCreated,
           dateCompleted,
           note,
@@ -121,6 +138,93 @@ export default function ServiceRequestCreateForm(props) {
       {...rest}
     >
       <TextField
+        label="Requestor id"
+        isRequired={false}
+        isReadOnly={false}
+        value={requestorID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              requestorID: value,
+              handlerID,
+              unitID,
+              dateCreated,
+              dateCompleted,
+              note,
+            };
+            const result = onChange(modelFields);
+            value = result?.requestorID ?? value;
+          }
+          if (errors.requestorID?.hasError) {
+            runValidationTasks("requestorID", value);
+          }
+          setRequestorID(value);
+        }}
+        onBlur={() => runValidationTasks("requestorID", requestorID)}
+        errorMessage={errors.requestorID?.errorMessage}
+        hasError={errors.requestorID?.hasError}
+        {...getOverrideProps(overrides, "requestorID")}
+      ></TextField>
+      <TextField
+        label="Handler id"
+        isRequired={false}
+        isReadOnly={false}
+        value={handlerID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              requestorID,
+              handlerID: value,
+              unitID,
+              dateCreated,
+              dateCompleted,
+              note,
+            };
+            const result = onChange(modelFields);
+            value = result?.handlerID ?? value;
+          }
+          if (errors.handlerID?.hasError) {
+            runValidationTasks("handlerID", value);
+          }
+          setHandlerID(value);
+        }}
+        onBlur={() => runValidationTasks("handlerID", handlerID)}
+        errorMessage={errors.handlerID?.errorMessage}
+        hasError={errors.handlerID?.hasError}
+        {...getOverrideProps(overrides, "handlerID")}
+      ></TextField>
+      <TextField
+        label="Unit id"
+        isRequired={false}
+        isReadOnly={false}
+        value={unitID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              requestorID,
+              handlerID,
+              unitID: value,
+              dateCreated,
+              dateCompleted,
+              note,
+            };
+            const result = onChange(modelFields);
+            value = result?.unitID ?? value;
+          }
+          if (errors.unitID?.hasError) {
+            runValidationTasks("unitID", value);
+          }
+          setUnitID(value);
+        }}
+        onBlur={() => runValidationTasks("unitID", unitID)}
+        errorMessage={errors.unitID?.errorMessage}
+        hasError={errors.unitID?.hasError}
+        {...getOverrideProps(overrides, "unitID")}
+      ></TextField>
+      <TextField
         label="Date created"
         isRequired={false}
         isReadOnly={false}
@@ -129,6 +233,9 @@ export default function ServiceRequestCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              requestorID,
+              handlerID,
+              unitID,
               dateCreated: value,
               dateCompleted,
               note,
@@ -155,6 +262,9 @@ export default function ServiceRequestCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              requestorID,
+              handlerID,
+              unitID,
               dateCreated,
               dateCompleted: value,
               note,
@@ -181,6 +291,9 @@ export default function ServiceRequestCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              requestorID,
+              handlerID,
+              unitID,
               dateCreated,
               dateCompleted,
               note: value,

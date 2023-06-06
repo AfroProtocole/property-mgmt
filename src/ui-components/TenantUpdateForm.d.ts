@@ -17,11 +17,13 @@ export declare type TenantUpdateFormInputValues = {
     firstName?: string;
     middleName?: string;
     lastName?: string;
+    unitID?: string;
 };
 export declare type TenantUpdateFormValidationValues = {
     firstName?: ValidationFunction<string>;
     middleName?: ValidationFunction<string>;
     lastName?: ValidationFunction<string>;
+    unitID?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type TenantUpdateFormOverridesProps = {
@@ -29,6 +31,7 @@ export declare type TenantUpdateFormOverridesProps = {
     firstName?: PrimitiveOverrideProps<TextFieldProps>;
     middleName?: PrimitiveOverrideProps<TextFieldProps>;
     lastName?: PrimitiveOverrideProps<TextFieldProps>;
+    unitID?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type TenantUpdateFormProps = React.PropsWithChildren<{
     overrides?: TenantUpdateFormOverridesProps | undefined | null;

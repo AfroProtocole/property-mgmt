@@ -27,10 +27,12 @@ export default function TenantUpdateForm(props) {
     firstName: "",
     middleName: "",
     lastName: "",
+    unitID: "",
   };
   const [firstName, setFirstName] = React.useState(initialValues.firstName);
   const [middleName, setMiddleName] = React.useState(initialValues.middleName);
   const [lastName, setLastName] = React.useState(initialValues.lastName);
+  const [unitID, setUnitID] = React.useState(initialValues.unitID);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = tenantRecord
@@ -39,6 +41,7 @@ export default function TenantUpdateForm(props) {
     setFirstName(cleanValues.firstName);
     setMiddleName(cleanValues.middleName);
     setLastName(cleanValues.lastName);
+    setUnitID(cleanValues.unitID);
     setErrors({});
   };
   const [tenantRecord, setTenantRecord] = React.useState(tenantModelProp);
@@ -56,6 +59,7 @@ export default function TenantUpdateForm(props) {
     firstName: [],
     middleName: [],
     lastName: [],
+    unitID: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -86,6 +90,7 @@ export default function TenantUpdateForm(props) {
           firstName,
           middleName,
           lastName,
+          unitID,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -144,6 +149,7 @@ export default function TenantUpdateForm(props) {
               firstName: value,
               middleName,
               lastName,
+              unitID,
             };
             const result = onChange(modelFields);
             value = result?.firstName ?? value;
@@ -170,6 +176,7 @@ export default function TenantUpdateForm(props) {
               firstName,
               middleName: value,
               lastName,
+              unitID,
             };
             const result = onChange(modelFields);
             value = result?.middleName ?? value;
@@ -196,6 +203,7 @@ export default function TenantUpdateForm(props) {
               firstName,
               middleName,
               lastName: value,
+              unitID,
             };
             const result = onChange(modelFields);
             value = result?.lastName ?? value;
@@ -209,6 +217,33 @@ export default function TenantUpdateForm(props) {
         errorMessage={errors.lastName?.errorMessage}
         hasError={errors.lastName?.hasError}
         {...getOverrideProps(overrides, "lastName")}
+      ></TextField>
+      <TextField
+        label="Unit id"
+        isRequired={false}
+        isReadOnly={false}
+        value={unitID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              firstName,
+              middleName,
+              lastName,
+              unitID: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.unitID ?? value;
+          }
+          if (errors.unitID?.hasError) {
+            runValidationTasks("unitID", value);
+          }
+          setUnitID(value);
+        }}
+        onBlur={() => runValidationTasks("unitID", unitID)}
+        errorMessage={errors.unitID?.errorMessage}
+        hasError={errors.unitID?.hasError}
+        {...getOverrideProps(overrides, "unitID")}
       ></TextField>
       <Flex
         justifyContent="space-between"

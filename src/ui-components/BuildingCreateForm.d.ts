@@ -20,6 +20,7 @@ export declare type BuildingCreateFormInputValues = {
     country?: string;
     zipCode?: string;
     poBox?: string;
+    propertyID?: string;
 };
 export declare type BuildingCreateFormValidationValues = {
     name?: ValidationFunction<string>;
@@ -29,6 +30,7 @@ export declare type BuildingCreateFormValidationValues = {
     country?: ValidationFunction<string>;
     zipCode?: ValidationFunction<string>;
     poBox?: ValidationFunction<string>;
+    propertyID?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type BuildingCreateFormOverridesProps = {
@@ -40,6 +42,7 @@ export declare type BuildingCreateFormOverridesProps = {
     country?: PrimitiveOverrideProps<TextFieldProps>;
     zipCode?: PrimitiveOverrideProps<TextFieldProps>;
     poBox?: PrimitiveOverrideProps<TextFieldProps>;
+    propertyID?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type BuildingCreateFormProps = React.PropsWithChildren<{
     overrides?: BuildingCreateFormOverridesProps | undefined | null;

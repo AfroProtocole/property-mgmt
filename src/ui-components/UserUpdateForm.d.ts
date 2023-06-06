@@ -20,6 +20,7 @@ export declare type UserUpdateFormInputValues = {
     middleName?: string;
     lastName?: string;
     salary?: string;
+    organizationID?: string;
 };
 export declare type UserUpdateFormValidationValues = {
     title?: ValidationFunction<string>;
@@ -28,6 +29,7 @@ export declare type UserUpdateFormValidationValues = {
     middleName?: ValidationFunction<string>;
     lastName?: ValidationFunction<string>;
     salary?: ValidationFunction<string>;
+    organizationID?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type UserUpdateFormOverridesProps = {
@@ -38,6 +40,7 @@ export declare type UserUpdateFormOverridesProps = {
     middleName?: PrimitiveOverrideProps<TextFieldProps>;
     lastName?: PrimitiveOverrideProps<TextFieldProps>;
     salary?: PrimitiveOverrideProps<TextFieldProps>;
+    organizationID?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type UserUpdateFormProps = React.PropsWithChildren<{
     overrides?: UserUpdateFormOverridesProps | undefined | null;

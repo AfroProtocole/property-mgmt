@@ -30,6 +30,7 @@ export default function UserUpdateForm(props) {
     middleName: "",
     lastName: "",
     salary: "",
+    organizationID: "",
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [type, setType] = React.useState(initialValues.type);
@@ -37,6 +38,9 @@ export default function UserUpdateForm(props) {
   const [middleName, setMiddleName] = React.useState(initialValues.middleName);
   const [lastName, setLastName] = React.useState(initialValues.lastName);
   const [salary, setSalary] = React.useState(initialValues.salary);
+  const [organizationID, setOrganizationID] = React.useState(
+    initialValues.organizationID
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = userRecord
@@ -48,6 +52,7 @@ export default function UserUpdateForm(props) {
     setMiddleName(cleanValues.middleName);
     setLastName(cleanValues.lastName);
     setSalary(cleanValues.salary);
+    setOrganizationID(cleanValues.organizationID);
     setErrors({});
   };
   const [userRecord, setUserRecord] = React.useState(userModelProp);
@@ -68,6 +73,7 @@ export default function UserUpdateForm(props) {
     middleName: [],
     lastName: [],
     salary: [],
+    organizationID: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -101,6 +107,7 @@ export default function UserUpdateForm(props) {
           middleName,
           lastName,
           salary,
+          organizationID,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -162,6 +169,7 @@ export default function UserUpdateForm(props) {
               middleName,
               lastName,
               salary,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -191,6 +199,7 @@ export default function UserUpdateForm(props) {
               middleName,
               lastName,
               salary,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.type ?? value;
@@ -220,6 +229,7 @@ export default function UserUpdateForm(props) {
               middleName,
               lastName,
               salary,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.firstName ?? value;
@@ -249,6 +259,7 @@ export default function UserUpdateForm(props) {
               middleName: value,
               lastName,
               salary,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.middleName ?? value;
@@ -278,6 +289,7 @@ export default function UserUpdateForm(props) {
               middleName,
               lastName: value,
               salary,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.lastName ?? value;
@@ -307,6 +319,7 @@ export default function UserUpdateForm(props) {
               middleName,
               lastName,
               salary: value,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.salary ?? value;
@@ -320,6 +333,36 @@ export default function UserUpdateForm(props) {
         errorMessage={errors.salary?.errorMessage}
         hasError={errors.salary?.hasError}
         {...getOverrideProps(overrides, "salary")}
+      ></TextField>
+      <TextField
+        label="Organization id"
+        isRequired={false}
+        isReadOnly={false}
+        value={organizationID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title,
+              type,
+              firstName,
+              middleName,
+              lastName,
+              salary,
+              organizationID: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.organizationID ?? value;
+          }
+          if (errors.organizationID?.hasError) {
+            runValidationTasks("organizationID", value);
+          }
+          setOrganizationID(value);
+        }}
+        onBlur={() => runValidationTasks("organizationID", organizationID)}
+        errorMessage={errors.organizationID?.errorMessage}
+        hasError={errors.organizationID?.hasError}
+        {...getOverrideProps(overrides, "organizationID")}
       ></TextField>
       <Flex
         justifyContent="space-between"

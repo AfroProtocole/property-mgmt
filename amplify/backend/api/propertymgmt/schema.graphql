@@ -27,16 +27,16 @@ type Organization @model {
   name: String
 }
 
-# type Organization2 {
-#   id: ID!
-#   name: String
-#   owners(num: int, after: string): OwnerConnection
-# }
+# # type Organization2 {
+# #   id: ID!
+# #   name: String
+# #   owners(num: int, after: string): OwnerConnection
+# # }
 
-# type OwnerConnection {
-#   cursor: string
-#   owners: [User]
-# }
+# # type OwnerConnection {
+# #   cursor: string
+# #   owners: [User]
+# # }
 
 type User @model {
   id: ID!
@@ -90,13 +90,12 @@ type Unit @model {
   poBox: String
   buildingID: String
   tenantID: String
-  serviceRequests: [ServiceRequest] @hasMany
 }
 
 type ServiceRequest @model {
   id: ID!
-  requestor: Tenant
-  handler: User
+  requestorID: String
+  handlerID: String
   unitID: String
   dateCreated: String
   dateCompleted: String
