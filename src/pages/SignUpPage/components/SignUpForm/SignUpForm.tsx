@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, Input, message, Select, Typography } from 'antd';
-import { useSignUpForm } from '../../hooks';
+import { auth } from '../../../../lib/firebase';
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const { Title, Text } = Typography;
 
@@ -30,14 +31,26 @@ const SignUpForm = () => {
     setIsSignUp(!isSignUp);
   };
 
-  const handleSubmit = (values: any) => {
-    setLoading(true);
-    // Simulate an API call for user signup or login
-    setTimeout(() => {
+  const handleSubmit = async (values:any) => {
+  setLoading(true);
+
+  try {
+    if (isSignUp) {
+      // Create user with email and password
+      await createUserWithEmailAndPassword(auth, values.email, values.password);
+      message.success('Signup successful!');
+    } else {
+      // Sign in user with email and password
+      await signInWithEmailAndPassword(auth, values.email, values.password);
+      message.success('Login successful!');
+    }
+  } catch (error:any) {
       setLoading(false);
-      message.success(isSignUp ? 'Signup successful!' : 'Login successful!');
-    }, 2000);
-  };
+      message.error(error.message);
+  }
+  
+  setLoading(false);
+};
 
   return (
     <>

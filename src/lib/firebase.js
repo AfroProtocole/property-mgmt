@@ -1,38 +1,24 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/storage';
-
-
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
- apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
- authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
- projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
- storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
- messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
- appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: "AIzaSyBksitJH2s0UQZGDsvUPBO-YW6ZWliYtI0",
+  authDomain: "realestatemgmt-d3faa.firebaseapp.com",
+  projectId: "realestatemgmt-d3faa",
+  storageBucket: "realestatemgmt-d3faa.appspot.com",
+  messagingSenderId: "55852845121",
+  appId: "1:55852845121:web:eed27e490c2cd74d08dec0",
+  measurementId: "G-6HDWB8YXQ5"
 };
 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
-// this is required to fix same-site cors errors
-const setCookieSameSite = (res, value) => {
- const cookies = res.getHeader('Set-Cookie');
- res.setHeader('Set-Cookie', cookies?.map((cookie) => cookie.replace('SameSite=Lax', `SameSite=${value}`)));
-};
-
-
-export const preview = async (_req, res) => {
- res.setPreviewData({});
- setCookieSameSite(res, 'None');
-};
-
-
-if (!firebase.apps.length) {
- firebase.initializeApp(firebaseConfig);
-}
-
-
-export const auth = firebase.auth();
-export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-export const firestore = firebase.firestore();
-export const storage = firebase.storage();
+const auth = getAuth();
+export  { auth };
