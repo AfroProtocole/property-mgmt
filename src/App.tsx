@@ -61,7 +61,7 @@ const loggedIn = false;
               }}
             >
               <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<LandingPage />} />
                 <Route
                   path="/organization/new"
                   element={<CreateOrganizationPage />}
