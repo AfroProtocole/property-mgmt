@@ -28,14 +28,16 @@ const TopNavigation: React.FC = () => {
   }));
 
   return (
-    <Header style={{ background: "#fff", padding: 0, display: "flex", alignItems: "center" }}>
+    <Header
+      style={{
+        background: "#fff",
+        padding: 0,
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
       <div className="demo-logo" />
-      <Menu
-        theme="dark"
-        mode="horizontal"
-        defaultSelectedKeys={["2"]}
-        items={items1}
-      />
+      [Logo]
       <div style={{ flex: 1 }} />
       <div style={{ paddingRight: "2rem" }}>
         <Button type="primary" onClick={handleLogout}>

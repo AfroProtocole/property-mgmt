@@ -40,7 +40,7 @@ const App: React.FC = () => {
             }}
             hasSider={true}
           >
-            <SideNavigation />
+            {user ? <SideNavigation /> : <></>}
 
             <div
               style={{
@@ -55,24 +55,38 @@ const App: React.FC = () => {
                 <Route
                   path="/organization/new"
                   element={
-                    user ? <CreateOrganizationPage /> : <Navigate to="/" replace={true} />
+                    user ? (
+                      <CreateOrganizationPage />
+                    ) : (
+                      <Navigate to="/" replace={true} />
+                    )
                   }
                 />
                 <Route
                   path="/signup"
-                  element={!user ? <SignUpPage /> : <Navigate to="/home" replace={true} />}
+                  element={
+                    !user ? (
+                      <SignUpPage />
+                    ) : (
+                      <Navigate to="/home" replace={true} />
+                    )
+                  }
                 />
                 <Route
                   path="/finance"
-                  element={user ? <FinancePage /> : <Navigate to="/" replace={true} />}
+                  element={
+                    user ? <FinancePage /> : <Navigate to="/" replace={true} />
+                  }
                 />
                 <Route
                   path="/home"
-                  element={user ? <HomePage /> : <Navigate to="/" replace={true} />}
+                  element={
+                    user ? <HomePage /> : <Navigate to="/" replace={true} />
+                  }
                 />
               </Routes>
             </div>
-            <SideActions />
+            {user ? <SideActions /> : <></>}
           </Layout>
         </Layout>
       </Layout>

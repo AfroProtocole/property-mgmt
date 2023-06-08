@@ -65,13 +65,13 @@ const SignUpForm = () => {
         // Reset the form
         form.resetFields();
         // Redirect to the "/home" page
-        window.location.href = '/home';
+        window.location.href = "/";
       } else {
         // Sign in user with email and password
         await signInWithEmailAndPassword(auth, values.email, values.password);
         form.resetFields();
         message.success('Login successful!');
-        window.location.href = '/home';
+        window.location.href = "/";
       }
     } catch (error: any) {
       setLoading(false);
@@ -85,88 +85,86 @@ const SignUpForm = () => {
 
   return (
     <>
-      <Title level={1}>{isSignUp ? 'Sign Up' : 'Sign In'}</Title>
-      <div style={{ maxWidth: 400 }}>
-        <Form form={form} onFinish={handleSubmit}>
-          {!isSignUp && (
-            <>
-              <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                  { required: true, message: 'Please enter your email' },
-                  { type: 'email', message: 'Please enter a valid email' },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                  { required: true, message: 'Please enter your password' },
-                ]}
-              >
-                <Input.Password />
-              </Form.Item>
-            </>
-          )}
-          {isSignUp && (
-            <>
-              <Form.Item label="First Name" name="firstName">
-                <Input />
-              </Form.Item>
-              <Form.Item label="Last Name" name="lastName">
-                <Input />
-              </Form.Item>
-              <Form.Item label="Organization Status" name="orgStatus">
-                <Select options={orgStatusOptions} />
-              </Form.Item>
-              <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                  { required: true, message: 'Please enter your email' },
-                  { type: 'email', message: 'Please enter a valid email' },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                label="Username"
-                name="username"
-                rules={[
-                  { required: true, message: 'Please enter your username' },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                  { required: true, message: 'Please enter your password' },
-                ]}
-              >
-                <Input.Password />
-              </Form.Item>
-            </>
-          )}
-          <Form.Item>
-            <Button type="primary" htmlType="submit" loading={loading} block>
-              {isSignUp ? 'Sign Up' : 'Sign In'}
+      <Title level={1}>{isSignUp ? "Sign Up" : "Sign In"}</Title>
+      <Form form={form} onFinish={handleSubmit}>
+        {!isSignUp && (
+          <>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                { required: true, message: "Please enter your email" },
+                { type: "email", message: "Please enter a valid email" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                { required: true, message: "Please enter your password" },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+          </>
+        )}
+        {isSignUp && (
+          <>
+            <Form.Item label="First Name" name="firstName">
+              <Input />
+            </Form.Item>
+            <Form.Item label="Last Name" name="lastName">
+              <Input />
+            </Form.Item>
+            <Form.Item label="Organization Status" name="orgStatus">
+              <Select options={orgStatusOptions} />
+            </Form.Item>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                { required: true, message: "Please enter your email" },
+                { type: "email", message: "Please enter a valid email" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Username"
+              name="username"
+              rules={[
+                { required: true, message: "Please enter your username" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                { required: true, message: "Please enter your password" },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+          </>
+        )}
+        <Form.Item>
+          <Button type="primary" htmlType="submit" loading={loading} block>
+            {isSignUp ? "Sign Up" : "Sign In"}
+          </Button>
+        </Form.Item>
+        <Form.Item>
+          <Text>
+            {isSignUp ? "Already have an account?" : "Don't have an account?"}
+            <Button type="link" onClick={handleFormToggle}>
+              {isSignUp ? "Sign In" : "Sign Up"}
             </Button>
-          </Form.Item>
-          <Form.Item>
-            <Text>
-              {isSignUp ? 'Already have an account?' : "Don't have an account?"}
-              <Button type="link" onClick={handleFormToggle}>
-                {isSignUp ? 'Sign In' : 'Sign Up'}
-              </Button>
-            </Text>
-          </Form.Item>
-        </Form>
-      </div>
+          </Text>
+        </Form.Item>
+      </Form>
     </>
   );
 };
