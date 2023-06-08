@@ -1,0 +1,938 @@
+
+type Blog {
+  id: ID!
+  name: String!
+  posts(filter: ModelPostFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelPostConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  blog: Blog
+  comments(filter: ModelCommentFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelCommentConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  blogPostsId: ID
+}
+
+type Comment {
+  id: ID!
+  post: Post
+  content: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  postCommentsId: ID
+}
+
+type Organization {
+  id: ID!
+  name: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type User {
+  id: ID!
+  title: String
+  type: String
+  firstName: String
+  middleName: String
+  lastName: String
+  salary: String
+  organizationID: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Tenant {
+  id: ID!
+  firstName: String
+  middleName: String
+  lastName: String
+  unitID: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Property {
+  id: ID!
+  name: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+  poBox: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Building {
+  id: ID!
+  name: String
+  number: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+  poBox: String
+  propertyID: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Unit {
+  id: ID!
+  name: String
+  number: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+  poBox: String
+  buildingID: String
+  tenantID: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type ServiceRequest {
+  id: ID!
+  requestorID: String
+  handlerID: String
+  unitID: String
+  dateCreated: String
+  dateCompleted: String
+  note: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelBlogConnection {
+  items: [Blog]!
+  nextToken: String
+}
+
+input ModelBlogFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  and: [ModelBlogFilterInput]
+  or: [ModelBlogFilterInput]
+  not: ModelBlogFilterInput
+}
+
+type Query {
+  getBlog(id: ID!): Blog
+  listBlogs(filter: ModelBlogFilterInput, limit: Int, nextToken: String): ModelBlogConnection
+  getPost(id: ID!): Post
+  listPosts(filter: ModelPostFilterInput, limit: Int, nextToken: String): ModelPostConnection
+  getComment(id: ID!): Comment
+  listComments(filter: ModelCommentFilterInput, limit: Int, nextToken: String): ModelCommentConnection
+  getOrganization(id: ID!): Organization
+  listOrganizations(filter: ModelOrganizationFilterInput, limit: Int, nextToken: String): ModelOrganizationConnection
+  getUser(id: ID!): User
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+  getTenant(id: ID!): Tenant
+  listTenants(filter: ModelTenantFilterInput, limit: Int, nextToken: String): ModelTenantConnection
+  getProperty(id: ID!): Property
+  listProperties(filter: ModelPropertyFilterInput, limit: Int, nextToken: String): ModelPropertyConnection
+  getBuilding(id: ID!): Building
+  listBuildings(filter: ModelBuildingFilterInput, limit: Int, nextToken: String): ModelBuildingConnection
+  getUnit(id: ID!): Unit
+  listUnits(filter: ModelUnitFilterInput, limit: Int, nextToken: String): ModelUnitConnection
+  getServiceRequest(id: ID!): ServiceRequest
+  listServiceRequests(filter: ModelServiceRequestFilterInput, limit: Int, nextToken: String): ModelServiceRequestConnection
+}
+
+input ModelBlogConditionInput {
+  name: ModelStringInput
+  and: [ModelBlogConditionInput]
+  or: [ModelBlogConditionInput]
+  not: ModelBlogConditionInput
+}
+
+input CreateBlogInput {
+  id: ID
+  name: String!
+}
+
+input UpdateBlogInput {
+  id: ID!
+  name: String
+}
+
+input DeleteBlogInput {
+  id: ID!
+}
+
+type Mutation {
+  createBlog(input: CreateBlogInput!, condition: ModelBlogConditionInput): Blog
+  updateBlog(input: UpdateBlogInput!, condition: ModelBlogConditionInput): Blog
+  deleteBlog(input: DeleteBlogInput!, condition: ModelBlogConditionInput): Blog
+  createPost(input: CreatePostInput!, condition: ModelPostConditionInput): Post
+  updatePost(input: UpdatePostInput!, condition: ModelPostConditionInput): Post
+  deletePost(input: DeletePostInput!, condition: ModelPostConditionInput): Post
+  createComment(input: CreateCommentInput!, condition: ModelCommentConditionInput): Comment
+  updateComment(input: UpdateCommentInput!, condition: ModelCommentConditionInput): Comment
+  deleteComment(input: DeleteCommentInput!, condition: ModelCommentConditionInput): Comment
+  createOrganization(input: CreateOrganizationInput!, condition: ModelOrganizationConditionInput): Organization
+  updateOrganization(input: UpdateOrganizationInput!, condition: ModelOrganizationConditionInput): Organization
+  deleteOrganization(input: DeleteOrganizationInput!, condition: ModelOrganizationConditionInput): Organization
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User
+  createTenant(input: CreateTenantInput!, condition: ModelTenantConditionInput): Tenant
+  updateTenant(input: UpdateTenantInput!, condition: ModelTenantConditionInput): Tenant
+  deleteTenant(input: DeleteTenantInput!, condition: ModelTenantConditionInput): Tenant
+  createProperty(input: CreatePropertyInput!, condition: ModelPropertyConditionInput): Property
+  updateProperty(input: UpdatePropertyInput!, condition: ModelPropertyConditionInput): Property
+  deleteProperty(input: DeletePropertyInput!, condition: ModelPropertyConditionInput): Property
+  createBuilding(input: CreateBuildingInput!, condition: ModelBuildingConditionInput): Building
+  updateBuilding(input: UpdateBuildingInput!, condition: ModelBuildingConditionInput): Building
+  deleteBuilding(input: DeleteBuildingInput!, condition: ModelBuildingConditionInput): Building
+  createUnit(input: CreateUnitInput!, condition: ModelUnitConditionInput): Unit
+  updateUnit(input: UpdateUnitInput!, condition: ModelUnitConditionInput): Unit
+  deleteUnit(input: DeleteUnitInput!, condition: ModelUnitConditionInput): Unit
+  createServiceRequest(input: CreateServiceRequestInput!, condition: ModelServiceRequestConditionInput): ServiceRequest
+  updateServiceRequest(input: UpdateServiceRequestInput!, condition: ModelServiceRequestConditionInput): ServiceRequest
+  deleteServiceRequest(input: DeleteServiceRequestInput!, condition: ModelServiceRequestConditionInput): ServiceRequest
+}
+
+input ModelSubscriptionBlogFilterInput {
+  id: ModelSubscriptionIDInput
+  name: ModelSubscriptionStringInput
+  and: [ModelSubscriptionBlogFilterInput]
+  or: [ModelSubscriptionBlogFilterInput]
+}
+
+type Subscription {
+  onCreateBlog(filter: ModelSubscriptionBlogFilterInput): Blog @aws_subscribe(mutations: ["createBlog"])
+  onUpdateBlog(filter: ModelSubscriptionBlogFilterInput): Blog @aws_subscribe(mutations: ["updateBlog"])
+  onDeleteBlog(filter: ModelSubscriptionBlogFilterInput): Blog @aws_subscribe(mutations: ["deleteBlog"])
+  onCreatePost(filter: ModelSubscriptionPostFilterInput): Post @aws_subscribe(mutations: ["createPost"])
+  onUpdatePost(filter: ModelSubscriptionPostFilterInput): Post @aws_subscribe(mutations: ["updatePost"])
+  onDeletePost(filter: ModelSubscriptionPostFilterInput): Post @aws_subscribe(mutations: ["deletePost"])
+  onCreateComment(filter: ModelSubscriptionCommentFilterInput): Comment @aws_subscribe(mutations: ["createComment"])
+  onUpdateComment(filter: ModelSubscriptionCommentFilterInput): Comment @aws_subscribe(mutations: ["updateComment"])
+  onDeleteComment(filter: ModelSubscriptionCommentFilterInput): Comment @aws_subscribe(mutations: ["deleteComment"])
+  onCreateOrganization(filter: ModelSubscriptionOrganizationFilterInput): Organization @aws_subscribe(mutations: ["createOrganization"])
+  onUpdateOrganization(filter: ModelSubscriptionOrganizationFilterInput): Organization @aws_subscribe(mutations: ["updateOrganization"])
+  onDeleteOrganization(filter: ModelSubscriptionOrganizationFilterInput): Organization @aws_subscribe(mutations: ["deleteOrganization"])
+  onCreateUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["deleteUser"])
+  onCreateTenant(filter: ModelSubscriptionTenantFilterInput): Tenant @aws_subscribe(mutations: ["createTenant"])
+  onUpdateTenant(filter: ModelSubscriptionTenantFilterInput): Tenant @aws_subscribe(mutations: ["updateTenant"])
+  onDeleteTenant(filter: ModelSubscriptionTenantFilterInput): Tenant @aws_subscribe(mutations: ["deleteTenant"])
+  onCreateProperty(filter: ModelSubscriptionPropertyFilterInput): Property @aws_subscribe(mutations: ["createProperty"])
+  onUpdateProperty(filter: ModelSubscriptionPropertyFilterInput): Property @aws_subscribe(mutations: ["updateProperty"])
+  onDeleteProperty(filter: ModelSubscriptionPropertyFilterInput): Property @aws_subscribe(mutations: ["deleteProperty"])
+  onCreateBuilding(filter: ModelSubscriptionBuildingFilterInput): Building @aws_subscribe(mutations: ["createBuilding"])
+  onUpdateBuilding(filter: ModelSubscriptionBuildingFilterInput): Building @aws_subscribe(mutations: ["updateBuilding"])
+  onDeleteBuilding(filter: ModelSubscriptionBuildingFilterInput): Building @aws_subscribe(mutations: ["deleteBuilding"])
+  onCreateUnit(filter: ModelSubscriptionUnitFilterInput): Unit @aws_subscribe(mutations: ["createUnit"])
+  onUpdateUnit(filter: ModelSubscriptionUnitFilterInput): Unit @aws_subscribe(mutations: ["updateUnit"])
+  onDeleteUnit(filter: ModelSubscriptionUnitFilterInput): Unit @aws_subscribe(mutations: ["deleteUnit"])
+  onCreateServiceRequest(filter: ModelSubscriptionServiceRequestFilterInput): ServiceRequest @aws_subscribe(mutations: ["createServiceRequest"])
+  onUpdateServiceRequest(filter: ModelSubscriptionServiceRequestFilterInput): ServiceRequest @aws_subscribe(mutations: ["updateServiceRequest"])
+  onDeleteServiceRequest(filter: ModelSubscriptionServiceRequestFilterInput): ServiceRequest @aws_subscribe(mutations: ["deleteServiceRequest"])
+}
+
+type ModelPostConnection {
+  items: [Post]!
+  nextToken: String
+}
+
+input ModelPostFilterInput {
+  id: ModelIDInput
+  title: ModelStringInput
+  and: [ModelPostFilterInput]
+  or: [ModelPostFilterInput]
+  not: ModelPostFilterInput
+  blogPostsId: ModelIDInput
+}
+
+input ModelPostConditionInput {
+  title: ModelStringInput
+  and: [ModelPostConditionInput]
+  or: [ModelPostConditionInput]
+  not: ModelPostConditionInput
+  blogPostsId: ModelIDInput
+}
+
+input CreatePostInput {
+  id: ID
+  title: String!
+  blogPostsId: ID
+}
+
+input UpdatePostInput {
+  id: ID!
+  title: String
+  blogPostsId: ID
+}
+
+input DeletePostInput {
+  id: ID!
+}
+
+input ModelSubscriptionPostFilterInput {
+  id: ModelSubscriptionIDInput
+  title: ModelSubscriptionStringInput
+  and: [ModelSubscriptionPostFilterInput]
+  or: [ModelSubscriptionPostFilterInput]
+}
+
+type ModelCommentConnection {
+  items: [Comment]!
+  nextToken: String
+}
+
+input ModelCommentFilterInput {
+  id: ModelIDInput
+  content: ModelStringInput
+  and: [ModelCommentFilterInput]
+  or: [ModelCommentFilterInput]
+  not: ModelCommentFilterInput
+  postCommentsId: ModelIDInput
+}
+
+input ModelCommentConditionInput {
+  content: ModelStringInput
+  and: [ModelCommentConditionInput]
+  or: [ModelCommentConditionInput]
+  not: ModelCommentConditionInput
+  postCommentsId: ModelIDInput
+}
+
+input CreateCommentInput {
+  id: ID
+  content: String!
+  postCommentsId: ID
+}
+
+input UpdateCommentInput {
+  id: ID!
+  content: String
+  postCommentsId: ID
+}
+
+input DeleteCommentInput {
+  id: ID!
+}
+
+input ModelSubscriptionCommentFilterInput {
+  id: ModelSubscriptionIDInput
+  content: ModelSubscriptionStringInput
+  and: [ModelSubscriptionCommentFilterInput]
+  or: [ModelSubscriptionCommentFilterInput]
+}
+
+type ModelOrganizationConnection {
+  items: [Organization]!
+  nextToken: String
+}
+
+input ModelOrganizationFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  and: [ModelOrganizationFilterInput]
+  or: [ModelOrganizationFilterInput]
+  not: ModelOrganizationFilterInput
+}
+
+input ModelOrganizationConditionInput {
+  name: ModelStringInput
+  and: [ModelOrganizationConditionInput]
+  or: [ModelOrganizationConditionInput]
+  not: ModelOrganizationConditionInput
+}
+
+input CreateOrganizationInput {
+  id: ID
+  name: String
+}
+
+input UpdateOrganizationInput {
+  id: ID!
+  name: String
+}
+
+input DeleteOrganizationInput {
+  id: ID!
+}
+
+input ModelSubscriptionOrganizationFilterInput {
+  id: ModelSubscriptionIDInput
+  name: ModelSubscriptionStringInput
+  and: [ModelSubscriptionOrganizationFilterInput]
+  or: [ModelSubscriptionOrganizationFilterInput]
+}
+
+type ModelUserConnection {
+  items: [User]!
+  nextToken: String
+}
+
+input ModelUserFilterInput {
+  id: ModelIDInput
+  title: ModelStringInput
+  type: ModelStringInput
+  firstName: ModelStringInput
+  middleName: ModelStringInput
+  lastName: ModelStringInput
+  salary: ModelStringInput
+  organizationID: ModelStringInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+}
+
+input ModelUserConditionInput {
+  title: ModelStringInput
+  type: ModelStringInput
+  firstName: ModelStringInput
+  middleName: ModelStringInput
+  lastName: ModelStringInput
+  salary: ModelStringInput
+  organizationID: ModelStringInput
+  and: [ModelUserConditionInput]
+  or: [ModelUserConditionInput]
+  not: ModelUserConditionInput
+}
+
+input CreateUserInput {
+  id: ID
+  title: String
+  type: String
+  firstName: String
+  middleName: String
+  lastName: String
+  salary: String
+  organizationID: String
+}
+
+input UpdateUserInput {
+  id: ID!
+  title: String
+  type: String
+  firstName: String
+  middleName: String
+  lastName: String
+  salary: String
+  organizationID: String
+}
+
+input DeleteUserInput {
+  id: ID!
+}
+
+input ModelSubscriptionUserFilterInput {
+  id: ModelSubscriptionIDInput
+  title: ModelSubscriptionStringInput
+  type: ModelSubscriptionStringInput
+  firstName: ModelSubscriptionStringInput
+  middleName: ModelSubscriptionStringInput
+  lastName: ModelSubscriptionStringInput
+  salary: ModelSubscriptionStringInput
+  organizationID: ModelSubscriptionStringInput
+  and: [ModelSubscriptionUserFilterInput]
+  or: [ModelSubscriptionUserFilterInput]
+}
+
+type ModelTenantConnection {
+  items: [Tenant]!
+  nextToken: String
+}
+
+input ModelTenantFilterInput {
+  id: ModelIDInput
+  firstName: ModelStringInput
+  middleName: ModelStringInput
+  lastName: ModelStringInput
+  unitID: ModelStringInput
+  and: [ModelTenantFilterInput]
+  or: [ModelTenantFilterInput]
+  not: ModelTenantFilterInput
+}
+
+input ModelTenantConditionInput {
+  firstName: ModelStringInput
+  middleName: ModelStringInput
+  lastName: ModelStringInput
+  unitID: ModelStringInput
+  and: [ModelTenantConditionInput]
+  or: [ModelTenantConditionInput]
+  not: ModelTenantConditionInput
+}
+
+input CreateTenantInput {
+  id: ID
+  firstName: String
+  middleName: String
+  lastName: String
+  unitID: String
+}
+
+input UpdateTenantInput {
+  id: ID!
+  firstName: String
+  middleName: String
+  lastName: String
+  unitID: String
+}
+
+input DeleteTenantInput {
+  id: ID!
+}
+
+input ModelSubscriptionTenantFilterInput {
+  id: ModelSubscriptionIDInput
+  firstName: ModelSubscriptionStringInput
+  middleName: ModelSubscriptionStringInput
+  lastName: ModelSubscriptionStringInput
+  unitID: ModelSubscriptionStringInput
+  and: [ModelSubscriptionTenantFilterInput]
+  or: [ModelSubscriptionTenantFilterInput]
+}
+
+type ModelPropertyConnection {
+  items: [Property]!
+  nextToken: String
+}
+
+input ModelPropertyFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  city: ModelStringInput
+  state: ModelStringInput
+  country: ModelStringInput
+  zipCode: ModelStringInput
+  poBox: ModelStringInput
+  and: [ModelPropertyFilterInput]
+  or: [ModelPropertyFilterInput]
+  not: ModelPropertyFilterInput
+}
+
+input ModelPropertyConditionInput {
+  name: ModelStringInput
+  city: ModelStringInput
+  state: ModelStringInput
+  country: ModelStringInput
+  zipCode: ModelStringInput
+  poBox: ModelStringInput
+  and: [ModelPropertyConditionInput]
+  or: [ModelPropertyConditionInput]
+  not: ModelPropertyConditionInput
+}
+
+input CreatePropertyInput {
+  id: ID
+  name: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+  poBox: String
+}
+
+input UpdatePropertyInput {
+  id: ID!
+  name: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+  poBox: String
+}
+
+input DeletePropertyInput {
+  id: ID!
+}
+
+input ModelSubscriptionPropertyFilterInput {
+  id: ModelSubscriptionIDInput
+  name: ModelSubscriptionStringInput
+  city: ModelSubscriptionStringInput
+  state: ModelSubscriptionStringInput
+  country: ModelSubscriptionStringInput
+  zipCode: ModelSubscriptionStringInput
+  poBox: ModelSubscriptionStringInput
+  and: [ModelSubscriptionPropertyFilterInput]
+  or: [ModelSubscriptionPropertyFilterInput]
+}
+
+type ModelBuildingConnection {
+  items: [Building]!
+  nextToken: String
+}
+
+input ModelBuildingFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  number: ModelStringInput
+  city: ModelStringInput
+  state: ModelStringInput
+  country: ModelStringInput
+  zipCode: ModelStringInput
+  poBox: ModelStringInput
+  propertyID: ModelStringInput
+  and: [ModelBuildingFilterInput]
+  or: [ModelBuildingFilterInput]
+  not: ModelBuildingFilterInput
+}
+
+input ModelBuildingConditionInput {
+  name: ModelStringInput
+  number: ModelStringInput
+  city: ModelStringInput
+  state: ModelStringInput
+  country: ModelStringInput
+  zipCode: ModelStringInput
+  poBox: ModelStringInput
+  propertyID: ModelStringInput
+  and: [ModelBuildingConditionInput]
+  or: [ModelBuildingConditionInput]
+  not: ModelBuildingConditionInput
+}
+
+input CreateBuildingInput {
+  id: ID
+  name: String
+  number: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+  poBox: String
+  propertyID: String
+}
+
+input UpdateBuildingInput {
+  id: ID!
+  name: String
+  number: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+  poBox: String
+  propertyID: String
+}
+
+input DeleteBuildingInput {
+  id: ID!
+}
+
+input ModelSubscriptionBuildingFilterInput {
+  id: ModelSubscriptionIDInput
+  name: ModelSubscriptionStringInput
+  number: ModelSubscriptionStringInput
+  city: ModelSubscriptionStringInput
+  state: ModelSubscriptionStringInput
+  country: ModelSubscriptionStringInput
+  zipCode: ModelSubscriptionStringInput
+  poBox: ModelSubscriptionStringInput
+  propertyID: ModelSubscriptionStringInput
+  and: [ModelSubscriptionBuildingFilterInput]
+  or: [ModelSubscriptionBuildingFilterInput]
+}
+
+type ModelUnitConnection {
+  items: [Unit]!
+  nextToken: String
+}
+
+input ModelUnitFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  number: ModelStringInput
+  city: ModelStringInput
+  state: ModelStringInput
+  country: ModelStringInput
+  zipCode: ModelStringInput
+  poBox: ModelStringInput
+  buildingID: ModelStringInput
+  tenantID: ModelStringInput
+  and: [ModelUnitFilterInput]
+  or: [ModelUnitFilterInput]
+  not: ModelUnitFilterInput
+}
+
+input ModelUnitConditionInput {
+  name: ModelStringInput
+  number: ModelStringInput
+  city: ModelStringInput
+  state: ModelStringInput
+  country: ModelStringInput
+  zipCode: ModelStringInput
+  poBox: ModelStringInput
+  buildingID: ModelStringInput
+  tenantID: ModelStringInput
+  and: [ModelUnitConditionInput]
+  or: [ModelUnitConditionInput]
+  not: ModelUnitConditionInput
+}
+
+input CreateUnitInput {
+  id: ID
+  name: String
+  number: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+  poBox: String
+  buildingID: String
+  tenantID: String
+}
+
+input UpdateUnitInput {
+  id: ID!
+  name: String
+  number: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+  poBox: String
+  buildingID: String
+  tenantID: String
+}
+
+input DeleteUnitInput {
+  id: ID!
+}
+
+input ModelSubscriptionUnitFilterInput {
+  id: ModelSubscriptionIDInput
+  name: ModelSubscriptionStringInput
+  number: ModelSubscriptionStringInput
+  city: ModelSubscriptionStringInput
+  state: ModelSubscriptionStringInput
+  country: ModelSubscriptionStringInput
+  zipCode: ModelSubscriptionStringInput
+  poBox: ModelSubscriptionStringInput
+  buildingID: ModelSubscriptionStringInput
+  tenantID: ModelSubscriptionStringInput
+  and: [ModelSubscriptionUnitFilterInput]
+  or: [ModelSubscriptionUnitFilterInput]
+}
+
+type ModelServiceRequestConnection {
+  items: [ServiceRequest]!
+  nextToken: String
+}
+
+input ModelServiceRequestFilterInput {
+  id: ModelIDInput
+  requestorID: ModelStringInput
+  handlerID: ModelStringInput
+  unitID: ModelStringInput
+  dateCreated: ModelStringInput
+  dateCompleted: ModelStringInput
+  note: ModelStringInput
+  and: [ModelServiceRequestFilterInput]
+  or: [ModelServiceRequestFilterInput]
+  not: ModelServiceRequestFilterInput
+}
+
+input ModelServiceRequestConditionInput {
+  requestorID: ModelStringInput
+  handlerID: ModelStringInput
+  unitID: ModelStringInput
+  dateCreated: ModelStringInput
+  dateCompleted: ModelStringInput
+  note: ModelStringInput
+  and: [ModelServiceRequestConditionInput]
+  or: [ModelServiceRequestConditionInput]
+  not: ModelServiceRequestConditionInput
+}
+
+input CreateServiceRequestInput {
+  id: ID
+  requestorID: String
+  handlerID: String
+  unitID: String
+  dateCreated: String
+  dateCompleted: String
+  note: String
+}
+
+input UpdateServiceRequestInput {
+  id: ID!
+  requestorID: String
+  handlerID: String
+  unitID: String
+  dateCreated: String
+  dateCompleted: String
+  note: String
+}
+
+input DeleteServiceRequestInput {
+  id: ID!
+}
+
+input ModelSubscriptionServiceRequestFilterInput {
+  id: ModelSubscriptionIDInput
+  requestorID: ModelSubscriptionStringInput
+  handlerID: ModelSubscriptionStringInput
+  unitID: ModelSubscriptionStringInput
+  dateCreated: ModelSubscriptionStringInput
+  dateCompleted: ModelSubscriptionStringInput
+  note: ModelSubscriptionStringInput
+  and: [ModelSubscriptionServiceRequestFilterInput]
+  or: [ModelSubscriptionServiceRequestFilterInput]
+}
+
