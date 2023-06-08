@@ -1,40 +1,30 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { Layout } from "antd";
 import { SideNavigation, TopNavigation, SideActions } from "./components";
 import { CreateOrganizationPage, LandingPage, HomePage, SignUpPage } from "./pages";
 import { FinancePage } from "./pages";
-import { Auth, API, Amplify } from "aws-amplify";
-// import awsconfig from "./aws-exports";
-// Amplify.configure(awsconfig);
+import { auth } from "./lib/firebase"; // Import your Firebase auth instance
 
-/**
- * sign-up:
- * try {
-    const { user } = await Auth.signUp({ username, password });
-    console.log(user);
-} catch (error) {
-    console.log('error signing up:', error);
-}
-
-sign-in:
-try {
-    const user = await Auth.signIn(username, password);
-} catch (error) {
-    console.log('error signing in', error);
-}
-
-sign-out:
-try {
-    await Auth.signOut();
-} catch (error) {
-    console.log('error signing out: ', error);
-}
- * @returns 
- */
 const App: React.FC = () => {
+  const [user, setUser] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-const loggedIn = false; 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+      setIsLoading(false);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  if (isLoading) {
+    // Show loading indicator or placeholder
+    return <div>Loading...</div>;
+  }
 
   return (
     <Router>
@@ -64,10 +54,22 @@ const loggedIn = false;
                 <Route path="/" element={<LandingPage />} />
                 <Route
                   path="/organization/new"
-                  element={<CreateOrganizationPage />}
+                  element={
+                    user ? <CreateOrganizationPage /> : <Navigate to="/" replace={true} />
+                  }
                 />
-                <Route path="/signup" element={<SignUpPage />} />
-                <Route path="/finance" element={<FinancePage />} />
+                <Route
+                  path="/signup"
+                  element={!user ? <SignUpPage /> : <Navigate to="/home" replace={true} />}
+                />
+                <Route
+                  path="/finance"
+                  element={user ? <FinancePage /> : <Navigate to="/" replace={true} />}
+                />
+                <Route
+                  path="/home"
+                  element={user ? <HomePage /> : <Navigate to="/" replace={true} />}
+                />
               </Routes>
             </div>
             <SideActions />
