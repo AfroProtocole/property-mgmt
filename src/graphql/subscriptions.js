@@ -316,6 +316,42 @@ export const onDeleteUser = /* GraphQL */ `
     }
   }
 `;
+export const onCreateFavorite = /* GraphQL */ `
+  subscription OnCreateFavorite($filter: ModelSubscriptionFavoriteFilterInput) {
+    onCreateFavorite(filter: $filter) {
+      id
+      userID
+      favType
+      favID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateFavorite = /* GraphQL */ `
+  subscription OnUpdateFavorite($filter: ModelSubscriptionFavoriteFilterInput) {
+    onUpdateFavorite(filter: $filter) {
+      id
+      userID
+      favType
+      favID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteFavorite = /* GraphQL */ `
+  subscription OnDeleteFavorite($filter: ModelSubscriptionFavoriteFilterInput) {
+    onDeleteFavorite(filter: $filter) {
+      id
+      userID
+      favType
+      favID
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateTenant = /* GraphQL */ `
   subscription OnCreateTenant($filter: ModelSubscriptionTenantFilterInput) {
     onCreateTenant(filter: $filter) {

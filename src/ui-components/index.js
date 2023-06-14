@@ -15,6 +15,8 @@ export { default as OrganizationCreateForm } from "./OrganizationCreateForm";
 export { default as OrganizationUpdateForm } from "./OrganizationUpdateForm";
 export { default as UserCreateForm } from "./UserCreateForm";
 export { default as UserUpdateForm } from "./UserUpdateForm";
+export { default as FavoriteCreateForm } from "./FavoriteCreateForm";
+export { default as FavoriteUpdateForm } from "./FavoriteUpdateForm";
 export { default as TenantCreateForm } from "./TenantCreateForm";
 export { default as TenantUpdateForm } from "./TenantUpdateForm";
 export { default as PropertyCreateForm } from "./PropertyCreateForm";

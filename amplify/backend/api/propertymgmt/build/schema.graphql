@@ -46,6 +46,15 @@ type User {
   updatedAt: AWSDateTime!
 }
 
+type Favorite {
+  id: ID!
+  userID: String
+  favType: String
+  favID: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
 type Tenant {
   id: ID!
   firstName: String
@@ -283,6 +292,8 @@ type Query {
   listOrganizations(filter: ModelOrganizationFilterInput, limit: Int, nextToken: String): ModelOrganizationConnection
   getUser(id: ID!): User
   listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+  getFavorite(id: ID!): Favorite
+  listFavorites(filter: ModelFavoriteFilterInput, limit: Int, nextToken: String): ModelFavoriteConnection
   getTenant(id: ID!): Tenant
   listTenants(filter: ModelTenantFilterInput, limit: Int, nextToken: String): ModelTenantConnection
   getProperty(id: ID!): Property
@@ -332,6 +343,9 @@ type Mutation {
   createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User
   updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User
   deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User
+  createFavorite(input: CreateFavoriteInput!, condition: ModelFavoriteConditionInput): Favorite
+  updateFavorite(input: UpdateFavoriteInput!, condition: ModelFavoriteConditionInput): Favorite
+  deleteFavorite(input: DeleteFavoriteInput!, condition: ModelFavoriteConditionInput): Favorite
   createTenant(input: CreateTenantInput!, condition: ModelTenantConditionInput): Tenant
   updateTenant(input: UpdateTenantInput!, condition: ModelTenantConditionInput): Tenant
   deleteTenant(input: DeleteTenantInput!, condition: ModelTenantConditionInput): Tenant
@@ -372,6 +386,9 @@ type Subscription {
   onCreateUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["createUser"])
   onUpdateUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["updateUser"])
   onDeleteUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["deleteUser"])
+  onCreateFavorite(filter: ModelSubscriptionFavoriteFilterInput): Favorite @aws_subscribe(mutations: ["createFavorite"])
+  onUpdateFavorite(filter: ModelSubscriptionFavoriteFilterInput): Favorite @aws_subscribe(mutations: ["updateFavorite"])
+  onDeleteFavorite(filter: ModelSubscriptionFavoriteFilterInput): Favorite @aws_subscribe(mutations: ["deleteFavorite"])
   onCreateTenant(filter: ModelSubscriptionTenantFilterInput): Tenant @aws_subscribe(mutations: ["createTenant"])
   onUpdateTenant(filter: ModelSubscriptionTenantFilterInput): Tenant @aws_subscribe(mutations: ["updateTenant"])
   onDeleteTenant(filter: ModelSubscriptionTenantFilterInput): Tenant @aws_subscribe(mutations: ["deleteTenant"])
@@ -589,6 +606,57 @@ input ModelSubscriptionUserFilterInput {
   organizationID: ModelSubscriptionStringInput
   and: [ModelSubscriptionUserFilterInput]
   or: [ModelSubscriptionUserFilterInput]
+}
+
+type ModelFavoriteConnection {
+  items: [Favorite]!
+  nextToken: String
+}
+
+input ModelFavoriteFilterInput {
+  id: ModelIDInput
+  userID: ModelStringInput
+  favType: ModelStringInput
+  favID: ModelStringInput
+  and: [ModelFavoriteFilterInput]
+  or: [ModelFavoriteFilterInput]
+  not: ModelFavoriteFilterInput
+}
+
+input ModelFavoriteConditionInput {
+  userID: ModelStringInput
+  favType: ModelStringInput
+  favID: ModelStringInput
+  and: [ModelFavoriteConditionInput]
+  or: [ModelFavoriteConditionInput]
+  not: ModelFavoriteConditionInput
+}
+
+input CreateFavoriteInput {
+  id: ID
+  userID: String
+  favType: String
+  favID: String
+}
+
+input UpdateFavoriteInput {
+  id: ID!
+  userID: String
+  favType: String
+  favID: String
+}
+
+input DeleteFavoriteInput {
+  id: ID!
+}
+
+input ModelSubscriptionFavoriteFilterInput {
+  id: ModelSubscriptionIDInput
+  userID: ModelSubscriptionStringInput
+  favType: ModelSubscriptionStringInput
+  favID: ModelSubscriptionStringInput
+  and: [ModelSubscriptionFavoriteFilterInput]
+  or: [ModelSubscriptionFavoriteFilterInput]
 }
 
 type ModelTenantConnection {

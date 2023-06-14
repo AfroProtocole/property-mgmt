@@ -216,6 +216,37 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
+export const getFavorite = /* GraphQL */ `
+  query GetFavorite($id: ID!) {
+    getFavorite(id: $id) {
+      id
+      userID
+      favType
+      favID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listFavorites = /* GraphQL */ `
+  query ListFavorites(
+    $filter: ModelFavoriteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFavorites(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userID
+        favType
+        favID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getTenant = /* GraphQL */ `
   query GetTenant($id: ID!) {
     getTenant(id: $id) {

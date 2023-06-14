@@ -22,11 +22,6 @@ const TopNavigation: React.FC = () => {
     }
   };
 
-  const items1: MenuProps["items"] = ["1", "2", "3"].map((key) => ({
-    key,
-    label: `nav ${key}`,
-  }));
-
   return (
     <Header
       style={{

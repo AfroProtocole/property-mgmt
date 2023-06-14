@@ -355,6 +355,51 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
+export const createFavorite = /* GraphQL */ `
+  mutation CreateFavorite(
+    $input: CreateFavoriteInput!
+    $condition: ModelFavoriteConditionInput
+  ) {
+    createFavorite(input: $input, condition: $condition) {
+      id
+      userID
+      favType
+      favID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateFavorite = /* GraphQL */ `
+  mutation UpdateFavorite(
+    $input: UpdateFavoriteInput!
+    $condition: ModelFavoriteConditionInput
+  ) {
+    updateFavorite(input: $input, condition: $condition) {
+      id
+      userID
+      favType
+      favID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteFavorite = /* GraphQL */ `
+  mutation DeleteFavorite(
+    $input: DeleteFavoriteInput!
+    $condition: ModelFavoriteConditionInput
+  ) {
+    deleteFavorite(input: $input, condition: $condition) {
+      id
+      userID
+      favType
+      favID
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createTenant = /* GraphQL */ `
   mutation CreateTenant(
     $input: CreateTenantInput!

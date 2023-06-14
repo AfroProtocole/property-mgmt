@@ -49,6 +49,13 @@ type User @model {
   organizationID: String
 }
 
+type Favorite @model {
+  id: ID!
+  userID: String
+  favType: String
+  favID: String
+}
+
 type Tenant @model {
   id: ID!
   firstName: String
