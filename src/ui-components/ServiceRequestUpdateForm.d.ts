@@ -15,7 +15,7 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type ServiceRequestUpdateFormInputValues = {
     requestorID?: string;
-    handlerID?: string;
+    userID?: string;
     unitID?: string;
     dateCreated?: string;
     dateCompleted?: string;
@@ -23,7 +23,7 @@ export declare type ServiceRequestUpdateFormInputValues = {
 };
 export declare type ServiceRequestUpdateFormValidationValues = {
     requestorID?: ValidationFunction<string>;
-    handlerID?: ValidationFunction<string>;
+    userID?: ValidationFunction<string>;
     unitID?: ValidationFunction<string>;
     dateCreated?: ValidationFunction<string>;
     dateCompleted?: ValidationFunction<string>;
@@ -33,7 +33,7 @@ export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes
 export declare type ServiceRequestUpdateFormOverridesProps = {
     ServiceRequestUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     requestorID?: PrimitiveOverrideProps<TextFieldProps>;
-    handlerID?: PrimitiveOverrideProps<TextFieldProps>;
+    userID?: PrimitiveOverrideProps<TextFieldProps>;
     unitID?: PrimitiveOverrideProps<TextFieldProps>;
     dateCreated?: PrimitiveOverrideProps<TextFieldProps>;
     dateCompleted?: PrimitiveOverrideProps<TextFieldProps>;

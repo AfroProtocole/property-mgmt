@@ -22,6 +22,8 @@ export declare type BuildingUpdateFormInputValues = {
     zipCode?: string;
     poBox?: string;
     propertyID?: string;
+    userID?: string;
+    organizationID?: string;
 };
 export declare type BuildingUpdateFormValidationValues = {
     name?: ValidationFunction<string>;
@@ -32,6 +34,8 @@ export declare type BuildingUpdateFormValidationValues = {
     zipCode?: ValidationFunction<string>;
     poBox?: ValidationFunction<string>;
     propertyID?: ValidationFunction<string>;
+    userID?: ValidationFunction<string>;
+    organizationID?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type BuildingUpdateFormOverridesProps = {
@@ -44,6 +48,8 @@ export declare type BuildingUpdateFormOverridesProps = {
     zipCode?: PrimitiveOverrideProps<TextFieldProps>;
     poBox?: PrimitiveOverrideProps<TextFieldProps>;
     propertyID?: PrimitiveOverrideProps<TextFieldProps>;
+    userID?: PrimitiveOverrideProps<TextFieldProps>;
+    organizationID?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type BuildingUpdateFormProps = React.PropsWithChildren<{
     overrides?: BuildingUpdateFormOverridesProps | undefined | null;

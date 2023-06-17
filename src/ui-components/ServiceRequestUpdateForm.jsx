@@ -25,7 +25,7 @@ export default function ServiceRequestUpdateForm(props) {
   } = props;
   const initialValues = {
     requestorID: "",
-    handlerID: "",
+    userID: "",
     unitID: "",
     dateCreated: "",
     dateCompleted: "",
@@ -34,7 +34,7 @@ export default function ServiceRequestUpdateForm(props) {
   const [requestorID, setRequestorID] = React.useState(
     initialValues.requestorID
   );
-  const [handlerID, setHandlerID] = React.useState(initialValues.handlerID);
+  const [userID, setUserID] = React.useState(initialValues.userID);
   const [unitID, setUnitID] = React.useState(initialValues.unitID);
   const [dateCreated, setDateCreated] = React.useState(
     initialValues.dateCreated
@@ -49,7 +49,7 @@ export default function ServiceRequestUpdateForm(props) {
       ? { ...initialValues, ...serviceRequestRecord }
       : initialValues;
     setRequestorID(cleanValues.requestorID);
-    setHandlerID(cleanValues.handlerID);
+    setUserID(cleanValues.userID);
     setUnitID(cleanValues.unitID);
     setDateCreated(cleanValues.dateCreated);
     setDateCompleted(cleanValues.dateCompleted);
@@ -71,7 +71,7 @@ export default function ServiceRequestUpdateForm(props) {
   React.useEffect(resetStateValues, [serviceRequestRecord]);
   const validations = {
     requestorID: [],
-    handlerID: [],
+    userID: [],
     unitID: [],
     dateCreated: [],
     dateCompleted: [],
@@ -104,7 +104,7 @@ export default function ServiceRequestUpdateForm(props) {
         event.preventDefault();
         let modelFields = {
           requestorID,
-          handlerID,
+          userID,
           unitID,
           dateCreated,
           dateCompleted,
@@ -165,7 +165,7 @@ export default function ServiceRequestUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               requestorID: value,
-              handlerID,
+              userID,
               unitID,
               dateCreated,
               dateCompleted,
@@ -185,33 +185,33 @@ export default function ServiceRequestUpdateForm(props) {
         {...getOverrideProps(overrides, "requestorID")}
       ></TextField>
       <TextField
-        label="Handler id"
+        label="User id"
         isRequired={false}
         isReadOnly={false}
-        value={handlerID}
+        value={userID}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               requestorID,
-              handlerID: value,
+              userID: value,
               unitID,
               dateCreated,
               dateCompleted,
               note,
             };
             const result = onChange(modelFields);
-            value = result?.handlerID ?? value;
+            value = result?.userID ?? value;
           }
-          if (errors.handlerID?.hasError) {
-            runValidationTasks("handlerID", value);
+          if (errors.userID?.hasError) {
+            runValidationTasks("userID", value);
           }
-          setHandlerID(value);
+          setUserID(value);
         }}
-        onBlur={() => runValidationTasks("handlerID", handlerID)}
-        errorMessage={errors.handlerID?.errorMessage}
-        hasError={errors.handlerID?.hasError}
-        {...getOverrideProps(overrides, "handlerID")}
+        onBlur={() => runValidationTasks("userID", userID)}
+        errorMessage={errors.userID?.errorMessage}
+        hasError={errors.userID?.hasError}
+        {...getOverrideProps(overrides, "userID")}
       ></TextField>
       <TextField
         label="Unit id"
@@ -223,7 +223,7 @@ export default function ServiceRequestUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               requestorID,
-              handlerID,
+              userID,
               unitID: value,
               dateCreated,
               dateCompleted,
@@ -252,7 +252,7 @@ export default function ServiceRequestUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               requestorID,
-              handlerID,
+              userID,
               unitID,
               dateCreated: value,
               dateCompleted,
@@ -281,7 +281,7 @@ export default function ServiceRequestUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               requestorID,
-              handlerID,
+              userID,
               unitID,
               dateCreated,
               dateCompleted: value,
@@ -310,7 +310,7 @@ export default function ServiceRequestUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               requestorID,
-              handlerID,
+              userID,
               unitID,
               dateCreated,
               dateCompleted,

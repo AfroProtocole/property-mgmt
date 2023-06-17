@@ -401,6 +401,8 @@ export const onCreateProperty = /* GraphQL */ `
       country
       zipCode
       poBox
+      userID
+      organizationID
       createdAt
       updatedAt
     }
@@ -416,6 +418,8 @@ export const onUpdateProperty = /* GraphQL */ `
       country
       zipCode
       poBox
+      userID
+      organizationID
       createdAt
       updatedAt
     }
@@ -431,6 +435,8 @@ export const onDeleteProperty = /* GraphQL */ `
       country
       zipCode
       poBox
+      userID
+      organizationID
       createdAt
       updatedAt
     }
@@ -448,6 +454,8 @@ export const onCreateBuilding = /* GraphQL */ `
       zipCode
       poBox
       propertyID
+      userID
+      organizationID
       createdAt
       updatedAt
     }
@@ -465,6 +473,8 @@ export const onUpdateBuilding = /* GraphQL */ `
       zipCode
       poBox
       propertyID
+      userID
+      organizationID
       createdAt
       updatedAt
     }
@@ -482,6 +492,8 @@ export const onDeleteBuilding = /* GraphQL */ `
       zipCode
       poBox
       propertyID
+      userID
+      organizationID
       createdAt
       updatedAt
     }
@@ -548,7 +560,7 @@ export const onCreateServiceRequest = /* GraphQL */ `
     onCreateServiceRequest(filter: $filter) {
       id
       requestorID
-      handlerID
+      userID
       unitID
       dateCreated
       dateCompleted
@@ -565,7 +577,7 @@ export const onUpdateServiceRequest = /* GraphQL */ `
     onUpdateServiceRequest(filter: $filter) {
       id
       requestorID
-      handlerID
+      userID
       unitID
       dateCreated
       dateCompleted
@@ -582,7 +594,7 @@ export const onDeleteServiceRequest = /* GraphQL */ `
     onDeleteServiceRequest(filter: $filter) {
       id
       requestorID
-      handlerID
+      userID
       unitID
       dateCreated
       dateCompleted

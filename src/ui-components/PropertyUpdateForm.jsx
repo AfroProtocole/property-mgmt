@@ -30,6 +30,8 @@ export default function PropertyUpdateForm(props) {
     country: "",
     zipCode: "",
     poBox: "",
+    userID: "",
+    organizationID: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [city, setCity] = React.useState(initialValues.city);
@@ -37,6 +39,10 @@ export default function PropertyUpdateForm(props) {
   const [country, setCountry] = React.useState(initialValues.country);
   const [zipCode, setZipCode] = React.useState(initialValues.zipCode);
   const [poBox, setPoBox] = React.useState(initialValues.poBox);
+  const [userID, setUserID] = React.useState(initialValues.userID);
+  const [organizationID, setOrganizationID] = React.useState(
+    initialValues.organizationID
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = propertyRecord
@@ -48,6 +54,8 @@ export default function PropertyUpdateForm(props) {
     setCountry(cleanValues.country);
     setZipCode(cleanValues.zipCode);
     setPoBox(cleanValues.poBox);
+    setUserID(cleanValues.userID);
+    setOrganizationID(cleanValues.organizationID);
     setErrors({});
   };
   const [propertyRecord, setPropertyRecord] = React.useState(propertyModelProp);
@@ -68,6 +76,8 @@ export default function PropertyUpdateForm(props) {
     country: [],
     zipCode: [],
     poBox: [],
+    userID: [],
+    organizationID: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -101,6 +111,8 @@ export default function PropertyUpdateForm(props) {
           country,
           zipCode,
           poBox,
+          userID,
+          organizationID,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -162,6 +174,8 @@ export default function PropertyUpdateForm(props) {
               country,
               zipCode,
               poBox,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -191,6 +205,8 @@ export default function PropertyUpdateForm(props) {
               country,
               zipCode,
               poBox,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.city ?? value;
@@ -220,6 +236,8 @@ export default function PropertyUpdateForm(props) {
               country,
               zipCode,
               poBox,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.state ?? value;
@@ -249,6 +267,8 @@ export default function PropertyUpdateForm(props) {
               country: value,
               zipCode,
               poBox,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.country ?? value;
@@ -278,6 +298,8 @@ export default function PropertyUpdateForm(props) {
               country,
               zipCode: value,
               poBox,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.zipCode ?? value;
@@ -307,6 +329,8 @@ export default function PropertyUpdateForm(props) {
               country,
               zipCode,
               poBox: value,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.poBox ?? value;
@@ -320,6 +344,68 @@ export default function PropertyUpdateForm(props) {
         errorMessage={errors.poBox?.errorMessage}
         hasError={errors.poBox?.hasError}
         {...getOverrideProps(overrides, "poBox")}
+      ></TextField>
+      <TextField
+        label="User id"
+        isRequired={false}
+        isReadOnly={false}
+        value={userID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              city,
+              state,
+              country,
+              zipCode,
+              poBox,
+              userID: value,
+              organizationID,
+            };
+            const result = onChange(modelFields);
+            value = result?.userID ?? value;
+          }
+          if (errors.userID?.hasError) {
+            runValidationTasks("userID", value);
+          }
+          setUserID(value);
+        }}
+        onBlur={() => runValidationTasks("userID", userID)}
+        errorMessage={errors.userID?.errorMessage}
+        hasError={errors.userID?.hasError}
+        {...getOverrideProps(overrides, "userID")}
+      ></TextField>
+      <TextField
+        label="Organization id"
+        isRequired={false}
+        isReadOnly={false}
+        value={organizationID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              city,
+              state,
+              country,
+              zipCode,
+              poBox,
+              userID,
+              organizationID: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.organizationID ?? value;
+          }
+          if (errors.organizationID?.hasError) {
+            runValidationTasks("organizationID", value);
+          }
+          setOrganizationID(value);
+        }}
+        onBlur={() => runValidationTasks("organizationID", organizationID)}
+        errorMessage={errors.organizationID?.errorMessage}
+        hasError={errors.organizationID?.hasError}
+        {...getOverrideProps(overrides, "organizationID")}
       ></TextField>
       <Flex
         justifyContent="space-between"

@@ -72,6 +72,8 @@ type Property @model {
   country: String
   zipCode: String
   poBox: String
+  userID: String
+  organizationID: String
 }
 
 type Building @model {
@@ -84,6 +86,8 @@ type Building @model {
   zipCode: String
   poBox: String
   propertyID: String
+  userID: String
+  organizationID: String
 }
 
 type Unit @model {
@@ -102,7 +106,7 @@ type Unit @model {
 type ServiceRequest @model {
   id: ID!
   requestorID: String
-  handlerID: String
+  userID: String
   unitID: String
   dateCreated: String
   dateCompleted: String

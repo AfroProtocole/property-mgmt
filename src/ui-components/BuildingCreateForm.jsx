@@ -31,6 +31,8 @@ export default function BuildingCreateForm(props) {
     zipCode: "",
     poBox: "",
     propertyID: "",
+    userID: "",
+    organizationID: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [number, setNumber] = React.useState(initialValues.number);
@@ -40,6 +42,10 @@ export default function BuildingCreateForm(props) {
   const [zipCode, setZipCode] = React.useState(initialValues.zipCode);
   const [poBox, setPoBox] = React.useState(initialValues.poBox);
   const [propertyID, setPropertyID] = React.useState(initialValues.propertyID);
+  const [userID, setUserID] = React.useState(initialValues.userID);
+  const [organizationID, setOrganizationID] = React.useState(
+    initialValues.organizationID
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setName(initialValues.name);
@@ -50,6 +56,8 @@ export default function BuildingCreateForm(props) {
     setZipCode(initialValues.zipCode);
     setPoBox(initialValues.poBox);
     setPropertyID(initialValues.propertyID);
+    setUserID(initialValues.userID);
+    setOrganizationID(initialValues.organizationID);
     setErrors({});
   };
   const validations = {
@@ -61,6 +69,8 @@ export default function BuildingCreateForm(props) {
     zipCode: [],
     poBox: [],
     propertyID: [],
+    userID: [],
+    organizationID: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -96,6 +106,8 @@ export default function BuildingCreateForm(props) {
           zipCode,
           poBox,
           propertyID,
+          userID,
+          organizationID,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -158,6 +170,8 @@ export default function BuildingCreateForm(props) {
               zipCode,
               poBox,
               propertyID,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -189,6 +203,8 @@ export default function BuildingCreateForm(props) {
               zipCode,
               poBox,
               propertyID,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.number ?? value;
@@ -220,6 +236,8 @@ export default function BuildingCreateForm(props) {
               zipCode,
               poBox,
               propertyID,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.city ?? value;
@@ -251,6 +269,8 @@ export default function BuildingCreateForm(props) {
               zipCode,
               poBox,
               propertyID,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.state ?? value;
@@ -282,6 +302,8 @@ export default function BuildingCreateForm(props) {
               zipCode,
               poBox,
               propertyID,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.country ?? value;
@@ -313,6 +335,8 @@ export default function BuildingCreateForm(props) {
               zipCode: value,
               poBox,
               propertyID,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.zipCode ?? value;
@@ -344,6 +368,8 @@ export default function BuildingCreateForm(props) {
               zipCode,
               poBox: value,
               propertyID,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.poBox ?? value;
@@ -375,6 +401,8 @@ export default function BuildingCreateForm(props) {
               zipCode,
               poBox,
               propertyID: value,
+              userID,
+              organizationID,
             };
             const result = onChange(modelFields);
             value = result?.propertyID ?? value;
@@ -388,6 +416,72 @@ export default function BuildingCreateForm(props) {
         errorMessage={errors.propertyID?.errorMessage}
         hasError={errors.propertyID?.hasError}
         {...getOverrideProps(overrides, "propertyID")}
+      ></TextField>
+      <TextField
+        label="User id"
+        isRequired={false}
+        isReadOnly={false}
+        value={userID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              number,
+              city,
+              state,
+              country,
+              zipCode,
+              poBox,
+              propertyID,
+              userID: value,
+              organizationID,
+            };
+            const result = onChange(modelFields);
+            value = result?.userID ?? value;
+          }
+          if (errors.userID?.hasError) {
+            runValidationTasks("userID", value);
+          }
+          setUserID(value);
+        }}
+        onBlur={() => runValidationTasks("userID", userID)}
+        errorMessage={errors.userID?.errorMessage}
+        hasError={errors.userID?.hasError}
+        {...getOverrideProps(overrides, "userID")}
+      ></TextField>
+      <TextField
+        label="Organization id"
+        isRequired={false}
+        isReadOnly={false}
+        value={organizationID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name,
+              number,
+              city,
+              state,
+              country,
+              zipCode,
+              poBox,
+              propertyID,
+              userID,
+              organizationID: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.organizationID ?? value;
+          }
+          if (errors.organizationID?.hasError) {
+            runValidationTasks("organizationID", value);
+          }
+          setOrganizationID(value);
+        }}
+        onBlur={() => runValidationTasks("organizationID", organizationID)}
+        errorMessage={errors.organizationID?.errorMessage}
+        hasError={errors.organizationID?.hasError}
+        {...getOverrideProps(overrides, "organizationID")}
       ></TextField>
       <Flex
         justifyContent="space-between"

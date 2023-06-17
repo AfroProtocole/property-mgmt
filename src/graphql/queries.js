@@ -290,6 +290,8 @@ export const getProperty = /* GraphQL */ `
       country
       zipCode
       poBox
+      userID
+      organizationID
       createdAt
       updatedAt
     }
@@ -310,6 +312,8 @@ export const listProperties = /* GraphQL */ `
         country
         zipCode
         poBox
+        userID
+        organizationID
         createdAt
         updatedAt
       }
@@ -329,6 +333,8 @@ export const getBuilding = /* GraphQL */ `
       zipCode
       poBox
       propertyID
+      userID
+      organizationID
       createdAt
       updatedAt
     }
@@ -351,6 +357,8 @@ export const listBuildings = /* GraphQL */ `
         zipCode
         poBox
         propertyID
+        userID
+        organizationID
         createdAt
         updatedAt
       }
@@ -406,7 +414,7 @@ export const getServiceRequest = /* GraphQL */ `
     getServiceRequest(id: $id) {
       id
       requestorID
-      handlerID
+      userID
       unitID
       dateCreated
       dateCompleted
@@ -426,7 +434,7 @@ export const listServiceRequests = /* GraphQL */ `
       items {
         id
         requestorID
-        handlerID
+        userID
         unitID
         dateCreated
         dateCompleted

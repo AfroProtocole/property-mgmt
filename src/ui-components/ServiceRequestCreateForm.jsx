@@ -24,7 +24,7 @@ export default function ServiceRequestCreateForm(props) {
   } = props;
   const initialValues = {
     requestorID: "",
-    handlerID: "",
+    userID: "",
     unitID: "",
     dateCreated: "",
     dateCompleted: "",
@@ -33,7 +33,7 @@ export default function ServiceRequestCreateForm(props) {
   const [requestorID, setRequestorID] = React.useState(
     initialValues.requestorID
   );
-  const [handlerID, setHandlerID] = React.useState(initialValues.handlerID);
+  const [userID, setUserID] = React.useState(initialValues.userID);
   const [unitID, setUnitID] = React.useState(initialValues.unitID);
   const [dateCreated, setDateCreated] = React.useState(
     initialValues.dateCreated
@@ -45,7 +45,7 @@ export default function ServiceRequestCreateForm(props) {
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setRequestorID(initialValues.requestorID);
-    setHandlerID(initialValues.handlerID);
+    setUserID(initialValues.userID);
     setUnitID(initialValues.unitID);
     setDateCreated(initialValues.dateCreated);
     setDateCompleted(initialValues.dateCompleted);
@@ -54,7 +54,7 @@ export default function ServiceRequestCreateForm(props) {
   };
   const validations = {
     requestorID: [],
-    handlerID: [],
+    userID: [],
     unitID: [],
     dateCreated: [],
     dateCompleted: [],
@@ -87,7 +87,7 @@ export default function ServiceRequestCreateForm(props) {
         event.preventDefault();
         let modelFields = {
           requestorID,
-          handlerID,
+          userID,
           unitID,
           dateCreated,
           dateCompleted,
@@ -147,7 +147,7 @@ export default function ServiceRequestCreateForm(props) {
           if (onChange) {
             const modelFields = {
               requestorID: value,
-              handlerID,
+              userID,
               unitID,
               dateCreated,
               dateCompleted,
@@ -167,33 +167,33 @@ export default function ServiceRequestCreateForm(props) {
         {...getOverrideProps(overrides, "requestorID")}
       ></TextField>
       <TextField
-        label="Handler id"
+        label="User id"
         isRequired={false}
         isReadOnly={false}
-        value={handlerID}
+        value={userID}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               requestorID,
-              handlerID: value,
+              userID: value,
               unitID,
               dateCreated,
               dateCompleted,
               note,
             };
             const result = onChange(modelFields);
-            value = result?.handlerID ?? value;
+            value = result?.userID ?? value;
           }
-          if (errors.handlerID?.hasError) {
-            runValidationTasks("handlerID", value);
+          if (errors.userID?.hasError) {
+            runValidationTasks("userID", value);
           }
-          setHandlerID(value);
+          setUserID(value);
         }}
-        onBlur={() => runValidationTasks("handlerID", handlerID)}
-        errorMessage={errors.handlerID?.errorMessage}
-        hasError={errors.handlerID?.hasError}
-        {...getOverrideProps(overrides, "handlerID")}
+        onBlur={() => runValidationTasks("userID", userID)}
+        errorMessage={errors.userID?.errorMessage}
+        hasError={errors.userID?.hasError}
+        {...getOverrideProps(overrides, "userID")}
       ></TextField>
       <TextField
         label="Unit id"
@@ -205,7 +205,7 @@ export default function ServiceRequestCreateForm(props) {
           if (onChange) {
             const modelFields = {
               requestorID,
-              handlerID,
+              userID,
               unitID: value,
               dateCreated,
               dateCompleted,
@@ -234,7 +234,7 @@ export default function ServiceRequestCreateForm(props) {
           if (onChange) {
             const modelFields = {
               requestorID,
-              handlerID,
+              userID,
               unitID,
               dateCreated: value,
               dateCompleted,
@@ -263,7 +263,7 @@ export default function ServiceRequestCreateForm(props) {
           if (onChange) {
             const modelFields = {
               requestorID,
-              handlerID,
+              userID,
               unitID,
               dateCreated,
               dateCompleted: value,
@@ -292,7 +292,7 @@ export default function ServiceRequestCreateForm(props) {
           if (onChange) {
             const modelFields = {
               requestorID,
-              handlerID,
+              userID,
               unitID,
               dateCreated,
               dateCompleted,

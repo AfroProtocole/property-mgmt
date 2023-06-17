@@ -73,6 +73,8 @@ type Property {
   country: String
   zipCode: String
   poBox: String
+  userID: String
+  organizationID: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -87,6 +89,8 @@ type Building {
   zipCode: String
   poBox: String
   propertyID: String
+  userID: String
+  organizationID: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -109,7 +113,7 @@ type Unit {
 type ServiceRequest {
   id: ID!
   requestorID: String
-  handlerID: String
+  userID: String
   unitID: String
   dateCreated: String
   dateCompleted: String
@@ -728,6 +732,8 @@ input ModelPropertyFilterInput {
   country: ModelStringInput
   zipCode: ModelStringInput
   poBox: ModelStringInput
+  userID: ModelStringInput
+  organizationID: ModelStringInput
   and: [ModelPropertyFilterInput]
   or: [ModelPropertyFilterInput]
   not: ModelPropertyFilterInput
@@ -740,6 +746,8 @@ input ModelPropertyConditionInput {
   country: ModelStringInput
   zipCode: ModelStringInput
   poBox: ModelStringInput
+  userID: ModelStringInput
+  organizationID: ModelStringInput
   and: [ModelPropertyConditionInput]
   or: [ModelPropertyConditionInput]
   not: ModelPropertyConditionInput
@@ -753,6 +761,8 @@ input CreatePropertyInput {
   country: String
   zipCode: String
   poBox: String
+  userID: String
+  organizationID: String
 }
 
 input UpdatePropertyInput {
@@ -763,6 +773,8 @@ input UpdatePropertyInput {
   country: String
   zipCode: String
   poBox: String
+  userID: String
+  organizationID: String
 }
 
 input DeletePropertyInput {
@@ -777,6 +789,8 @@ input ModelSubscriptionPropertyFilterInput {
   country: ModelSubscriptionStringInput
   zipCode: ModelSubscriptionStringInput
   poBox: ModelSubscriptionStringInput
+  userID: ModelSubscriptionStringInput
+  organizationID: ModelSubscriptionStringInput
   and: [ModelSubscriptionPropertyFilterInput]
   or: [ModelSubscriptionPropertyFilterInput]
 }
@@ -796,6 +810,8 @@ input ModelBuildingFilterInput {
   zipCode: ModelStringInput
   poBox: ModelStringInput
   propertyID: ModelStringInput
+  userID: ModelStringInput
+  organizationID: ModelStringInput
   and: [ModelBuildingFilterInput]
   or: [ModelBuildingFilterInput]
   not: ModelBuildingFilterInput
@@ -810,6 +826,8 @@ input ModelBuildingConditionInput {
   zipCode: ModelStringInput
   poBox: ModelStringInput
   propertyID: ModelStringInput
+  userID: ModelStringInput
+  organizationID: ModelStringInput
   and: [ModelBuildingConditionInput]
   or: [ModelBuildingConditionInput]
   not: ModelBuildingConditionInput
@@ -825,6 +843,8 @@ input CreateBuildingInput {
   zipCode: String
   poBox: String
   propertyID: String
+  userID: String
+  organizationID: String
 }
 
 input UpdateBuildingInput {
@@ -837,6 +857,8 @@ input UpdateBuildingInput {
   zipCode: String
   poBox: String
   propertyID: String
+  userID: String
+  organizationID: String
 }
 
 input DeleteBuildingInput {
@@ -853,6 +875,8 @@ input ModelSubscriptionBuildingFilterInput {
   zipCode: ModelSubscriptionStringInput
   poBox: ModelSubscriptionStringInput
   propertyID: ModelSubscriptionStringInput
+  userID: ModelSubscriptionStringInput
+  organizationID: ModelSubscriptionStringInput
   and: [ModelSubscriptionBuildingFilterInput]
   or: [ModelSubscriptionBuildingFilterInput]
 }
@@ -946,7 +970,7 @@ type ModelServiceRequestConnection {
 input ModelServiceRequestFilterInput {
   id: ModelIDInput
   requestorID: ModelStringInput
-  handlerID: ModelStringInput
+  userID: ModelStringInput
   unitID: ModelStringInput
   dateCreated: ModelStringInput
   dateCompleted: ModelStringInput
@@ -958,7 +982,7 @@ input ModelServiceRequestFilterInput {
 
 input ModelServiceRequestConditionInput {
   requestorID: ModelStringInput
-  handlerID: ModelStringInput
+  userID: ModelStringInput
   unitID: ModelStringInput
   dateCreated: ModelStringInput
   dateCompleted: ModelStringInput
@@ -971,7 +995,7 @@ input ModelServiceRequestConditionInput {
 input CreateServiceRequestInput {
   id: ID
   requestorID: String
-  handlerID: String
+  userID: String
   unitID: String
   dateCreated: String
   dateCompleted: String
@@ -981,7 +1005,7 @@ input CreateServiceRequestInput {
 input UpdateServiceRequestInput {
   id: ID!
   requestorID: String
-  handlerID: String
+  userID: String
   unitID: String
   dateCreated: String
   dateCompleted: String
@@ -995,7 +1019,7 @@ input DeleteServiceRequestInput {
 input ModelSubscriptionServiceRequestFilterInput {
   id: ModelSubscriptionIDInput
   requestorID: ModelSubscriptionStringInput
-  handlerID: ModelSubscriptionStringInput
+  userID: ModelSubscriptionStringInput
   unitID: ModelSubscriptionStringInput
   dateCreated: ModelSubscriptionStringInput
   dateCompleted: ModelSubscriptionStringInput

@@ -26,6 +26,13 @@ const App: React.FC = () => {
     return <div>Loading...</div>;
   }
 
+  const pageStyling = {
+    flex: 1,
+    height: "100%",
+    maxHeight: 1000,
+    paddingTop: "2rem",
+  };
+
   return (
     <Router>
       <Layout>
@@ -40,53 +47,73 @@ const App: React.FC = () => {
             }}
             hasSider={true}
           >
-            {user ? <SideNavigation /> : <></>}
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route
+                path="/organization/new"
+                element={
+                  <>
+                    {user ? <SideNavigation /> : <></>}
 
-            <div
-              style={{
-                flex: 1,
-                height: "100%",
-                maxHeight: 1000,
-                paddingTop: "2rem",
-              }}
-            >
-              <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route
-                  path="/organization/new"
-                  element={
-                    user ? (
-                      <CreateOrganizationPage />
-                    ) : (
-                      <Navigate to="/" replace={true} />
-                    )
-                  }
-                />
-                <Route
-                  path="/signup"
-                  element={
-                    !user ? (
-                      <SignUpPage />
-                    ) : (
-                      <Navigate to="/home" replace={true} />
-                    )
-                  }
-                />
-                <Route
-                  path="/finance"
-                  element={
-                    user ? <FinancePage /> : <Navigate to="/" replace={true} />
-                  }
-                />
-                <Route
-                  path="/home"
-                  element={
-                    user ? <HomePage /> : <Navigate to="/" replace={true} />
-                  }
-                />
-              </Routes>
-            </div>
-            {user ? <SideActions /> : <></>}
+                    <div style={pageStyling}>
+                      {user ? (
+                        <CreateOrganizationPage />
+                      ) : (
+                        <Navigate to="/" replace={true} />
+                      )}
+                    </div>
+                    {user ? <SideActions /> : <></>}
+                  </>
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <>
+                    {user ? <SideNavigation /> : <></>}
+
+                    <div style={pageStyling}>
+                      {!user ? (
+                        <SignUpPage />
+                      ) : (
+                        <Navigate to="/home" replace={true} />
+                      )}
+                    </div>
+                    {user ? <SideActions /> : <></>}
+                  </>
+                }
+              />
+              <Route
+                path="/finance"
+                element={
+                  <>
+                    {user ? <SideNavigation /> : <></>}
+
+                    <div style={pageStyling}>
+                      {user ? (
+                        <FinancePage />
+                      ) : (
+                        <Navigate to="/" replace={true} />
+                      )}
+                    </div>
+                    {user ? <SideActions /> : <></>}
+                  </>
+                }
+              />
+              <Route
+                path="/home"
+                element={
+                  <>
+                    {user ? <SideNavigation /> : <></>}
+
+                    <div style={pageStyling}>
+                      {user ? <HomePage /> : <Navigate to="/" replace={true} />}
+                    </div>
+                    {user ? <SideActions /> : <></>}
+                  </>
+                }
+              />
+            </Routes>
           </Layout>
         </Layout>
       </Layout>
