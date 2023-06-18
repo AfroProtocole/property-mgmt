@@ -1,5 +1,5 @@
 
-type Blog {
+type Blog @aws_api_key {
   id: ID!
   name: String!
   posts(filter: ModelPostFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelPostConnection
@@ -7,7 +7,7 @@ type Blog {
   updatedAt: AWSDateTime!
 }
 
-type Post {
+type Post @aws_api_key {
   id: ID!
   title: String!
   blog: Blog
@@ -17,7 +17,7 @@ type Post {
   blogPostsId: ID
 }
 
-type Comment {
+type Comment @aws_api_key {
   id: ID!
   post: Post
   content: String!
@@ -26,14 +26,14 @@ type Comment {
   postCommentsId: ID
 }
 
-type Organization {
+type Organization @aws_api_key {
   id: ID!
   name: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
 
-type User {
+type User @aws_api_key {
   id: ID!
   title: String
   type: String
@@ -46,7 +46,7 @@ type User {
   updatedAt: AWSDateTime!
 }
 
-type Favorite {
+type Favorite @aws_api_key {
   id: ID!
   userID: String
   favType: String
@@ -55,7 +55,7 @@ type Favorite {
   updatedAt: AWSDateTime!
 }
 
-type Tenant {
+type Tenant @aws_api_key {
   id: ID!
   firstName: String
   middleName: String
@@ -65,7 +65,7 @@ type Tenant {
   updatedAt: AWSDateTime!
 }
 
-type Property {
+type Property @aws_api_key {
   id: ID!
   name: String
   city: String
@@ -79,7 +79,7 @@ type Property {
   updatedAt: AWSDateTime!
 }
 
-type Building {
+type Building @aws_api_key {
   id: ID!
   name: String
   number: String
@@ -95,7 +95,7 @@ type Building {
   updatedAt: AWSDateTime!
 }
 
-type Unit {
+type Unit @aws_api_key {
   id: ID!
   name: String
   number: String
@@ -110,7 +110,7 @@ type Unit {
   updatedAt: AWSDateTime!
 }
 
-type ServiceRequest {
+type ServiceRequest @aws_api_key {
   id: ID!
   requestorID: String
   userID: String

@@ -1,11 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 import { Layout } from "antd";
-import { SideNavigation, TopNavigation, SideActions } from "./components";
-import { CreateOrganizationPage, LandingPage, HomePage, SignUpPage } from "./pages";
+import {
+  SideNavigation,
+  TopNavigation,
+  SideActions,
+  AppLayout,
+} from "./components";
+import {
+  CreateOrganizationPage,
+  LandingPage,
+  HomePage,
+  SignUpPage,
+} from "./pages";
 import { FinancePage } from "./pages";
 import { auth } from "./lib/firebase"; // Import your Firebase auth instance
 import { CreateOrganizationLoader } from "./pages/CreateOrganizationPage/loader";
+import {
+  HomePageAction,
+  HomePageLoader,
+} from "./pages/HomePage/loaders/HomePageLoader";
+
+import awsmobile from "./aws-exports";
+import { Amplify } from "aws-amplify";
+
+Amplify.configure(awsmobile);
 
 const App: React.FC = () => {
   const [user, setUser] = useState<any>(null);
@@ -34,91 +61,98 @@ const App: React.FC = () => {
     paddingTop: "2rem",
   };
 
-  return (
-    <Router>
-      <Layout>
-        <TopNavigation />
-        <Layout
-          style={{
-            padding: "0 24px 24px",
-            display: "flex",
-            height: "100%",
-            maxHeight: 1000,
-          }}
-          hasSider={true}
-        >
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route
-              path="/signup"
-              element={
-                <>
-                  {user ? <SideNavigation /> : <></>}
-
-                  <div style={pageStyling}>
-                    {!user ? (
-                      <SignUpPage />
-                    ) : (
-                      <Navigate to="/home" replace={true} />
-                    )}
-                  </div>
-                  {user ? <SideActions /> : <></>}
-                </>
-              }
-            />
-            <Route
-              path="/home"
-              loader={CreateOrganizationLoader}
-              element={
-                <>
-                  {user ? <SideNavigation /> : <></>}
-
-                  <div style={pageStyling}>
-                    {user ? <HomePage /> : <Navigate to="/" replace={true} />}
-                  </div>
-                  {user ? <SideActions /> : <></>}
-                </>
-              }
-            />
-            <Route
-              path="/organization/new"
-              element={
-                <>
-                  {user ? <SideNavigation /> : <></>}
-
-                  <div style={pageStyling}>
-                    {user ? (
-                      <CreateOrganizationPage />
-                    ) : (
-                      <Navigate to="/" replace={true} />
-                    )}
-                  </div>
-                  {user ? <SideActions /> : <></>}
-                </>
-              }
-            />
-            <Route
-              path="/finance"
-              element={
-                <>
-                  {user ? <SideNavigation /> : <></>}
-
-                  <div style={pageStyling}>
-                    {user ? (
-                      <FinancePage />
-                    ) : (
-                      <Navigate to="/" replace={true} />
-                    )}
-                  </div>
-                  {user ? <SideActions /> : <></>}
-                </>
-              }
-            />
-          </Routes>
-        </Layout>
-      </Layout>
-    </Router>
+  const routesJSX = (
+    <Route>
+      <Route
+        path="/"
+        element={
+          <AppLayout
+            TopNavigation={null}
+            SideNavigation={null}
+            SideAction={null}
+            PageContent={<LandingPage />}
+          />
+        }
+      />
+      <Route
+        path="/signup"
+        element={
+          <AppLayout
+            TopNavigation={<TopNavigation />}
+            SideNavigation={user ? <SideNavigation /> : <></>}
+            SideAction={user ? <SideActions /> : <></>}
+            PageContent={
+              <div style={pageStyling}>
+                {!user ? (
+                  <SignUpPage />
+                ) : (
+                  <Navigate to="/home" replace={true} />
+                )}
+              </div>
+            }
+          />
+        }
+      />
+      <Route
+        path="/home"
+        loader={HomePageLoader}
+        action={HomePageAction}
+        element={
+          <AppLayout
+            TopNavigation={<TopNavigation />}
+            SideNavigation={user ? <SideNavigation /> : <></>}
+            SideAction={user ? <SideActions /> : <></>}
+            PageContent={
+              <div style={pageStyling}>
+                {user ? <HomePage /> : <Navigate to="/" replace={true} />}
+              </div>
+            }
+          />
+        }
+      />
+      <Route
+        path="/organization/new"
+        loader={CreateOrganizationLoader}
+        element={
+          <AppLayout
+            TopNavigation={<TopNavigation />}
+            SideNavigation={user ? <SideNavigation /> : <></>}
+            SideAction={user ? <SideActions /> : <></>}
+            PageContent={
+              <div style={pageStyling}>
+                {user ? (
+                  <CreateOrganizationPage />
+                ) : (
+                  <Navigate to="/" replace={true} />
+                )}
+              </div>
+            }
+          />
+        }
+      />
+      <Route
+        path="/finance"
+        element={
+          <AppLayout
+            TopNavigation={<TopNavigation />}
+            SideNavigation={user ? <SideNavigation /> : <></>}
+            SideAction={user ? <SideActions /> : <></>}
+            PageContent={
+              <div style={pageStyling}>
+                {user ? <FinancePage /> : <Navigate to="/" replace={true} />}
+              </div>
+            }
+          />
+        }
+      />
+    </Route>
   );
+
+  const routes = createRoutesFromElements(routesJSX);
+
+  const router = createBrowserRouter(routes);
+
+  return <RouterProvider router={router} />;
 };
 
 export default App;

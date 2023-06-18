@@ -3,9 +3,12 @@ import { Content } from "antd/es/layout/layout";
 import { RightOutlined } from "@ant-design/icons";
 import { MainBookmarkSetting } from "./components";
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
 const HomePage = () => {
   const [mainBookmark, setMainBookmark] = React.useState("");
+  const loaderData = useLoaderData();
+  // console.log("loader data", loaderData);
 
   return (
     <>
