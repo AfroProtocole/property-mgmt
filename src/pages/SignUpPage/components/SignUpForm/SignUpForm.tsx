@@ -1,31 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Form, Input, message, Select, Typography } from 'antd';
-// import { auth, db } from "../../../../lib/firebase"; 
-// this import is re-written below. Please follow this convention across the entire app instead
 import { auth, db } from "~/lib/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { time } from 'console';
 
 const { Title, Text } = Typography;
-
-const orgStatusOptions = [
-  {
-    value: "joining",
-    label: "Joining an organization",
-    name: "joining",
-  },
-  {
-    value: "new",
-    label: "Creating an organization",
-    name: "new",
-  },
-  {
-    value: "none",
-    label: "No Organization",
-    name: "none",
-  },
-];
 
 const SignUpForm = () => {
   const [loading, setLoading] = useState(false);
@@ -51,7 +31,6 @@ const SignUpForm = () => {
         const userObject ={
           firstName: values.firstName,
           lastName: values.lastName,
-          orgStatus: values.orgStatus,
           email: values.email,
           username: values.username,
         };
@@ -119,9 +98,6 @@ const SignUpForm = () => {
             </Form.Item>
             <Form.Item label="Last Name" name="lastName">
               <Input />
-            </Form.Item>
-            <Form.Item label="Organization Status" name="orgStatus">
-              <Select options={orgStatusOptions} />
             </Form.Item>
             <Form.Item
               label="Email"
