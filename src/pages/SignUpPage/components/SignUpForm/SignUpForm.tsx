@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Form, Input, message, Select, Typography } from 'antd';
-import { auth, db } from '../../../../lib/firebase';
+// import { auth, db } from "../../../../lib/firebase"; 
+// this import is re-written below. Please follow this convention across the entire app instead
+import { auth, db } from "~/lib/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { time } from 'console';
@@ -9,19 +11,19 @@ const { Title, Text } = Typography;
 
 const orgStatusOptions = [
   {
-    value: 'joining',
-    label: 'Joining an organization',
-    name: 'joining',
+    value: "joining",
+    label: "Joining an organization",
+    name: "joining",
   },
   {
-    value: 'new',
-    label: 'Creating an organization',
-    name: 'new',
+    value: "new",
+    label: "Creating an organization",
+    name: "new",
   },
   {
-    value: 'none',
-    label: 'No Organization',
-    name: 'none',
+    value: "none",
+    label: "No Organization",
+    name: "none",
   },
 ];
 

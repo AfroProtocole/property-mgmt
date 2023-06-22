@@ -7,8 +7,8 @@ import { useLoaderData } from "react-router-dom";
 
 const HomePage = () => {
   const [mainBookmark, setMainBookmark] = React.useState("");
-  const loaderData = useLoaderData();
-  // console.log("loader data", loaderData);
+  const loaderData = useLoaderData() as unknown as { data: any };
+  console.log("loader data", loaderData.data);
 
   return (
     <>
