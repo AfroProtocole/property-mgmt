@@ -67,13 +67,13 @@ const SignUpForm = () => {
         // Reset the form
         form.resetFields();
         // Redirect to the "/home" page
-        window.location.href = "/";
+        window.location.href = "/home";
       } else {
         // Sign in user with email and password
         await signInWithEmailAndPassword(auth, values.email, values.password);
         form.resetFields();
         message.success('Login successful!');
-        window.location.href = "/";
+        window.location.href = "/home";
       }
     } catch (error: any) {
       setLoading(false);
