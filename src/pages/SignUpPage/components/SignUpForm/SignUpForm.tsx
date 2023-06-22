@@ -64,13 +64,99 @@ const SignUpForm = () => {
 
   const [form] = Form.useForm();
 
-  return (
-    <>
-      <Title level={1}>{isSignUp ? "Sign Up" : "Sign In"}</Title>
+//   return (
+//     <>
+//       <Title level={1}>{isSignUp ? "Sign Up" : "Sign In"}</Title>
+//       <Form form={form} onFinish={handleSubmit}>
+//         {!isSignUp && (
+//           <>
+//             <Form.Item
+//               label="Email"
+//               name="email"
+//               rules={[
+//                 { required: true, message: "Please enter your email" },
+//                 { type: "email", message: "Please enter a valid email" },
+//               ]}
+//             >
+//               <Input />
+//             </Form.Item>
+//             <Form.Item
+//               label="Password"
+//               name="password"
+//               rules={[
+//                 { required: true, message: "Please enter your password" },
+//               ]}
+//             >
+//               <Input.Password />
+//             </Form.Item>
+//           </>
+//         )}
+//         {isSignUp && (
+//           <>
+//             <Form.Item label="First Name" name="firstName">
+//               <Input />
+//             </Form.Item>
+//             <Form.Item label="Last Name" name="lastName">
+//               <Input />
+//             </Form.Item>
+//             <Form.Item
+//               label="Email"
+//               name="email"
+//               rules={[
+//                 { required: true, message: "Please enter your email" },
+//                 { type: "email", message: "Please enter a valid email" },
+//               ]}
+//             >
+//               <Input />
+//             </Form.Item>
+//             <Form.Item
+//               label="Username"
+//               name="username"
+//               rules={[
+//                 { required: true, message: "Please enter your username" },
+//               ]}
+//             >
+//               <Input />
+//             </Form.Item>
+//             <Form.Item
+//               label="Password"
+//               name="password"
+//               rules={[
+//                 { required: true, message: "Please enter your password" },
+//               ]}
+//             >
+//               <Input.Password />
+//             </Form.Item>
+//           </>
+//         )}
+//         <Form.Item>
+//           <Button type="primary" htmlType="submit" loading={loading} block>
+//             {isSignUp ? "Sign Up" : "Sign In"}
+//           </Button>
+//         </Form.Item>
+//         <Form.Item>
+//           <Text>
+//             {isSignUp ? "Already have an account?" : "Don't have an account?"}
+//             <Button type="link" onClick={handleFormToggle}>
+//               {isSignUp ? "Sign In" : "Sign Up"}
+//             </Button>
+//           </Text>
+//         </Form.Item>
+//       </Form>
+//     </>
+//   );
+// };
+
+
+
+return (
+    <div className="signup-form">
+      <Title className="signup-form-title" level={1}>{isSignUp ? "Sign Up" : "Sign In"}</Title>
       <Form form={form} onFinish={handleSubmit}>
         {!isSignUp && (
           <>
             <Form.Item
+              className="signup-form-item"
               label="Email"
               name="email"
               rules={[
@@ -81,6 +167,7 @@ const SignUpForm = () => {
               <Input />
             </Form.Item>
             <Form.Item
+              className="signup-form-item"
               label="Password"
               name="password"
               rules={[
@@ -93,13 +180,14 @@ const SignUpForm = () => {
         )}
         {isSignUp && (
           <>
-            <Form.Item label="First Name" name="firstName">
+            <Form.Item className="signup-form-item" label="First Name" name="firstName">
               <Input />
             </Form.Item>
-            <Form.Item label="Last Name" name="lastName">
+            <Form.Item className="signup-form-item" label="Last Name" name="lastName">
               <Input />
             </Form.Item>
             <Form.Item
+              className="signup-form-item"
               label="Email"
               name="email"
               rules={[
@@ -110,6 +198,7 @@ const SignUpForm = () => {
               <Input />
             </Form.Item>
             <Form.Item
+              className="signup-form-item"
               label="Username"
               name="username"
               rules={[
@@ -119,6 +208,7 @@ const SignUpForm = () => {
               <Input />
             </Form.Item>
             <Form.Item
+              className="signup-form-item"
               label="Password"
               name="password"
               rules={[
@@ -129,12 +219,12 @@ const SignUpForm = () => {
             </Form.Item>
           </>
         )}
-        <Form.Item>
+        <Form.Item className="signup-form-submit-button">
           <Button type="primary" htmlType="submit" loading={loading} block>
             {isSignUp ? "Sign Up" : "Sign In"}
           </Button>
         </Form.Item>
-        <Form.Item>
+        <Form.Item className="signup-form-toggle">
           <Text>
             {isSignUp ? "Already have an account?" : "Don't have an account?"}
             <Button type="link" onClick={handleFormToggle}>
@@ -143,7 +233,7 @@ const SignUpForm = () => {
           </Text>
         </Form.Item>
       </Form>
-    </>
+    </div>
   );
 };
 

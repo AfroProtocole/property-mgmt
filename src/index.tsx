@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import './styles/App.css';
 import './styles/Landingpage.css';
+import './styles/SignUpForm.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
