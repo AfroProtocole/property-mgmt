@@ -6,6 +6,7 @@ import {
   LaptopOutlined,
   NotificationOutlined,
   UserOutlined,
+  InboxOutlined,
 } from "@ant-design/icons";
 
 const { Header } = Layout;
@@ -31,13 +32,25 @@ const TopNavigation: React.FC = () => {
         alignItems: "center",
       }}
     >
-      <div className="demo-logo" />
-      [Logo]
+  <div className="logo" style={{ height: "100px", width: "60px", paddingLeft: "0.5rem"}}>
+  <img style={{ height: "100%", width: "100%", objectFit: "contain" }}
+    src="/logo1.png" alt="Prop Ease"
+  />
+  </div>
+      <Menu
+        theme="light"
+        mode="horizontal"
+        defaultSelectedKeys={["overview"]}
+      >
+        <Menu.Item key="overview">Overview</Menu.Item>
+        <Menu.Item key="property">Property</Menu.Item>
+        <Menu.Item key="building">Building</Menu.Item>
+        <Menu.Item key="unit">Unit</Menu.Item>
+      </Menu>
       <div style={{ flex: 1 }} />
-      <div style={{ paddingRight: "2rem" }}>
-        <Button type="primary" onClick={handleLogout}>
-          Logout
-        </Button>
+      <div style={{ display: "flex", alignItems: "center", paddingRight: "1rem" }}>
+        <Button type="primary" icon={<InboxOutlined />} style={{ marginRight: "0.5rem" }} />
+        <Button type="primary" icon={<UserOutlined />} onClick={handleLogout} />
       </div>
     </Header>
   );
