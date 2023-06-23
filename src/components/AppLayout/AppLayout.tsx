@@ -13,7 +13,7 @@ const AppLayout = ({
   PageContent: any;
 }) => {
   return (
-    <Layout>
+    <Layout style={{ minHeight: "100vh" }}>
       {TopNavigation}
       <Layout
         style={{
@@ -25,7 +25,9 @@ const AppLayout = ({
         hasSider={true}
       >
         {SideNavigation}
-        {PageContent}
+        <Content style={{ height: "100%", overflow: "auto" }}>
+          {PageContent}
+        </Content>
         {SideAction}
       </Layout>
     </Layout>
