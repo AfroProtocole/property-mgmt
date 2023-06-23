@@ -1,10 +1,11 @@
 import React from "react";
-import { Layout, Button, Menu, MenuProps } from "antd";
+import { Layout, Button, Menu, MenuProps, Dropdown } from "antd";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../lib/firebase";
 import {
   LaptopOutlined,
   NotificationOutlined,
+  EllipsisOutlined,
   UserOutlined,
   InboxOutlined,
 } from "@ant-design/icons";
@@ -13,6 +14,16 @@ const { Header } = Layout;
 
 const TopNavigation: React.FC = () => {
   const navigate = useNavigate();
+  const menu = (
+    <Menu>
+      <Menu.Item key="Gym">Gym</Menu.Item>
+      <Menu.Item key="Pool">Pool</Menu.Item>
+      <Menu.Item key="Court">Court</Menu.Item>
+      <Menu.Item key="Private Room">Private Room</Menu.Item>
+      <Menu.Item key="Cabin">Cabin</Menu.Item>
+      <Menu.Item key="Country Side">Country Side</Menu.Item>
+    </Menu>
+  );
 
   const handleLogout = async () => {
     try {
@@ -37,15 +48,16 @@ const TopNavigation: React.FC = () => {
     src="/logo1.png" alt="Prop Ease"
   />
   </div>
-      <Menu
-        theme="light"
-        mode="horizontal"
-        defaultSelectedKeys={["overview"]}
-      >
+      <Menu mode="horizontal" style={{ flexGrow: 1 }}>
         <Menu.Item key="overview">Overview</Menu.Item>
         <Menu.Item key="property">Property</Menu.Item>
         <Menu.Item key="building">Building</Menu.Item>
-        <Menu.Item key="unit">Unit</Menu.Item>
+        <Menu.Item key="units">Units</Menu.Item>
+        <Menu.Item key="more">
+          <Dropdown overlay={menu} trigger={["click"]}>
+            <Button type="link" icon={<EllipsisOutlined />} />
+          </Dropdown>
+        </Menu.Item>
       </Menu>
       <div style={{ flex: 1 }} />
       <div style={{ display: "flex", alignItems: "center", paddingRight: "1rem" }}>
