@@ -8,7 +8,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import { Layout } from "antd";
+import { Layout, Spin } from "antd";
 import {
   SideNavigation,
   TopNavigation,
@@ -52,7 +52,7 @@ const App: React.FC = () => {
 
   if (isLoading) {
     // Show loading indicator or placeholder
-    return <div>Loading...</div>;
+    return <Spin />;
   }
 
   const pageStyling = {

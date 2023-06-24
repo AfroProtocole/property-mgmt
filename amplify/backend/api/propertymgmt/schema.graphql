@@ -54,6 +54,8 @@ type Favorite @model @aws_api_key {
   userID: String
   favType: String
   favID: String
+  image: String
+  name: String
 }
 
 type Tenant @model @aws_api_key {

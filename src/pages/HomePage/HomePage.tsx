@@ -4,10 +4,13 @@ import { RightOutlined } from "@ant-design/icons";
 import { MainBookmarkSetting } from "./components";
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import { favorites } from "~/types";
+
+type LoaderData = { data: favorites[] };
 
 const HomePage = () => {
   const [mainBookmark, setMainBookmark] = React.useState("");
-  const loaderData = useLoaderData() as unknown as { data: any };
+  const loaderData = useLoaderData() as unknown as LoaderData;
   console.log("loader data", loaderData.data);
 
   return (

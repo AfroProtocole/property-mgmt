@@ -17,11 +17,15 @@ export declare type FavoriteUpdateFormInputValues = {
     userID?: string;
     favType?: string;
     favID?: string;
+    image?: string;
+    name?: string;
 };
 export declare type FavoriteUpdateFormValidationValues = {
     userID?: ValidationFunction<string>;
     favType?: ValidationFunction<string>;
     favID?: ValidationFunction<string>;
+    image?: ValidationFunction<string>;
+    name?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type FavoriteUpdateFormOverridesProps = {
@@ -29,6 +33,8 @@ export declare type FavoriteUpdateFormOverridesProps = {
     userID?: PrimitiveOverrideProps<TextFieldProps>;
     favType?: PrimitiveOverrideProps<TextFieldProps>;
     favID?: PrimitiveOverrideProps<TextFieldProps>;
+    image?: PrimitiveOverrideProps<TextFieldProps>;
+    name?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type FavoriteUpdateFormProps = React.PropsWithChildren<{
     overrides?: FavoriteUpdateFormOverridesProps | undefined | null;

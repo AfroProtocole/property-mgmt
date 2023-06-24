@@ -161,7 +161,7 @@
           "DynamoDBBillingMode": "PAY_PER_REQUEST",
           "DynamoDBEnableServerSideEncryption": false,
           "S3DeploymentBucket": "amplify-amplify6512a0320a584-staging-200316-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/37104b20ea9c735f99358f0f7008a713082575a0",
+          "S3DeploymentRootKey": "amplify-appsync-files/48a67352322cbb8465a33496a8679663082efe4c",
           "env": "staging"
         }
       }
@@ -283,10 +283,12 @@
                 "                    iam.send(new GetRoleCommand({RoleName: authParams.RoleName})),",
                 "                    iam.send(new GetRoleCommand({RoleName: unauthParams.RoleName}))",
                 "                ]);",
+                "                console.log('in res', res);",
                 "                res = await Promise.all([",
                 "                    iam.send(new UpdateAssumeRolePolicyCommand(authParams)),",
                 "                    iam.send(new UpdateAssumeRolePolicyCommand(unauthParams))",
                 "                ]);",
+                "                console.log('delete response data' + JSON.stringify(res));",
                 "                response.send(event, context, response.SUCCESS, {});",
                 "            } catch (err) {",
                 "                console.log(err.stack);",
@@ -300,6 +302,8 @@
                 "                iam.send(new UpdateAssumeRolePolicyCommand(authParams)),",
                 "                iam.send(new UpdateAssumeRolePolicyCommand(unauthParams))",
                 "            ]);",
+                "            console.log('createORupdate' + res);",
+                "            console.log('response data' + JSON.stringify(res));",
                 "            response.send(event, context, response.SUCCESS, {});",
                 "        }",
                 "    } catch (err) {",

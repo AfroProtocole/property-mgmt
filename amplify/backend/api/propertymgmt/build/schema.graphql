@@ -1,3 +1,4 @@
+
 type Blog @aws_api_key {
   id: ID!
   name: String!
@@ -50,6 +51,8 @@ type Favorite @aws_api_key {
   userID: String
   favType: String
   favID: String
+  image: String
+  name: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -621,6 +624,8 @@ input ModelFavoriteFilterInput {
   userID: ModelStringInput
   favType: ModelStringInput
   favID: ModelStringInput
+  image: ModelStringInput
+  name: ModelStringInput
   and: [ModelFavoriteFilterInput]
   or: [ModelFavoriteFilterInput]
   not: ModelFavoriteFilterInput
@@ -630,6 +635,8 @@ input ModelFavoriteConditionInput {
   userID: ModelStringInput
   favType: ModelStringInput
   favID: ModelStringInput
+  image: ModelStringInput
+  name: ModelStringInput
   and: [ModelFavoriteConditionInput]
   or: [ModelFavoriteConditionInput]
   not: ModelFavoriteConditionInput
@@ -640,6 +647,8 @@ input CreateFavoriteInput {
   userID: String
   favType: String
   favID: String
+  image: String
+  name: String
 }
 
 input UpdateFavoriteInput {
@@ -647,6 +656,8 @@ input UpdateFavoriteInput {
   userID: String
   favType: String
   favID: String
+  image: String
+  name: String
 }
 
 input DeleteFavoriteInput {
@@ -658,6 +669,8 @@ input ModelSubscriptionFavoriteFilterInput {
   userID: ModelSubscriptionStringInput
   favType: ModelSubscriptionStringInput
   favID: ModelSubscriptionStringInput
+  image: ModelSubscriptionStringInput
+  name: ModelSubscriptionStringInput
   and: [ModelSubscriptionFavoriteFilterInput]
   or: [ModelSubscriptionFavoriteFilterInput]
 }
@@ -1026,3 +1039,4 @@ input ModelSubscriptionServiceRequestFilterInput {
   and: [ModelSubscriptionServiceRequestFilterInput]
   or: [ModelSubscriptionServiceRequestFilterInput]
 }
+
