@@ -49,3 +49,35 @@
   /* width: 200px;  */
   height: 165px; 
 }
+
+@media (max-width: 768px) {
+    /* Adjust the breakpoint as needed */
+    .landing-page-content {
+        overflow-y: scroll;
+        height: 100vh;
+    }
+}
+
+.landing-page-container {
+    height: 100vh;
+    overflow: auto;
+}
+
+.landing-page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+.landing-page-features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.landing-page-feature {
+    width: 300px;
+    text-align: center;
+}
