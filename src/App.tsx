@@ -32,6 +32,7 @@ import {
 
 import awsmobile from "./aws-exports";
 import { Amplify } from "aws-amplify";
+import { CalendarPage } from "./pages";
 
 Amplify.configure(awsmobile);
 
@@ -156,6 +157,21 @@ const App: React.FC = () => {
             PageContent={
               <div style={pageStyling}>
                 {user ? <TenantsPage /> : <Navigate to="/" replace={true} />}
+              </div>
+            }
+          />
+        }
+      />
+     <Route
+        path="/calendar"
+        element={
+          <AppLayout
+            TopNavigation={<TopNavigation />}
+            SideNavigation={user ? <SideNavigation /> : <></>}
+            SideAction={user ? <SideActions /> : <></>}
+            PageContent={
+              <div style={pageStyling}>
+                {user ? <CalendarPage /> : <Navigate to="/" replace={true} />}
               </div>
             }
           />
