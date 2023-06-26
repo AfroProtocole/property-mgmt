@@ -9,7 +9,7 @@ const LandingPage = () => {
         <p className="landing-page-subtitle">Track, analyze, and manage your real estate assets with ease.</p>
         <div className="landing-page-features">
           <div className="landing-page-feature">
-            <img src="/public/images/financial-analysis.jpeg" alt="Feature 1" className="landing-page-feature-image" />
+            <img src="/images/financial-analysis.jpeg" alt="Feature 1" className="landing-page-feature-image" />
             <h3>Asset Tracking</h3>
             <p>Effortlessly track and manage your real estate assets in one central location.</p>
           </div>
