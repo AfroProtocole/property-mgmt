@@ -3,4 +3,5 @@ export * from "./HomePage";
 export * from "./LandingPage";
 export * from "./SignUpPage";
 export * from "./TenantsPage";
+export * from "./CalendarPage";
 export * from "./CreateOrganizationPage";
