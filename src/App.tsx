@@ -82,7 +82,7 @@ const App: React.FC = () => {
         path="/signup"
         element={
           <AppLayout
-            TopNavigation={<TopNavigation />}
+            TopNavigation={<></>}
             SideNavigation={user ? <SideNavigation /> : <></>}
             SideAction={user ? <SideActions /> : <></>}
             PageContent={
