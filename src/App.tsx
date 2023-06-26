@@ -20,7 +20,8 @@ import {
   LandingPage,
   HomePage,
   SignUpPage,
-  TenantsPage
+  TenantsPage,
+  CalendarPage
 } from "./pages";
 import { FinancePage } from "./pages";
 import { auth } from "./lib/firebase"; // Import your Firebase auth instance
@@ -156,6 +157,21 @@ const App: React.FC = () => {
             PageContent={
               <div style={pageStyling}>
                 {user ? <TenantsPage /> : <Navigate to="/" replace={true} />}
+              </div>
+            }
+          />
+        }
+      />
+      <Route
+        path="/calendar"
+        element={
+          <AppLayout
+            TopNavigation={<TopNavigation />}
+            SideNavigation={user ? <SideNavigation /> : <></>}
+            SideAction={user ? <SideActions /> : <></>}
+            PageContent={
+              <div style={pageStyling}>
+                {user ? <CalendarPage /> : <Navigate to="/" replace={true} />}
               </div>
             }
           />
