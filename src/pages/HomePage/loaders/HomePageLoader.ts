@@ -3,22 +3,27 @@ import { auth, db } from "~/lib/firebase";
 import { getAuth } from "firebase/auth";
 import { log } from "console";
 import { listFavorites } from "~/graphql/queries";
+import { trimGraphQLTimeStamp } from "~/utils";
 
 export async function HomePageLoader({ request }: any) {
   const auth = getAuth();
   const user = auth.currentUser;
+  const idFromDYnamo = "hgRliVrjzZMI3hKbK82aRe5Wupq2";
   console.log("user id", user?.uid);
   try {
-    const allBookmarks = await API.graphql({
+    let allBookmarks: any = await API.graphql({
       query: listFavorites,
       variables: {
-        and: { userID: user?.uid },
+        filter: { userID: { eq: user?.uid } },
       },
     });
-    console.log("favorite");
+    // console.log("favorite", allBookmarks.data.listFavorites.items);
+    allBookmarks.data.listFavorites.items.forEach((item: any) => {
+      return trimGraphQLTimeStamp(item);
+    });
     return {
       success: true,
-      data: allBookmarks || [],
+      data: allBookmarks.data.listFavorites.items || [],
     };
   } catch (error) {
     return {
@@ -30,12 +35,8 @@ export async function HomePageLoader({ request }: any) {
 }
 
 export async function HomePageAction({ request }: any) {
-  // const allBookmarks = await API.graphql({
-  //   query: listFavorites,
-  //   variables: {
-  //     and: { id: "dfdfdfdfd" },
-  //   },
-  // });
-  // console.log("favorite");
-  // return { allBookmarks };
+  const formData = await request.formData();
+  const payload = formData.get("body");
+  console.log("payload", payload);
+  return {};
 }

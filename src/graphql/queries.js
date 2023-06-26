@@ -223,6 +223,8 @@ export const getFavorite = /* GraphQL */ `
       userID
       favType
       favID
+      image
+      name
       createdAt
       updatedAt
     }
@@ -240,6 +242,8 @@ export const listFavorites = /* GraphQL */ `
         userID
         favType
         favID
+        image
+        name
         createdAt
         updatedAt
       }

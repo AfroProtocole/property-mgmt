@@ -9,6 +9,7 @@ import {
   BellOutlined,
   CalendarOutlined,
   ProfileOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 
 const SideNavigation = () => {
@@ -28,7 +29,12 @@ const SideNavigation = () => {
       reverseArrow={false}
       trigger={null}
     >
-      <Menu mode="inline" defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} style={{ height: "100%", borderRight: 0 }}>
+      <Menu
+        mode="inline"
+        defaultSelectedKeys={["1"]}
+        defaultOpenKeys={["sub1"]}
+        style={{ height: "100%", borderRight: 0 }}
+      >
         <Menu.Item
           icon={<RightOutlined />}
           onClick={() => {
@@ -37,8 +43,8 @@ const SideNavigation = () => {
         >
           {isMenuCollapsed ? "Show" : "Hide"}
         </Menu.Item>
-        <Menu.Item icon={<UserAddOutlined />}>
-          <Link to="/signup">Create User</Link>
+        <Menu.Item icon={<HomeOutlined />}>
+          <Link to="/home">Home</Link>
         </Menu.Item>
         <Menu.Item icon={<DeploymentUnitOutlined />}>
           <Link to="/organization/new">Create Organization</Link>
@@ -50,7 +56,7 @@ const SideNavigation = () => {
           <Link to="/finance">Finance</Link>
         </Menu.Item>
         <Menu.Item icon={<CalendarOutlined />}>
-          <Link to="/servicerequest">Service Request</Link>
+          <Link to="/service-request">Service Request</Link>
         </Menu.Item>
         <Menu.Item icon={<ProfileOutlined />}>
           <Link to="/etat-des-lieux">Etat des Lieux</Link>

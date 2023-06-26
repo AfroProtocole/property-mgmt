@@ -27,10 +27,14 @@ export default function FavoriteUpdateForm(props) {
     userID: "",
     favType: "",
     favID: "",
+    image: "",
+    name: "",
   };
   const [userID, setUserID] = React.useState(initialValues.userID);
   const [favType, setFavType] = React.useState(initialValues.favType);
   const [favID, setFavID] = React.useState(initialValues.favID);
+  const [image, setImage] = React.useState(initialValues.image);
+  const [name, setName] = React.useState(initialValues.name);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = favoriteRecord
@@ -39,6 +43,8 @@ export default function FavoriteUpdateForm(props) {
     setUserID(cleanValues.userID);
     setFavType(cleanValues.favType);
     setFavID(cleanValues.favID);
+    setImage(cleanValues.image);
+    setName(cleanValues.name);
     setErrors({});
   };
   const [favoriteRecord, setFavoriteRecord] = React.useState(favoriteModelProp);
@@ -56,6 +62,8 @@ export default function FavoriteUpdateForm(props) {
     userID: [],
     favType: [],
     favID: [],
+    image: [],
+    name: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -86,6 +94,8 @@ export default function FavoriteUpdateForm(props) {
           userID,
           favType,
           favID,
+          image,
+          name,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -144,6 +154,8 @@ export default function FavoriteUpdateForm(props) {
               userID: value,
               favType,
               favID,
+              image,
+              name,
             };
             const result = onChange(modelFields);
             value = result?.userID ?? value;
@@ -170,6 +182,8 @@ export default function FavoriteUpdateForm(props) {
               userID,
               favType: value,
               favID,
+              image,
+              name,
             };
             const result = onChange(modelFields);
             value = result?.favType ?? value;
@@ -196,6 +210,8 @@ export default function FavoriteUpdateForm(props) {
               userID,
               favType,
               favID: value,
+              image,
+              name,
             };
             const result = onChange(modelFields);
             value = result?.favID ?? value;
@@ -209,6 +225,62 @@ export default function FavoriteUpdateForm(props) {
         errorMessage={errors.favID?.errorMessage}
         hasError={errors.favID?.hasError}
         {...getOverrideProps(overrides, "favID")}
+      ></TextField>
+      <TextField
+        label="Image"
+        isRequired={false}
+        isReadOnly={false}
+        value={image}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              userID,
+              favType,
+              favID,
+              image: value,
+              name,
+            };
+            const result = onChange(modelFields);
+            value = result?.image ?? value;
+          }
+          if (errors.image?.hasError) {
+            runValidationTasks("image", value);
+          }
+          setImage(value);
+        }}
+        onBlur={() => runValidationTasks("image", image)}
+        errorMessage={errors.image?.errorMessage}
+        hasError={errors.image?.hasError}
+        {...getOverrideProps(overrides, "image")}
+      ></TextField>
+      <TextField
+        label="Name"
+        isRequired={false}
+        isReadOnly={false}
+        value={name}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              userID,
+              favType,
+              favID,
+              image,
+              name: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.name ?? value;
+          }
+          if (errors.name?.hasError) {
+            runValidationTasks("name", value);
+          }
+          setName(value);
+        }}
+        onBlur={() => runValidationTasks("name", name)}
+        errorMessage={errors.name?.errorMessage}
+        hasError={errors.name?.hasError}
+        {...getOverrideProps(overrides, "name")}
       ></TextField>
       <Flex
         justifyContent="space-between"

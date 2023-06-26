@@ -323,6 +323,8 @@ export const onCreateFavorite = /* GraphQL */ `
       userID
       favType
       favID
+      image
+      name
       createdAt
       updatedAt
     }
@@ -335,6 +337,8 @@ export const onUpdateFavorite = /* GraphQL */ `
       userID
       favType
       favID
+      image
+      name
       createdAt
       updatedAt
     }
@@ -347,6 +351,8 @@ export const onDeleteFavorite = /* GraphQL */ `
       userID
       favType
       favID
+      image
+      name
       createdAt
       updatedAt
     }

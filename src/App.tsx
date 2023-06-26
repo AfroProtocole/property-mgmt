@@ -8,7 +8,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import { Layout } from "antd";
+import { Layout, Spin } from "antd";
 import {
   SideNavigation,
   TopNavigation,
@@ -20,8 +20,7 @@ import {
   LandingPage,
   HomePage,
   SignUpPage,
-  TenantsPage,
-  ServiceRequestPage
+  TenantsPage
 } from "./pages";
 import { FinancePage } from "./pages";
 import { auth } from "./lib/firebase"; // Import your Firebase auth instance
@@ -33,7 +32,6 @@ import {
 
 import awsmobile from "./aws-exports";
 import { Amplify } from "aws-amplify";
-import { CalendarPage } from "./pages";
 
 Amplify.configure(awsmobile);
 
@@ -54,7 +52,7 @@ const App: React.FC = () => {
 
   if (isLoading) {
     // Show loading indicator or placeholder
-    return <div>Loading...</div>;
+    return <Spin />;
   }
 
   const pageStyling = {
@@ -158,36 +156,6 @@ const App: React.FC = () => {
             PageContent={
               <div style={pageStyling}>
                 {user ? <TenantsPage /> : <Navigate to="/" replace={true} />}
-              </div>
-            }
-          />
-        }
-      />
-     <Route
-        path="/calendar"
-        element={
-          <AppLayout
-            TopNavigation={<TopNavigation />}
-            SideNavigation={user ? <SideNavigation /> : <></>}
-            SideAction={user ? <SideActions /> : <></>}
-            PageContent={
-              <div style={pageStyling}>
-                {user ? <CalendarPage /> : <Navigate to="/" replace={true} />}
-              </div>
-            }
-          />
-        }
-      />
-      <Route
-        path="/servicerequest"
-        element={
-          <AppLayout
-            TopNavigation={<TopNavigation />}
-            SideNavigation={user ? <SideNavigation /> : <></>}
-            SideAction={user ? <SideActions /> : <></>}
-            PageContent={
-              <div style={pageStyling}>
-                {user ? <ServiceRequestPage /> : <Navigate to="/" replace={true} />}
               </div>
             }
           />
