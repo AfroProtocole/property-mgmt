@@ -22,7 +22,8 @@ import {
   SignUpPage,
   TenantsPage,
   CalendarPage,
-  ServiceRequestPage
+  ServiceRequestPage,
+  EtatDesLieuxPage
 } from "./pages";
 import { FinancePage } from "./pages";
 import { auth } from "./lib/firebase"; // Import your Firebase auth instance
@@ -188,6 +189,21 @@ const App: React.FC = () => {
             PageContent={
               <div style={pageStyling}>
                 {user ? <ServiceRequestPage /> : <Navigate to="/" replace={true} />}
+              </div>
+            }
+          />
+        }
+      />
+        <Route
+        path="/etatdeslieux"
+        element={
+          <AppLayout
+            TopNavigation={<TopNavigation />}
+            SideNavigation={user ? <SideNavigation /> : <></>}
+            SideAction={user ? <SideActions /> : <></>}
+            PageContent={
+              <div style={pageStyling}>
+                {user ? <EtatDesLieuxPage /> : <Navigate to="/" replace={true} />}
               </div>
             }
           />
