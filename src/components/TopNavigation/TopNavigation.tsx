@@ -10,7 +10,8 @@ import {
   EllipsisOutlined,
   UserOutlined,
   InboxOutlined,
-  QuestionCircleOutlined
+  QuestionCircleOutlined,
+  PlusOutlined
 } from "@ant-design/icons";
 
 const { Header } = Layout;
@@ -62,6 +63,10 @@ const TopNavigation: React.FC = () => {
     }
   };
 
+    const handleAdd = () => {
+      navigate("/add");
+  };
+
   const handleMenuClick = ({ key }: { key: string }) => {
     if (key === "account") {
       // Handle account click
@@ -71,6 +76,8 @@ const TopNavigation: React.FC = () => {
       handleLogout();
     } else if (key === "help") {
       // Handle help click
+    }else if (key === "add") {
+      handleAdd();
     }
   };
 
@@ -131,6 +138,7 @@ const userContent = (
       </Menu>
       <div style={{ flex: 1 }} />
       <div style={{ display: "flex", alignItems: "center", paddingRight: "1rem" }}>
+        <Button type="primary" icon={<PlusOutlined />} style={{ marginRight: "0.5rem" }} onClick={() => handleMenuClick({ key: "add" })}/>
         <Button type="primary" icon={<InboxOutlined />} style={{ marginRight: "0.5rem" }} />
         <Popover placement="bottomRight" content={userContent} trigger="click">
           <Button type="primary" icon={<UserOutlined />} style={{ marginRight: "0.5rem" }} />
