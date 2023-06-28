@@ -6,4 +6,4 @@ export * from "./TenantsPage";
 export * from "./CalendarPage";
 export * from "./ServiceRequestPage";
 export * from "./EtatDesLieuxPage";
-export * from "./CreateOrganizationPage";
+export * from "./OrganizationPages/CreateOrganizationPage";

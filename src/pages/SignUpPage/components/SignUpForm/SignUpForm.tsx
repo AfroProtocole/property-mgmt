@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Button, Form, Input, message, Select, Typography } from 'antd';
 import { auth, db } from "~/lib/firebase";
 import { collection, addDoc } from "firebase/firestore";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { time } from 'console';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const { Title, Text } = Typography;
 
@@ -28,7 +30,7 @@ const SignUpForm = () => {
         );
 
         // Make object with user data
-        const userObject ={
+        const userObject = {
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
@@ -42,17 +44,17 @@ const SignUpForm = () => {
           message.error(error.message);
         }
 
-        message.success('Signup successful!');
+        message.success("Signup successful!");
         // Reset the form
         form.resetFields();
-        // Redirect to the "/home" page
-        window.location.href = "/home";
+        // Redirect to the "/" page
+        window.location.href = "/";
       } else {
         // Sign in user with email and password
         await signInWithEmailAndPassword(auth, values.email, values.password);
         form.resetFields();
         message.success('Login successful!');
-        window.location.href = "/home";
+        window.location.href = "/";
       }
     } catch (error: any) {
       setLoading(false);

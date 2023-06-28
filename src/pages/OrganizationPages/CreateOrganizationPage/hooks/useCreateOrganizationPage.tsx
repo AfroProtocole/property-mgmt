@@ -1,9 +1,9 @@
 import { FormInstance } from "antd";
 import React from "react";
 import { Auth, API } from "aws-amplify";
-import { NewOrganizationForm } from "../../../types";
-import { createOrganization, updateUser } from "../../../graphql/mutations";
-import { getUser } from "../../../graphql/queries";
+import { NewOrganizationForm } from "../../../../types";
+import { createOrganization, updateUser } from "../../../../graphql/mutations";
+import { getUser } from "../../../../graphql/queries";
 
 const useCreateOrganizationPage = ({
   formInstance,

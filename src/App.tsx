@@ -27,7 +27,7 @@ import {
 } from "./pages";
 import { FinancePage } from "./pages";
 import { auth } from "./lib/firebase"; // Import your Firebase auth instance
-import { CreateOrganizationLoader } from "./pages/CreateOrganizationPage/loader";
+import { CreateOrganizationLoader } from "./pages/OrganizationPages/CreateOrganizationPage/loader";
 import {
   HomePageAction,
   HomePageLoader,
@@ -35,6 +35,7 @@ import {
 
 import awsmobile from "./aws-exports";
 import { Amplify } from "aws-amplify";
+import { PropertyTablePage } from "./pages/PropertyPages/PropertyTablePage";
 
 Amplify.configure(awsmobile);
 
@@ -68,7 +69,7 @@ const App: React.FC = () => {
   const routesJSX = (
     <Route>
       <Route
-        path="/"
+        path="/explore"
         element={
           <AppLayout
             TopNavigation={null}
@@ -83,8 +84,8 @@ const App: React.FC = () => {
         element={
           <AppLayout
             TopNavigation={<></>}
-            SideNavigation={user ? <SideNavigation /> : <></>}
-            SideAction={user ? <SideActions /> : <></>}
+            SideNavigation={null}
+            SideAction={null}
             PageContent={
               <div style={pageStyling}>
                 {!user ? (
@@ -98,17 +99,41 @@ const App: React.FC = () => {
         }
       />
       <Route
-        path="/home"
+        path="/"
         loader={HomePageLoader}
         action={HomePageAction}
         element={
           <AppLayout
             TopNavigation={<TopNavigation />}
-            SideNavigation={user ? <SideNavigation /> : <></>}
-            SideAction={user ? <SideActions /> : <></>}
+            SideNavigation={<SideNavigation />}
+            SideAction={<SideActions />}
             PageContent={
               <div style={pageStyling}>
-                {user ? <HomePage /> : <Navigate to="/" replace={true} />}
+                {user ? (
+                  <HomePage />
+                ) : (
+                  <Navigate to="/explore" replace={true} />
+                )}
+              </div>
+            }
+          />
+        }
+      />
+      <Route
+        path="/property"
+        // loader={}
+        element={
+          <AppLayout
+            TopNavigation={<TopNavigation />}
+            SideNavigation={user ? <SideNavigation /> : <></>}
+            SideAction={<></>}
+            PageContent={
+              <div style={pageStyling}>
+                {user ? (
+                  <CreateOrganizationPage />
+                ) : (
+                  <Navigate to="/" replace={true} />
+                )}
               </div>
             }
           />
@@ -120,8 +145,8 @@ const App: React.FC = () => {
         element={
           <AppLayout
             TopNavigation={<TopNavigation />}
-            SideNavigation={user ? <SideNavigation /> : <></>}
-            SideAction={user ? <SideActions /> : <></>}
+            SideNavigation={<SideNavigation />}
+            SideAction={<SideActions />}
             PageContent={
               <div style={pageStyling}>
                 {user ? (
@@ -180,7 +205,7 @@ const App: React.FC = () => {
         }
       />
       <Route
-        path="/servicerequest"
+        path="/service-request"
         element={
           <AppLayout
             TopNavigation={<TopNavigation />}
@@ -188,14 +213,18 @@ const App: React.FC = () => {
             SideAction={user ? <SideActions /> : <></>}
             PageContent={
               <div style={pageStyling}>
-                {user ? <ServiceRequestPage /> : <Navigate to="/" replace={true} />}
+                {user ? (
+                  <ServiceRequestPage />
+                ) : (
+                  <Navigate to="/" replace={true} />
+                )}
               </div>
             }
           />
         }
       />
-        <Route
-        path="/etatdeslieux"
+      <Route
+        path="/etat-des-lieux"
         element={
           <AppLayout
             TopNavigation={<TopNavigation />}
@@ -203,7 +232,11 @@ const App: React.FC = () => {
             SideAction={user ? <SideActions /> : <></>}
             PageContent={
               <div style={pageStyling}>
-                {user ? <EtatDesLieuxPage /> : <Navigate to="/" replace={true} />}
+                {user ? (
+                  <EtatDesLieuxPage />
+                ) : (
+                  <Navigate to="/" replace={true} />
+                )}
               </div>
             }
           />
