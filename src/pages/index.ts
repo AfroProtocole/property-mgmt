@@ -7,3 +7,4 @@ export * from "./CalendarPage";
 export * from "./ServiceRequestPage";
 export * from "./InventoryOfFixturesPage";
 export * from "./OrganizationPages/CreateOrganizationPage";
+export * from "./AddPage";
