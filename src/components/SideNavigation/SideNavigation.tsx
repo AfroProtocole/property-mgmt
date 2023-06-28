@@ -59,7 +59,7 @@ const SideNavigation = () => {
           <Link to="/servicerequest">Service Request</Link>
         </Menu.Item>
         <Menu.Item icon={<ProfileOutlined />}>
-          <Link to="/inventory-of-fixtures">Etat des Lieux</Link>
+          <Link to="/inventory-of-fixtures">Inventory Of Fixtures</Link>
         </Menu.Item>
         <Menu.Item icon={<CalendarOutlined />}>
           <Link to="/calendar">Calendar</Link>
