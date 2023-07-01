@@ -1,67 +1,62 @@
 import { HomeOutlined } from "@ant-design/icons";
 import { Breadcrumb, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
+import { useLoaderData } from "react-router-dom";
 import { CustomTable } from "~/components";
+import { LoaderData, property } from "~/types";
 
-interface DataType {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-}
-
-type DataIndex = keyof DataType;
-
-const data: DataType[] = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-  },
-];
-
-const columns: ColumnsType<DataType> = [
+const columns: ColumnsType<property> = [
   {
     title: "Name",
     dataIndex: "name",
     key: "name",
-    width: "30%",
+    width: 200,
   },
   {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
-    width: "20%",
+    title: "Property ID",
+    dataIndex: "id",
+    key: "id",
+    width: 250,
+    render: (_, record) => {
+      const { id = "" } = record;
+      return (
+        <Typography.Link>
+          <a href={`/property${id}`} target="_blank">
+            {id}
+          </a>
+        </Typography.Link>
+      );
+    },
   },
   {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-    sorter: (a, b) => a.address.length - b.address.length,
+    title: "State",
+    dataIndex: "state",
+    key: "state",
+    width: 200,
+    sorter: (a, b) => a.state.length - b.state.length,
+    sortDirections: ["descend", "ascend"],
+  },
+  {
+    title: "City",
+    dataIndex: "city",
+    key: "city",
+    width: 200,
+    sorter: (a, b) => a.city.length - b.city.length,
+    sortDirections: ["descend", "ascend"],
+  },
+  {
+    title: "Country",
+    dataIndex: "country",
+    key: "country",
+    width: 200,
+    sorter: (a, b) => a.country.length - b.country.length,
     sortDirections: ["descend", "ascend"],
   },
 ];
 
 const PropertyTablePage = () => {
+  const loaderData = useLoaderData() as unknown as LoaderData<property[]>;
+  console.log("property table", loaderData);
   return (
     <>
       <Breadcrumb separator=">">
@@ -70,17 +65,22 @@ const PropertyTablePage = () => {
         </Breadcrumb.Item>
         <Breadcrumb.Item>Property</Breadcrumb.Item>
       </Breadcrumb>
-      <CustomTable
-        tableHeaders={
-          <div>
-            <Typography.Title level={5}>Table Header</Typography.Title>
-          </div>
-        }
-        tableProps={{
-          dataSource: data,
-          columns: columns,
-        }}
-      />
+      <section style={{ marginTop: "2rem" }}>
+        <CustomTable
+          tableHeaders={
+            <div style={{ display: "flex" }}>
+              <Typography.Text strong>All Properties Info: </Typography.Text>
+              <Typography.Text italic>
+                {loaderData.data.length} Total Records Found
+              </Typography.Text>
+            </div>
+          }
+          tableProps={{
+            dataSource: loaderData.data || [],
+            columns: columns,
+          }}
+        />
+      </section>
     </>
   );
 };

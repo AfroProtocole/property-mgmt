@@ -37,6 +37,7 @@ import {
 import awsmobile from "./aws-exports";
 import { Amplify } from "aws-amplify";
 import { PropertyTablePage } from "./pages/PropertyPages/PropertyTablePage";
+import { PropertyTablePageLoader } from "./pages/PropertyPages/PropertyTablePage/loaders";
 
 Amplify.configure(awsmobile);
 
@@ -122,7 +123,7 @@ const App: React.FC = () => {
       />
       <Route
         path="/property"
-        // loader={}
+        loader={PropertyTablePageLoader}
         element={
           <AppLayout
             TopNavigation={<TopNavigation />}
