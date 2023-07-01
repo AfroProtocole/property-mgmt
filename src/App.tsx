@@ -131,7 +131,7 @@ const App: React.FC = () => {
             PageContent={
               <div style={pageStyling}>
                 {user ? (
-                  <CreateOrganizationPage />
+                  <PropertyTablePage />
                 ) : (
                   <Navigate to="/" replace={true} />
                 )}
@@ -243,7 +243,7 @@ const App: React.FC = () => {
           />
         }
       />
-     <Route
+      <Route
         path="/add"
         element={
           <AppLayout
@@ -252,11 +252,7 @@ const App: React.FC = () => {
             SideAction={user ? <SideActions /> : <></>}
             PageContent={
               <div style={pageStyling}>
-                {user ? (
-                  <AddPage />
-                ) : (
-                  <Navigate to="/" replace={true} />
-                )}
+                {user ? <AddPage /> : <Navigate to="/" replace={true} />}
               </div>
             }
           />
