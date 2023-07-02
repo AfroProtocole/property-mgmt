@@ -6,9 +6,43 @@ const { Option } = Select;
 const PropertyForm = () => {
   const [entityType, setEntityType] = useState<string>('');
 
+  const [apartmentCount, setApartmentCount] = useState(0);
+
+  const handleApartmentCountChange = (value: number) => {
+    setApartmentCount(value);
+  };
+
+
   const handleEntityTypeChange = (value: string) => {
     setEntityType(value);
   };
+
+
+   const renderApartmentFields = () => {
+    if (apartmentCount > 0) {
+      const apartmentFields = [];
+
+      for (let i = 1; i <= apartmentCount; i++) {
+        apartmentFields.push(
+          <div key={i}>
+            <h3>Apartment {i}</h3>
+            <Form.Item label={`Apartment ${i} Number`} name={`apartment${i}Number`}>
+              <Input />
+            </Form.Item>
+            <Form.Item label={`Apartment ${i} Size`} name={`apartment${i}Size`}>
+              <Input />
+            </Form.Item>
+            {/* Add other apartment-specific fields */}
+          </div>
+        );
+      }
+
+      return apartmentFields;
+    }
+
+    return null;
+  };
+
 
   const renderFormFields = () => {
     switch (entityType) {
@@ -45,13 +79,49 @@ const PropertyForm = () => {
       case 'building':
         return (
           <>
-            <Form.Item label="Building Name" name="buildingName" rules={[{ required: true, message: 'Please enter the building name' }]}>
-              <Input />
-            </Form.Item>
-            <Form.Item label="Number of Floors" name="numberOfFloors" rules={[{ required: true, message: 'Please enter the number of floors' }]}>
-              <Input type="number" />
-            </Form.Item>
-            {/* Add other building-specific fields */}
+             <h2>Building Information</h2>
+      <Form.Item label="Building Name" name="buildingName">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Building Type" name="buildingType">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Street" name="street">
+        <Input />
+      </Form.Item>
+      <Form.Item label="City" name="city">
+        <Input />
+      </Form.Item>
+      <Form.Item label="State" name="state">
+        <Input />
+      </Form.Item>
+      <Form.Item label="ZIP" name="zip">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Country" name="country">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Property" name="property">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Number of Apartments" name="apartmentCount">
+        <Select onChange={handleApartmentCountChange}>
+          <Option value={0}>0</Option>
+          <Option value={1}>1</Option>
+          <Option value={2}>2</Option>
+          {/* Add more options based on your requirement */}
+        </Select>
+      </Form.Item>
+      <Form.Item label="Pictures" name="pictures">
+        <Input type="file" multiple />
+      </Form.Item>
+      <Form.Item label="Year of Construction" name="yearOfConstruction">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Special Notes" name="specialNotes">
+        <Input.TextArea />
+      </Form.Item>
+      {renderApartmentFields()}
           </>
         );
       case 'apartment':
