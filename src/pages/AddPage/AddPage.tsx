@@ -13,7 +13,7 @@ const PropertyForm = () => {
   const renderFormFields = () => {
     switch (entityType) {
       case 'property':
-        return (
+            return (
           <>
             <Form.Item label="Property Name" name="propertyName" rules={[{ required: true, message: 'Please enter the property name' }]}>
               <Input />
@@ -24,9 +24,24 @@ const PropertyForm = () => {
                 <Option value="commercial">Commercial</Option>
               </Select>
             </Form.Item>
-            {/* Add other property-specific fields */}
+            <Form.Item label="Description" name="description" rules={[{ required: true, message: 'Please enter the property description' }]}>
+              <Input.TextArea />
+            </Form.Item>
+            <Form.Item label="ZIP Code" name="zipCode" rules={[{ required: true, message: 'Please enter the ZIP code' }]}>
+              <Input />
+            </Form.Item>
+            <Form.Item label="Area Size" name="areaSize" rules={[{ required: true, message: 'Please enter the area size' }]}>
+              <Input />
+            </Form.Item>
+            <Form.Item label="Country" name="country" rules={[{ required: true, message: 'Please enter the country' }]}>
+              <Input />
+            </Form.Item>
+            <Form.Item label="Picture" name="picture" rules={[{ required: true, message: 'Please upload a picture' }]}>
+              <Input type="file" />
+            </Form.Item>
           </>
         );
+
       case 'building':
         return (
           <>
