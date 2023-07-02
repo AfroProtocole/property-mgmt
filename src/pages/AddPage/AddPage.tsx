@@ -127,13 +127,40 @@ const PropertyForm = () => {
       case 'apartment':
         return (
           <>
-            <Form.Item label="Unit Number" name="unitNumber" rules={[{ required: true, message: 'Please enter the unit number' }]}>
-              <Input />
-            </Form.Item>
-            <Form.Item label="Floor" name="floor" rules={[{ required: true, message: 'Please enter the floor' }]}>
-              <Input type="number" />
-            </Form.Item>
-            {/* Add other apartment-specific fields */}
+      <h2>Apartment Information</h2>
+      <Form.Item label="Apartment Number" name="apartmentNumber">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Size" name="size">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Building" name="building">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Date of Availability" name="availabilityDate">
+        <Input type="date" />
+      </Form.Item>
+      <Form.Item label="Contact to Ask" name="contact">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Price" name="price">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Number of Bathrooms" name="bathrooms">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Number of Stairs" name="stairs">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Number of Bedrooms" name="bedrooms">
+        <Input />
+      </Form.Item>
+      <Form.Item label="Pictures" name="pictures">
+        <Input type="file" multiple />
+      </Form.Item>
+      <Form.Item label="Description" name="description">
+        <Input.TextArea />
+      </Form.Item>
           </>
         );
       default:
