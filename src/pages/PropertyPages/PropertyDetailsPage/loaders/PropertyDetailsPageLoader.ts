@@ -15,21 +15,29 @@ export async function PropertyDetailsPageLoader({
     let property: any = await API.graphql({
       query: getProperty,
       variables: {
-        input: {
-          id: params.propertyID,
-        },
+        // input: {
+        id: params.propertyID,
+        // },
       },
     });
     console.log("favorite", property.data);
-    property.data.getProperty.items.forEach((item: any) => {
-      return trimGraphQLTimeStamp(item);
-    });
-    console.log("properties", property.data.getProperty.items);
+    console.log("properties", property.data.getProperty);
     return {
       success: true,
-      data: property.data.getProperty.items || [],
+      data: trimGraphQLTimeStamp(property.data.getProperty) || {
+        id: "",
+        name: "",
+        city: "",
+        state: "",
+        country: "",
+        zipCode: "",
+        poBox: "",
+        userID: "",
+        organizationID: "",
+      },
     };
   } catch (error) {
+    console.error(error);
     return {
       success: false,
       data: [],
