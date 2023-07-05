@@ -52,12 +52,6 @@ const PropertyForm = () => {
             <Form.Item label="Property Name" name="propertyName" rules={[{ required: true, message: 'Please enter the property name' }]}>
               <Input />
             </Form.Item>
-            <Form.Item label="Property Type" name="propertyType" rules={[{ required: true, message: 'Please select the property type' }]}>
-              <Select>
-                <Option value="residential">Residential</Option>
-                <Option value="commercial">Commercial</Option>
-              </Select>
-            </Form.Item>
             <Form.Item label="Description" name="description" rules={[{ required: true, message: 'Please enter the property description' }]}>
               <Input.TextArea />
             </Form.Item>
@@ -83,33 +77,25 @@ const PropertyForm = () => {
       <Form.Item label="Building Name" name="buildingName">
         <Input />
       </Form.Item>
-      <Form.Item label="Building Type" name="buildingType">
+      <Form.Item label="Street" name="street" rules={[{ required: true, message: 'Please select the street'}]}>
         <Input />
       </Form.Item>
-      <Form.Item label="Street" name="street">
+      <Form.Item label="City" name="city" rules={[{ required: true, message: 'Please select the city'}]}>
         <Input />
       </Form.Item>
-      <Form.Item label="City" name="city">
+      <Form.Item label="State" name="state" rules={[{ required: true, message: 'Please select the state'}]}>
         <Input />
       </Form.Item>
-      <Form.Item label="State" name="state">
+      <Form.Item label="ZIP" name="zip" rules={[{ required: true, message: 'Please select the zip' }]}>
         <Input />
       </Form.Item>
-      <Form.Item label="ZIP" name="zip">
+      <Form.Item label="Country" name="country" rules={[{ required: true, message: 'Please select the country'}]}>
         <Input />
       </Form.Item>
-      <Form.Item label="Country" name="country">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Property" name="property">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Number of Apartments" name="apartmentCount">
-        <Select onChange={handleApartmentCountChange}>
-          <Option value={0}>0</Option>
-          <Option value={1}>1</Option>
-          <Option value={2}>2</Option>
-          {/* Add more options based on your requirement */}
+      <Form.Item label="Property" name="property" rules={[{ required: true, message: 'Please select the property' }]}>
+        <Select>
+            <Option value="Property 1">Property 1</Option>
+            <Option value="Property 2">Property 2</Option>
         </Select>
       </Form.Item>
       <Form.Item label="Pictures" name="pictures">
@@ -119,7 +105,15 @@ const PropertyForm = () => {
         <Input />
       </Form.Item>
       <Form.Item label="Special Notes" name="specialNotes">
-        <Input.TextArea />
+      <Input.TextArea />
+      </Form.Item>
+            <Form.Item label="Number of Apartments" name="apartmentCount">
+        <Select onChange={handleApartmentCountChange}>
+          <Option value={0}>0</Option>
+          <Option value={1}>1</Option>
+          <Option value={2}>2</Option>
+          {/* Add more options based on your requirement */}
+        </Select>
       </Form.Item>
       {renderApartmentFields()}
           </>
