@@ -289,6 +289,8 @@ export const getProperty = /* GraphQL */ `
     getProperty(id: $id) {
       id
       name
+      decription
+      areaSize
       city
       state
       country
@@ -311,6 +313,8 @@ export const listProperties = /* GraphQL */ `
       items {
         id
         name
+        decription
+        areaSize
         city
         state
         country

@@ -122,12 +122,21 @@ const userContent = (
         alignItems: "center",
       }}
     >
-      <div className="logo" style={{ height: "100px", width: "60px", paddingLeft: "0.5rem" }}>
-        <img style={{ height: "100%", width: "100%", objectFit: "contain" }} src="/logo1.png" alt="Prop Ease" />
+      <div
+        className="logo"
+        style={{ height: "100px", width: "60px", paddingLeft: "0.5rem" }}
+      >
+        <img
+          style={{ height: "100%", width: "100%", objectFit: "contain" }}
+          src="/logo1.png"
+          alt="Prop Ease"
+        />
       </div>
       <Menu mode="horizontal" style={{ flexGrow: 1 }}>
         <Menu.Item key="overview">Overview</Menu.Item>
-        <Menu.Item key="property">Property</Menu.Item>
+        <Menu.Item key="property" onClick={() => navigate("/property")}>
+          Property
+        </Menu.Item>
         <Menu.Item key="building">Building</Menu.Item>
         <Menu.Item key="units">Units</Menu.Item>
         <Menu.Item key="more">
@@ -137,11 +146,26 @@ const userContent = (
         </Menu.Item>
       </Menu>
       <div style={{ flex: 1 }} />
-      <div style={{ display: "flex", alignItems: "center", paddingRight: "1rem" }}>
-        <Button type="primary" icon={<PlusOutlined />} style={{ marginRight: "0.5rem" }} onClick={() => handleMenuClick({ key: "add" })}/>
-        <Button type="primary" icon={<InboxOutlined />} style={{ marginRight: "0.5rem" }} />
+      <div
+        style={{ display: "flex", alignItems: "center", paddingRight: "1rem" }}
+      >
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          style={{ marginRight: "0.5rem" }}
+          onClick={() => handleMenuClick({ key: "add" })}
+        />
+        <Button
+          type="primary"
+          icon={<InboxOutlined />}
+          style={{ marginRight: "0.5rem" }}
+        />
         <Popover placement="bottomRight" content={userContent} trigger="click">
-          <Button type="primary" icon={<UserOutlined />} style={{ marginRight: "0.5rem" }} />
+          <Button
+            type="primary"
+            icon={<UserOutlined />}
+            style={{ marginRight: "0.5rem" }}
+          />
         </Popover>
       </div>
     </Header>

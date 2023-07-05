@@ -402,6 +402,8 @@ export const onCreateProperty = /* GraphQL */ `
     onCreateProperty(filter: $filter) {
       id
       name
+      decription
+      areaSize
       city
       state
       country
@@ -419,6 +421,8 @@ export const onUpdateProperty = /* GraphQL */ `
     onUpdateProperty(filter: $filter) {
       id
       name
+      decription
+      areaSize
       city
       state
       country
@@ -436,6 +440,8 @@ export const onDeleteProperty = /* GraphQL */ `
     onDeleteProperty(filter: $filter) {
       id
       name
+      decription
+      areaSize
       city
       state
       country

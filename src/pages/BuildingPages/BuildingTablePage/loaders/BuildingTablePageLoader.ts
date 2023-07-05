@@ -1,28 +1,26 @@
 import { API } from "aws-amplify";
 import { getAuth } from "firebase/auth";
-import { redirect } from "react-router-dom";
-import { listProperties } from "~/graphql/queries";
+import { listBuildings } from "~/graphql/queries";
 import { trimGraphQLTimeStamp } from "~/utils";
 
-export async function PropertyTablePageLoader({ request }: any) {
+export async function BuildingTablePageLoader({ request }: any) {
   const auth = getAuth();
   const user = auth.currentUser;
-  if (!user) redirect("/explore");
   try {
-    let allUserProperties: any = await API.graphql({
-      query: listProperties,
+    let allUserBuildings: any = await API.graphql({
+      query: listBuildings,
       variables: {
         filter: { userID: { eq: user?.uid } },
       },
     });
     // console.log("favorite", allBookmarks.data.listFavorites.items);
-    allUserProperties.data.listProperties.items.forEach((item: any) => {
+    allUserBuildings.data.listBuildings.items.forEach((item: any) => {
       return trimGraphQLTimeStamp(item);
     });
-    console.log("properties", allUserProperties.data.listProperties.items);
+    // console.log("Buildings", allUserBuildings.data.listBuildings.items);
     return {
       success: true,
-      data: allUserProperties.data.listProperties.items || [],
+      data: allUserBuildings.data.listBuildings.items || [],
     };
   } catch (error) {
     return {

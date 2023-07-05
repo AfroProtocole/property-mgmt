@@ -462,6 +462,8 @@ export const createProperty = /* GraphQL */ `
     createProperty(input: $input, condition: $condition) {
       id
       name
+      decription
+      areaSize
       city
       state
       country
@@ -482,6 +484,8 @@ export const updateProperty = /* GraphQL */ `
     updateProperty(input: $input, condition: $condition) {
       id
       name
+      decription
+      areaSize
       city
       state
       country
@@ -502,6 +506,8 @@ export const deleteProperty = /* GraphQL */ `
     deleteProperty(input: $input, condition: $condition) {
       id
       name
+      decription
+      areaSize
       city
       state
       country

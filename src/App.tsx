@@ -38,6 +38,8 @@ import awsmobile from "./aws-exports";
 import { Amplify } from "aws-amplify";
 import { PropertyTablePage } from "./pages/PropertyPages/PropertyTablePage";
 import { PropertyTablePageLoader } from "./pages/PropertyPages/PropertyTablePage/loaders";
+import { PropertyDetailsPageLoader } from "./pages/PropertyPages/PropertyDetailsPage/loaders";
+import { PropertyDetailsPage } from "./pages/PropertyPages/PropertyDetailsPage";
 
 Amplify.configure(awsmobile);
 
@@ -133,6 +135,26 @@ const App: React.FC = () => {
               <div style={pageStyling}>
                 {user ? (
                   <PropertyTablePage />
+                ) : (
+                  <Navigate to="/" replace={true} />
+                )}
+              </div>
+            }
+          />
+        }
+      />
+      <Route
+        path={`/property/:propertyID`}
+        loader={PropertyDetailsPageLoader}
+        element={
+          <AppLayout
+            TopNavigation={<TopNavigation />}
+            SideNavigation={user ? <SideNavigation /> : <></>}
+            SideAction={<></>}
+            PageContent={
+              <div style={pageStyling}>
+                {user ? (
+                  <PropertyDetailsPage />
                 ) : (
                   <Navigate to="/" replace={true} />
                 )}

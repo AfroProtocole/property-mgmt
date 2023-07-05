@@ -44,7 +44,7 @@ const SideNavigation = () => {
           {isMenuCollapsed ? "Show" : "Hide"}
         </Menu.Item>
         <Menu.Item icon={<HomeOutlined />}>
-          <Link to="/home">Home</Link>
+          <Link to="/">Home</Link>
         </Menu.Item>
         <Menu.Item icon={<DeploymentUnitOutlined />}>
           <Link to="/organization/new">Create Organization</Link>

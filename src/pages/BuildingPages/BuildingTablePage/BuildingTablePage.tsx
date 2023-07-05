@@ -3,9 +3,9 @@ import { Breadcrumb, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useLoaderData } from "react-router-dom";
 import { CustomTable } from "~/components";
-import { LoaderData, property } from "~/types";
+import { LoaderData, building } from "~/types";
 
-const columns: ColumnsType<property> = [
+const columns: ColumnsType<building> = [
   {
     title: "Name",
     dataIndex: "name",
@@ -13,7 +13,7 @@ const columns: ColumnsType<property> = [
     width: 200,
   },
   {
-    title: "Property ID",
+    title: "building ID",
     dataIndex: "id",
     key: "id",
     width: 250,
@@ -21,7 +21,7 @@ const columns: ColumnsType<property> = [
       const { id = "" } = record;
       return (
         <Typography.Link>
-          <a href={`/property/${id}`} target="_blank">
+          <a href={`/building/${id}`} target="_blank">
             {id}
           </a>
         </Typography.Link>
@@ -54,16 +54,16 @@ const columns: ColumnsType<property> = [
   },
 ];
 
-const PropertyTablePage = () => {
-  const loaderData = useLoaderData() as unknown as LoaderData<property[]>;
-  // console.log("property table", loaderData);
+const BuildingTablePage = () => {
+  const loaderData = useLoaderData() as unknown as LoaderData<building[]>;
+  console.log("building table", loaderData);
   return (
     <>
       <Breadcrumb separator=">">
         <Breadcrumb.Item href="/">
           <HomeOutlined />
         </Breadcrumb.Item>
-        <Breadcrumb.Item>Property</Breadcrumb.Item>
+        <Breadcrumb.Item>building</Breadcrumb.Item>
       </Breadcrumb>
       <section style={{ marginTop: "2rem" }}>
         <CustomTable
@@ -85,4 +85,4 @@ const PropertyTablePage = () => {
   );
 };
 
-export default PropertyTablePage;
+export default BuildingTablePage;

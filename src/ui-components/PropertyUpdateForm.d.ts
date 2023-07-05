@@ -15,6 +15,8 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type PropertyUpdateFormInputValues = {
     name?: string;
+    decription?: string;
+    areaSize?: string;
     city?: string;
     state?: string;
     country?: string;
@@ -25,6 +27,8 @@ export declare type PropertyUpdateFormInputValues = {
 };
 export declare type PropertyUpdateFormValidationValues = {
     name?: ValidationFunction<string>;
+    decription?: ValidationFunction<string>;
+    areaSize?: ValidationFunction<string>;
     city?: ValidationFunction<string>;
     state?: ValidationFunction<string>;
     country?: ValidationFunction<string>;
@@ -37,6 +41,8 @@ export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes
 export declare type PropertyUpdateFormOverridesProps = {
     PropertyUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
+    decription?: PrimitiveOverrideProps<TextFieldProps>;
+    areaSize?: PrimitiveOverrideProps<TextFieldProps>;
     city?: PrimitiveOverrideProps<TextFieldProps>;
     state?: PrimitiveOverrideProps<TextFieldProps>;
     country?: PrimitiveOverrideProps<TextFieldProps>;

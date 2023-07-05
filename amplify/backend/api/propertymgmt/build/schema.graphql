@@ -70,6 +70,8 @@ type Tenant @aws_api_key {
 type Property @aws_api_key {
   id: ID!
   name: String
+  decription: String
+  areaSize: String
   city: String
   state: String
   country: String
@@ -739,6 +741,8 @@ type ModelPropertyConnection {
 input ModelPropertyFilterInput {
   id: ModelIDInput
   name: ModelStringInput
+  decription: ModelStringInput
+  areaSize: ModelStringInput
   city: ModelStringInput
   state: ModelStringInput
   country: ModelStringInput
@@ -753,6 +757,8 @@ input ModelPropertyFilterInput {
 
 input ModelPropertyConditionInput {
   name: ModelStringInput
+  decription: ModelStringInput
+  areaSize: ModelStringInput
   city: ModelStringInput
   state: ModelStringInput
   country: ModelStringInput
@@ -768,6 +774,8 @@ input ModelPropertyConditionInput {
 input CreatePropertyInput {
   id: ID
   name: String
+  decription: String
+  areaSize: String
   city: String
   state: String
   country: String
@@ -780,6 +788,8 @@ input CreatePropertyInput {
 input UpdatePropertyInput {
   id: ID!
   name: String
+  decription: String
+  areaSize: String
   city: String
   state: String
   country: String
@@ -796,6 +806,8 @@ input DeletePropertyInput {
 input ModelSubscriptionPropertyFilterInput {
   id: ModelSubscriptionIDInput
   name: ModelSubscriptionStringInput
+  decription: ModelSubscriptionStringInput
+  areaSize: ModelSubscriptionStringInput
   city: ModelSubscriptionStringInput
   state: ModelSubscriptionStringInput
   country: ModelSubscriptionStringInput

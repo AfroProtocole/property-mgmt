@@ -4,12 +4,13 @@ import { getAuth } from "firebase/auth";
 import { log } from "console";
 import { listFavorites } from "~/graphql/queries";
 import { trimGraphQLTimeStamp } from "~/utils";
+import { redirect } from "react-router-dom";
 
 export async function HomePageLoader({ request }: any) {
   const auth = getAuth();
   const user = auth.currentUser;
   const idFromDYnamo = "hgRliVrjzZMI3hKbK82aRe5Wupq2";
-  console.log("user id", user?.uid);
+  if (!user?.uid) redirect("/explore");
   try {
     let allBookmarks: any = await API.graphql({
       query: listFavorites,

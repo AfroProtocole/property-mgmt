@@ -3,3 +3,4 @@ export * from "./organization";
 export * from "./favorites";
 export * from "./property";
 export * from "./loaderData";
+export * from "./building";
