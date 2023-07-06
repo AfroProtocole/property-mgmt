@@ -148,7 +148,7 @@ const PropertyForm = () => {
             <Form.Item label="Country" name="country" rules={[{ required: true, message: 'Please enter the country' }]}>
               <Input />
             </Form.Item>
-            <Form.Item label="Picture" name="picture" rules={[{ required: true, message: 'Please upload a picture' }]}>
+            <Form.Item label="Picture" name="picture" rules={[{ required: false, message: 'Please upload a picture' }]}>
               <Input type="file" />
             </Form.Item>
           </>
@@ -273,7 +273,7 @@ const handleSubmit = async (values:any) => {
       variables: {
         input: {
           name : values.name,
-          // description : values.description,
+          description : values.description,
           zipCode : values.zipCode,
           areaSize : values.areaSize,
           country : values.country,
