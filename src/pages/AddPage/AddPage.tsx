@@ -55,7 +55,7 @@ const PropertyForm = () => {
     return null;
   };
 
-    const renderBuildingHasNoApartmentFields = () => {
+  const renderBuildingHasNoApartmentFields = () => {
       return (
         <>
       <Form.Item label="Price" name="price" rules={[{ required: true, message: 'Please select the price' }]}>
@@ -80,7 +80,7 @@ const PropertyForm = () => {
     );
   };
 
-      const renderBuildingGeneralFields = () => {
+  const renderBuildingGeneralFields = () => {
         return (
           <>
           <h2>Building Information</h2>
