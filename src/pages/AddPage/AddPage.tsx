@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Form, Input, Select, Button, Radio, Slider, AutoComplete, message } from 'antd';
 import { createProperty, updateProperty } from '~/graphql/mutations';
 import { API } from 'aws-amplify';
+import { auth} from "~/lib/firebase";
+
 
 const { Option } = Select;
 
@@ -268,6 +270,12 @@ const handleSubmit = async (values:any) => {
     delete values.entityType;
 
     try {
+      const user = auth.currentUser;
+      if (!user) {
+        throw new Error('User not authenticated');
+      }
+      const userId = user.uid;
+
       await API.graphql({
       query: createProperty,
       variables: {
@@ -277,9 +285,8 @@ const handleSubmit = async (values:any) => {
           zipCode : values.zipCode,
           areaSize : values.areaSize,
           country : values.country,
+          userID : userId,
           // picture : values.picture,
-          userID : "01", // values.userID,
-          // id : values.id,
         },
       },
     });
