@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
-import { Form, Input, Select, Button, Slider, AutoComplete} from 'antd';
+import { Form, Input, Select, Button, Radio, Slider, AutoComplete} from 'antd';
 
 const { Option } = Select;
 
 const PropertyForm = () => {
   const [entityType, setEntityType] = useState<string>('');
 
+  const [hasApartments, setHasApartments] = useState(false);
   const [apartmentCount, setApartmentCount] = useState(0);
+
+  const handleHasApartmentsChange = (e: any) => {
+    const value = e.target.value;
+    setHasApartments(value);
+    setApartmentCount(0); // Reset apartment count when changing the option
+  };
 
   const handleApartmentCountChange = (value: number) => {
     setApartmentCount(value);
@@ -119,14 +126,29 @@ const PropertyForm = () => {
       filterOption={(inputValue, option) =>
       option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}/>
       </Form.Item>
-      <Form.Item label="Number of Apartments" name="apartmentCount">
-        <Select onChange={handleApartmentCountChange}>
-          <Option value={0}>0</Option>
-          <Option value={1}>1</Option>
-          <Option value={2}>2</Option>
-        </Select>
+        <Form.Item label="Has Apartments" name="hasApartments" rules={[{ required: true, message: 'Please select an option' }]}>
+        <Radio.Group onChange={handleHasApartmentsChange}>
+          <Radio value={false}>No</Radio>
+          <Radio value={true}>Yes</Radio>
+        </Radio.Group>
       </Form.Item>
-      {renderApartmentFields()}
+      {hasApartments && (
+        <>
+          <Form.Item label="Number of Apartments" name="apartmentCount">
+            <Select onChange={handleApartmentCountChange}>
+              <Option value={0}>0</Option>
+              <Option value={1}>1</Option>
+              <Option value={2}>2</Option>
+            </Select>
+          </Form.Item>
+          {apartmentCount > 0 && (
+            <>
+              <h2>Apartment Information</h2>
+              {renderApartmentFields()}
+            </>
+          )}
+        </>
+      )}
           </>
         );
       case 'apartment':
