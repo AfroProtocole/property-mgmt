@@ -69,7 +69,7 @@ type Tenant @model @aws_api_key {
 type Property @model @aws_api_key {
   id: ID!
   name: String
-  decription: String
+  description: String
   areaSize: String
   city: String
   state: String

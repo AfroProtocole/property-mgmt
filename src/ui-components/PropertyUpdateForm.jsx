@@ -25,7 +25,7 @@ export default function PropertyUpdateForm(props) {
   } = props;
   const initialValues = {
     name: "",
-    decription: "",
+    description: "",
     areaSize: "",
     city: "",
     state: "",
@@ -36,7 +36,9 @@ export default function PropertyUpdateForm(props) {
     organizationID: "",
   };
   const [name, setName] = React.useState(initialValues.name);
-  const [decription, setDecription] = React.useState(initialValues.decription);
+  const [description, setDescription] = React.useState(
+    initialValues.description
+  );
   const [areaSize, setAreaSize] = React.useState(initialValues.areaSize);
   const [city, setCity] = React.useState(initialValues.city);
   const [state, setState] = React.useState(initialValues.state);
@@ -53,7 +55,7 @@ export default function PropertyUpdateForm(props) {
       ? { ...initialValues, ...propertyRecord }
       : initialValues;
     setName(cleanValues.name);
-    setDecription(cleanValues.decription);
+    setDescription(cleanValues.description);
     setAreaSize(cleanValues.areaSize);
     setCity(cleanValues.city);
     setState(cleanValues.state);
@@ -77,7 +79,7 @@ export default function PropertyUpdateForm(props) {
   React.useEffect(resetStateValues, [propertyRecord]);
   const validations = {
     name: [],
-    decription: [],
+    description: [],
     areaSize: [],
     city: [],
     state: [],
@@ -114,7 +116,7 @@ export default function PropertyUpdateForm(props) {
         event.preventDefault();
         let modelFields = {
           name,
-          decription,
+          description,
           areaSize,
           city,
           state,
@@ -179,7 +181,7 @@ export default function PropertyUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name: value,
-              decription,
+              description,
               areaSize,
               city,
               state,
@@ -203,16 +205,16 @@ export default function PropertyUpdateForm(props) {
         {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
-        label="Decription"
+        label="Description"
         isRequired={false}
         isReadOnly={false}
-        value={decription}
+        value={description}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               name,
-              decription: value,
+              description: value,
               areaSize,
               city,
               state,
@@ -223,17 +225,17 @@ export default function PropertyUpdateForm(props) {
               organizationID,
             };
             const result = onChange(modelFields);
-            value = result?.decription ?? value;
+            value = result?.description ?? value;
           }
-          if (errors.decription?.hasError) {
-            runValidationTasks("decription", value);
+          if (errors.description?.hasError) {
+            runValidationTasks("description", value);
           }
-          setDecription(value);
+          setDescription(value);
         }}
-        onBlur={() => runValidationTasks("decription", decription)}
-        errorMessage={errors.decription?.errorMessage}
-        hasError={errors.decription?.hasError}
-        {...getOverrideProps(overrides, "decription")}
+        onBlur={() => runValidationTasks("description", description)}
+        errorMessage={errors.description?.errorMessage}
+        hasError={errors.description?.hasError}
+        {...getOverrideProps(overrides, "description")}
       ></TextField>
       <TextField
         label="Area size"
@@ -245,7 +247,7 @@ export default function PropertyUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              decription,
+              description,
               areaSize: value,
               city,
               state,
@@ -278,7 +280,7 @@ export default function PropertyUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              decription,
+              description,
               areaSize,
               city: value,
               state,
@@ -311,7 +313,7 @@ export default function PropertyUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              decription,
+              description,
               areaSize,
               city,
               state: value,
@@ -344,7 +346,7 @@ export default function PropertyUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              decription,
+              description,
               areaSize,
               city,
               state,
@@ -377,7 +379,7 @@ export default function PropertyUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              decription,
+              description,
               areaSize,
               city,
               state,
@@ -410,7 +412,7 @@ export default function PropertyUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              decription,
+              description,
               areaSize,
               city,
               state,
@@ -443,7 +445,7 @@ export default function PropertyUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              decription,
+              description,
               areaSize,
               city,
               state,
@@ -476,7 +478,7 @@ export default function PropertyUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              decription,
+              description,
               areaSize,
               city,
               state,
