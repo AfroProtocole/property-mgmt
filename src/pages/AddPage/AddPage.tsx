@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Select, Button } from 'antd';
+import { Form, Input, Select, Button, Slider, AutoComplete} from 'antd';
 
 const { Option } = Select;
 
@@ -17,6 +17,11 @@ const PropertyForm = () => {
     setEntityType(value);
   };
 
+  const contactOptions = [
+  { value: 'John Doe' },
+  { value: 'Jane Smith' },
+  { value: 'Michael Johnson' },
+];
 
    const renderApartmentFields = () => {
     if (apartmentCount > 0) {
@@ -73,7 +78,7 @@ const PropertyForm = () => {
       case 'building':
         return (
           <>
-             <h2>Building Information</h2>
+      <h2>Building Information</h2>
       <Form.Item label="Building Name" name="buildingName">
         <Input />
       </Form.Item>
@@ -104,15 +109,21 @@ const PropertyForm = () => {
       <Form.Item label="Year of Construction" name="yearOfConstruction">
         <Input />
       </Form.Item>
-      <Form.Item label="Special Notes" name="specialNotes">
+      <Form.Item label="Description" name="description">
       <Input.TextArea />
       </Form.Item>
-            <Form.Item label="Number of Apartments" name="apartmentCount">
+      <Form.Item label="Contact to Ask" name="contact">
+      <AutoComplete
+      options={contactOptions}
+      placeholder="Start typing..."
+      filterOption={(inputValue, option) =>
+      option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}/>
+      </Form.Item>
+      <Form.Item label="Number of Apartments" name="apartmentCount">
         <Select onChange={handleApartmentCountChange}>
           <Option value={0}>0</Option>
           <Option value={1}>1</Option>
           <Option value={2}>2</Option>
-          {/* Add more options based on your requirement */}
         </Select>
       </Form.Item>
       {renderApartmentFields()}
@@ -122,39 +133,46 @@ const PropertyForm = () => {
         return (
           <>
       <h2>Apartment Information</h2>
-      <Form.Item label="Apartment Number" name="apartmentNumber">
+      <Form.Item label="Apartment Number" name="apartmentNumber" rules={[{ required: true, message: 'Please select the apartment number' }]}>
         <Input />
+      </Form.Item>
+      <Form.Item label="Building" name="building" rules={[{ required: true, message: 'Please select the building' }]}>
+        <Select>
+            <Option value="Building 1">Building 1</Option>
+            <Option value="Building 2">Building 2</Option>
+        </Select>
+      </Form.Item>
+      <Form.Item label="Price" name="price" rules={[{ required: true, message: 'Please select the price' }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item label="Date of Availability" name="availabilityDate" rules={[{ required: true, message: 'Please select the date of availability' }]}>
+        <Input type="date" />
       </Form.Item>
       <Form.Item label="Size" name="size">
         <Input />
       </Form.Item>
-      <Form.Item label="Building" name="building">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Date of Availability" name="availabilityDate">
-        <Input type="date" />
-      </Form.Item>
-      <Form.Item label="Contact to Ask" name="contact">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Price" name="price">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Number of Bathrooms" name="bathrooms">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Number of Stairs" name="stairs">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Number of Bedrooms" name="bedrooms">
-        <Input />
-      </Form.Item>
+<Form.Item label="Number of Bathrooms" name="bathrooms">
+  <Slider min={1} max={5} tooltipVisible tipFormatter={value => `${value}`} />
+</Form.Item>
+<Form.Item label="Number of Stairs" name="stairs">
+  <Slider min={1} max={10} tooltipVisible tipFormatter={value => `${value}`} />
+</Form.Item>
+<Form.Item label="Number of Bedrooms" name="bedrooms">
+  <Slider min={1} max={10} tooltipVisible tipFormatter={value => `${value}`} />
+</Form.Item>
       <Form.Item label="Pictures" name="pictures">
         <Input type="file" multiple />
       </Form.Item>
       <Form.Item label="Description" name="description">
         <Input.TextArea />
       </Form.Item>
+ <Form.Item label="Contact to Ask" name="contact">
+  <AutoComplete
+    options={contactOptions}
+    placeholder="Start typing..."
+    filterOption={(inputValue, option) =>
+      option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}/>
+</Form.Item>
           </>
         );
       default:
