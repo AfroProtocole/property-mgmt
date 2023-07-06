@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Input, Select, Button, Radio, Slider, AutoComplete } from 'antd';
+import { Form, Input, Select, Button, Radio, Slider, AutoComplete, message } from 'antd';
+import { createProperty, updateProperty } from '~/graphql/mutations';
+import { API } from 'aws-amplify';
 
 const { Option } = Select;
 
@@ -131,7 +133,7 @@ const PropertyForm = () => {
   const renderPropertyFields = () => {
     return (
                <>
-            <Form.Item label="Property Name" name="propertyName" rules={[{ required: true, message: 'Please enter the property name' }]}>
+            <Form.Item label="Property Name" name="name" rules={[{ required: true, message: 'Please enter the property name' }]}>
               <Input />
             </Form.Item>
             <Form.Item label="Description" name="description" rules={[{ required: true, message: 'Please enter the property description' }]}>
@@ -260,9 +262,33 @@ const PropertyForm = () => {
     }
   };
 
-    const handleSubmit = (values: any) => {
-    // Handle form submission
-    console.log(values);
+const handleSubmit = async (values:any) => {
+    // Perform any necessary processing or validation before submitting
+    console.log('Submitting form:', values);
+    delete values.entityType;
+
+    try {
+      await API.graphql({
+      query: createProperty,
+      variables: {
+        input: {
+          name : values.name,
+          // description : values.description,
+          zipCode : values.zipCode,
+          areaSize : values.areaSize,
+          country : values.country,
+          // picture : values.picture,
+          userID : "01", // values.userID,
+          // id : values.id,
+        },
+      },
+    });
+        console.log('Form submitted successfully');
+        message.success('Form submitted successfully');
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        message.error('Error submitting form');
+    }
   };
 
   return (
