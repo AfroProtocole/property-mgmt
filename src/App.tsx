@@ -25,7 +25,10 @@ import {
   ServiceRequestPage,
   InventoryOfFixturesPage,
   AddPage,
-  MessagesPage
+  MessagesPage,
+  SettingsPage,
+  HelpPage,
+  AccountPage,
 } from "./pages";
 import { FinancePage } from "./pages";
 import { auth } from "./lib/firebase"; // Import your Firebase auth instance
@@ -292,6 +295,51 @@ const App: React.FC = () => {
             PageContent={
               <div style={pageStyling}>
                 {user ? <MessagesPage /> : <Navigate to="/" replace={true} />}
+              </div>
+            }
+          />
+        }
+      />
+      <Route
+        path="/account"
+        element={
+          <AppLayout
+            TopNavigation={<TopNavigation />}
+            SideNavigation={user ? <SideNavigation /> : <></>}
+            SideAction={user ? <SideActions /> : <></>}
+            PageContent={
+              <div style={pageStyling}>
+                {user ? <AccountPage /> : <Navigate to="/" replace={true} />}
+              </div>
+            }
+          />
+        }
+      />
+      <Route
+        path="/settings"
+        element={
+          <AppLayout
+            TopNavigation={<TopNavigation />}
+            SideNavigation={user ? <SideNavigation /> : <></>}
+            SideAction={user ? <SideActions /> : <></>}
+            PageContent={
+              <div style={pageStyling}>
+                {user ? <SettingsPage /> : <Navigate to="/" replace={true} />}
+              </div>
+            }
+          />
+        }
+      />
+      <Route
+        path="/help"
+        element={
+          <AppLayout
+            TopNavigation={<TopNavigation />}
+            SideNavigation={user ? <SideNavigation /> : <></>}
+            SideAction={user ? <SideActions /> : <></>}
+            PageContent={
+              <div style={pageStyling}>
+                {user ? <HelpPage /> : <Navigate to="/" replace={true} />}
               </div>
             }
           />
