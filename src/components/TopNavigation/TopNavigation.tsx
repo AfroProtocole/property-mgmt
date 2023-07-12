@@ -69,13 +69,13 @@ const TopNavigation: React.FC = () => {
 
   const handleMenuClick = ({ key }: { key: string }) => {
     if (key === "account") {
-      // Handle account click
+      navigate("/account");
     } else if (key === "settings") {
-      // Handle settings click
+      navigate("/settings");
     } else if (key === "signout") {
       handleLogout();
     } else if (key === "help") {
-      // Handle help click
+      navigate("/help");
     }else if (key === "add") {
       handleAdd();
     }
@@ -160,6 +160,7 @@ const userContent = (
           type="primary"
           icon={<InboxOutlined />}
           style={{ marginRight: "0.5rem" }}
+          onClick={() => navigate("/messages")}
         />
         <Popover placement="bottomRight" content={userContent} trigger="click">
           <Button

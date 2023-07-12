@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Form, Input, Select, Button, Radio, Slider, AutoComplete, message } from 'antd';
 import { createProperty, updateProperty } from '~/graphql/mutations';
 import { API } from 'aws-amplify';
+import { auth} from "~/lib/firebase";
+
 import AWS from "aws-sdk";
 
 const { Option } = Select;
@@ -435,23 +437,28 @@ const PropertyForm = () => {
     delete values.entityType;
 
     try {
+      const user = auth.currentUser;
+      if (!user) {
+        throw new Error('User not authenticated');
+      }
+      const userId = user.uid;
+
       await API.graphql({
-        query: createProperty,
-        variables: {
-          input: {
-            name: values.name,
-            description: values.description,
-            zipCode: values.zipCode,
-            areaSize: values.areaSize,
-            country: values.country,
-            // picture : values.picture,
-            userID: "01", // values.userID,
-            // id : values.id,
-          },
+      query: createProperty,
+      variables: {
+        input: {
+          name : values.name,
+          description : values.description,
+          zipCode : values.zipCode,
+          areaSize : values.areaSize,
+          country : values.country,
+          userID : userId,
+          // picture : values.picture,
         },
-      });
-      console.log("Form submitted successfully");
-      message.success("Form submitted successfully");
+      },
+    });
+        console.log('Form submitted successfully');
+        message.success('Form submitted successfully');
     } catch (error) {
       console.error("Error submitting form:", error);
       message.error("Error submitting form");

@@ -8,3 +8,7 @@ export * from "./ServiceRequestPage";
 export * from "./InventoryOfFixturesPage";
 export * from "./OrganizationPages/CreateOrganizationPage";
 export * from "./AddPage";
+export * from "./MessagesPage";
+export * from "./AccountPage";
+export * from "./HelpPage";
+export * from "./SettingsPage";
