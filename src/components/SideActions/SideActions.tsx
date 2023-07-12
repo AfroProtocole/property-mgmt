@@ -42,6 +42,7 @@ const SideActions = () => {
           background: colorBgContainer,
           marginLeft: "2rem",
           height: "100%",
+          borderLeft: "1px solid grey",
         }}
       >
         <Menu

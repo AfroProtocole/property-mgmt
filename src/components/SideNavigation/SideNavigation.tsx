@@ -23,7 +23,13 @@ const SideNavigation = () => {
   return (
     <Sider
       width={200}
-      style={{ background: colorBgContainer, marginRight: "2rem" }}
+      style={{
+        background: colorBgContainer,
+        marginRight: "2rem",
+        borderRight: "1px solid grey",
+        padding: 0,
+        marginLeft: 0,
+      }}
       collapsible={true}
       collapsed={isMenuCollapsed}
       reverseArrow={false}

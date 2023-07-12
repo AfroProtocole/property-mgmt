@@ -1,14 +1,13 @@
-import { Alert, Breadcrumb, Button, Card, Typography } from "antd";
-import { Content } from "antd/es/layout/layout";
+import { Alert, Breadcrumb, Card, Tooltip, Typography } from "antd";
 import {
   ApartmentOutlined,
   FormOutlined,
+  InfoCircleOutlined,
   RightOutlined,
   UsergroupAddOutlined,
 } from "@ant-design/icons";
 import { MainBookmarkSetting } from "./components";
-import React from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { favorites } from "~/types";
 import { HomeOutlined } from "@ant-design/icons";
 
@@ -25,6 +24,23 @@ const HomePage = () => {
           <HomeOutlined />
         </Breadcrumb.Item>
       </Breadcrumb>
+
+      <Alert
+        showIcon
+        type="info"
+        description={
+          <div>
+            <Typography.Paragraph>
+              Use the following quick links to navigate/manage your properties!
+              More options can be found in the Side menu on the left, or in the
+              help link below
+            </Typography.Paragraph>
+            <Typography.Paragraph>
+              <Link to="/help">Help</Link>
+            </Typography.Paragraph>
+          </div>
+        }
+      />
       <section
         style={{
           display: "flex",
@@ -52,7 +68,12 @@ const HomePage = () => {
         </div>
       </section>
 
-      <Typography.Title level={5}>All Bookmarks</Typography.Title>
+      <Typography.Title level={5}>
+        All Bookmarks{" "}
+        <Tooltip title="Access and manage your currently bookmarked units/buildings/properties below!">
+          <InfoCircleOutlined />
+        </Tooltip>
+      </Typography.Title>
       <Card bodyStyle={{ display: "flex", justifyContent: "space-between" }}>
         {loaderData.data.length ? (
           <>

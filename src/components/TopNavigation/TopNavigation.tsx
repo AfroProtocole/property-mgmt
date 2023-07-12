@@ -120,6 +120,7 @@ const userContent = (
         padding: 0,
         display: "flex",
         alignItems: "center",
+        // borderBottom: "1px solid grey",
       }}
     >
       <div

@@ -272,7 +272,7 @@ const App: React.FC = () => {
           <AppLayout
             TopNavigation={<TopNavigation />}
             SideNavigation={user ? <SideNavigation /> : <></>}
-            SideAction={user ? <SideActions /> : <></>}
+            SideAction={user ? <></> : <></>}
             PageContent={
               <div style={pageStyling}>
                 {user ? <AddPage /> : <Navigate to="/" replace={true} />}

@@ -2,13 +2,31 @@ import React, { useState } from 'react';
 import { Form, Input, Select, Button, Radio, Slider, AutoComplete, message } from 'antd';
 import { createProperty, updateProperty } from '~/graphql/mutations';
 import { API } from 'aws-amplify';
+import AWS from "aws-sdk";
 
 const { Option } = Select;
 
 const PropertyForm = () => {
-  const [entityType, setEntityType] = useState<string>('');
+  const [entityType, setEntityType] = useState<string>("");
   const [hasApartments, setHasApartments] = useState(false);
   const [apartmentCount, setApartmentCount] = useState(0);
+  const s3 = new AWS.S3();
+  const [imageUrl, setImageUrl] = useState("");
+  const [file, setFile] = useState(null);
+
+  // const uploadToS3 = async () => {
+  //   if (!file) {
+  //     return;
+  //   }
+  //   const params = {
+  //     Bucket: "<Your-Bucket-name>",
+  //     Key: `${Date.now()}.${file.name}`,
+  //     Body: file,
+  //   };
+  //   const { Location } = await s3.upload(params).promise();
+  //   setImageUrl(Location);
+  //   console.log("uploading to s3", Location);
+  // };
 
   const handleHasApartmentsChange = (e: any) => {
     const value = e.target.value;
@@ -25,9 +43,9 @@ const PropertyForm = () => {
   };
 
   const contactOptions = [
-    { value: 'John Doe' },
-    { value: 'Jane Smith' },
-    { value: 'Michael Johnson' },
+    { value: "John Doe" },
+    { value: "Jane Smith" },
+    { value: "Michael Johnson" },
   ];
 
   const renderBuildingApartmentFields = () => {
@@ -38,15 +56,37 @@ const PropertyForm = () => {
         apartmentFields.push(
           <div key={i}>
             <h3>Apartment {i}</h3>
-           <Form.Item label="Apartment Number" name="apartmentNumber" rules={[{ required: true, message: 'Please select the apartment number' }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label="Price" name="price" rules={[{ required: true, message: 'Please select the price' }]}>
-           <Input />
-          </Form.Item>
-          <Form.Item label="Date of Availability" name="availabilityDate" rules={[{ required: true, message: 'Please select the date of availability' }]}>
-           <Input type="date" />
-         </Form.Item>
+            <Form.Item
+              label="Apartment Number"
+              name="apartmentNumber"
+              rules={[
+                {
+                  required: true,
+                  message: "Please select the apartment number",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Price"
+              name="price"
+              rules={[{ required: true, message: "Please select the price" }]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Date of Availability"
+              name="availabilityDate"
+              rules={[
+                {
+                  required: true,
+                  message: "Please select the date of availability",
+                },
+              ]}
+            >
+              <Input type="date" />
+            </Form.Item>
           </div>
         );
       }
@@ -58,100 +98,186 @@ const PropertyForm = () => {
   };
 
   const renderBuildingHasNoApartmentFields = () => {
-      return (
-        <>
-      <Form.Item label="Price" name="price" rules={[{ required: true, message: 'Please select the price' }]}>
+    return (
+      <>
+        <Form.Item
+          label="Price"
+          name="price"
+          rules={[{ required: true, message: "Please select the price" }]}
+        >
           <Input />
-      </Form.Item>
-      <Form.Item label="Date of Availability" name="availabilityDate" rules={[{ required: true, message: 'Please select the date of availability' }]}>
-        <Input type="date" />
-      </Form.Item>
-      {/* <Form.Item label="Size" name="size">
+        </Form.Item>
+        <Form.Item
+          label="Date of Availability"
+          name="availabilityDate"
+          rules={[
+            {
+              required: true,
+              message: "Please select the date of availability",
+            },
+          ]}
+        >
+          <Input type="date" />
+        </Form.Item>
+        {/* <Form.Item label="Size" name="size">
         <Input />
       </Form.Item> */}
-      <Form.Item label="Number of Bathrooms" name="bathrooms">
-        <Slider min={1} max={5} tooltipVisible tipFormatter={value => `${value}`} />
-      </Form.Item>
-      <Form.Item label="Number of Stairs" name="stairs">
-        <Slider min={1} max={10} tooltipVisible tipFormatter={value => `${value}`} />
-      </Form.Item>
-      <Form.Item label="Number of Bedrooms" name="bedrooms">
-        <Slider min={1} max={10} tooltipVisible tipFormatter={value => `${value}`} />
-      </Form.Item>
-        </>
+        <Form.Item label="Number of Bathrooms" name="bathrooms">
+          <Slider
+            min={1}
+            max={5}
+            tooltipVisible
+            tipFormatter={(value) => `${value}`}
+          />
+        </Form.Item>
+        <Form.Item label="Number of Stairs" name="stairs">
+          <Slider
+            min={1}
+            max={10}
+            tooltipVisible
+            tipFormatter={(value) => `${value}`}
+          />
+        </Form.Item>
+        <Form.Item label="Number of Bedrooms" name="bedrooms">
+          <Slider
+            min={1}
+            max={10}
+            tooltipVisible
+            tipFormatter={(value) => `${value}`}
+          />
+        </Form.Item>
+      </>
     );
   };
 
   const renderBuildingGeneralFields = () => {
-        return (
-          <>
-          <h2>Building Information</h2>
-          <Form.Item label="Building Name" name="buildingName">
-            <Input />
-          </Form.Item>
-          <Form.Item label="Street" name="street" rules={[{ required: true, message: 'Please select the street'}]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label="City" name="city" rules={[{ required: true, message: 'Please select the city'}]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label="State" name="state" rules={[{ required: true, message: 'Please select the state'}]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label="ZIP" name="zip" rules={[{ required: true, message: 'Please select the zip' }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label="Country" name="country" rules={[{ required: true, message: 'Please select the country'}]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label="Property" name="property" rules={[{ required: true, message: 'Please select the property' }]}>
-            <Select>
-              <Option value="Property 1">Property 1</Option>
-              <Option value="Property 2">Property 2</Option>
-            </Select>
-          </Form.Item>
-          <Form.Item label="Pictures" name="pictures">
-            <Input type="file" multiple />
-          </Form.Item>
-          <Form.Item label="Description" name="description">
+    return (
+      <>
+        <h2>Building Information</h2>
+        <Form.Item label="Building Name" name="buildingName">
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Street"
+          name="street"
+          rules={[{ required: true, message: "Please select the street" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="City"
+          name="city"
+          rules={[{ required: true, message: "Please select the city" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="State"
+          name="state"
+          rules={[{ required: true, message: "Please select the state" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="ZIP"
+          name="zip"
+          rules={[{ required: true, message: "Please select the zip" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Country"
+          name="country"
+          rules={[{ required: true, message: "Please select the country" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Property"
+          name="property"
+          rules={[{ required: true, message: "Please select the property" }]}
+        >
+          <Select>
+            <Option value="Property 1">Property 1</Option>
+            <Option value="Property 2">Property 2</Option>
+          </Select>
+        </Form.Item>
+        <Form.Item label="Pictures" name="pictures">
+          <Input type="file" multiple />
+        </Form.Item>
+        <Form.Item label="Description" name="description">
           <Input.TextArea />
-          </Form.Item>
-           <Form.Item label="Year of Construction" name="yearOfConstruction">
-            <Input />
-          </Form.Item>
-          <Form.Item label="Contact to Ask" name="contact">
+        </Form.Item>
+        <Form.Item label="Year of Construction" name="yearOfConstruction">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Contact to Ask" name="contact">
           <AutoComplete
-          options={contactOptions}
-          placeholder="Start typing..."
-          filterOption={(inputValue, option) =>
-          option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}/>
-        </Form.Item>          
-          </>
+            options={contactOptions}
+            placeholder="Start typing..."
+            filterOption={(inputValue, option) =>
+              option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
+              -1
+            }
+          />
+        </Form.Item>
+      </>
     );
   };
 
   const renderPropertyFields = () => {
     return (
-               <>
-            <Form.Item label="Property Name" name="name" rules={[{ required: true, message: 'Please enter the property name' }]}>
-              <Input />
-            </Form.Item>
-            <Form.Item label="Description" name="description" rules={[{ required: true, message: 'Please enter the property description' }]}>
-              <Input.TextArea />
-            </Form.Item>
-            <Form.Item label="ZIP Code" name="zipCode" rules={[{ required: true, message: 'Please enter the ZIP code' }]}>
-              <Input />
-            </Form.Item>
-            <Form.Item label="Area Size" name="areaSize" rules={[{ required: true, message: 'Please enter the area size' }]}>
-              <Input />
-            </Form.Item>
-            <Form.Item label="Country" name="country" rules={[{ required: true, message: 'Please enter the country' }]}>
-              <Input />
-            </Form.Item>
-            <Form.Item label="Picture" name="picture" rules={[{ required: false, message: 'Please upload a picture' }]}>
-              <Input type="file" />
-            </Form.Item>
-          </>
+      <>
+        <Form.Item
+          label="Property Name"
+          name="name"
+          rules={[
+            { required: true, message: "Please enter the property name" },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Description"
+          name="description"
+          rules={[
+            {
+              required: true,
+              message: "Please enter the property description",
+            },
+          ]}
+        >
+          <Input.TextArea />
+        </Form.Item>
+        <Form.Item
+          label="ZIP Code"
+          name="zipCode"
+          rules={[{ required: true, message: "Please enter the ZIP code" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Area Size"
+          name="areaSize"
+          rules={[{ required: true, message: "Please enter the area size" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Country"
+          name="country"
+          rules={[{ required: true, message: "Please enter the country" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Picture"
+          name="picture"
+          rules={[{ required: false, message: "Please upload a picture" }]}
+        >
+          <Input type="file" />
+        </Form.Item>
+      </>
     );
   };
 
@@ -160,7 +286,11 @@ const PropertyForm = () => {
       <>
         {renderBuildingGeneralFields()}
 
-        <Form.Item label="Has Apartments" name="hasApartments" rules={[{ required: true, message: 'Please select an option' }]}>
+        <Form.Item
+          label="Has Apartments"
+          name="hasApartments"
+          rules={[{ required: true, message: "Please select an option" }]}
+        >
           <Radio.Group onChange={handleHasApartmentsChange}>
             <Radio value={false}>No</Radio>
             <Radio value={true}>Yes</Radio>
@@ -189,11 +319,7 @@ const PropertyForm = () => {
           </>
         )}
 
-        {!hasApartments && (
-          <>
-            {renderBuildingHasNoApartmentFields()}
-          </>
-        )}
+        {!hasApartments && <>{renderBuildingHasNoApartmentFields()}</>}
       </>
     );
   };
@@ -201,60 +327,101 @@ const PropertyForm = () => {
   const renderApartmentFields = () => {
     return (
       <>
-      <h2>Apartment Information</h2>
-      <Form.Item label="Apartment Number" name="apartmentNumber" rules={[{ required: true, message: 'Please select the apartment number' }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item label="Building" name="building" rules={[{ required: true, message: 'Please select the building' }]}>
-        <Select>
+        <h2>Apartment Information</h2>
+        <Form.Item
+          label="Apartment Number"
+          name="apartmentNumber"
+          rules={[
+            { required: true, message: "Please select the apartment number" },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Building"
+          name="building"
+          rules={[{ required: true, message: "Please select the building" }]}
+        >
+          <Select>
             <Option value="Building 1">Building 1</Option>
             <Option value="Building 2">Building 2</Option>
-        </Select>
-      </Form.Item>
-      <Form.Item label="Price" name="price" rules={[{ required: true, message: 'Please select the price' }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item label="Date of Availability" name="availabilityDate" rules={[{ required: true, message: 'Please select the date of availability' }]}>
-        <Input type="date" />
-      </Form.Item>
-      {/* <Form.Item label="Size" name="size">
+          </Select>
+        </Form.Item>
+        <Form.Item
+          label="Price"
+          name="price"
+          rules={[{ required: true, message: "Please select the price" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Date of Availability"
+          name="availabilityDate"
+          rules={[
+            {
+              required: true,
+              message: "Please select the date of availability",
+            },
+          ]}
+        >
+          <Input type="date" />
+        </Form.Item>
+        {/* <Form.Item label="Size" name="size">
         <Input />
       </Form.Item> */}
-      <Form.Item label="Number of Bathrooms" name="bathrooms">
-        <Slider min={1} max={5} tooltipVisible tipFormatter={value => `${value}`} />
-      </Form.Item>
-      <Form.Item label="Number of Stairs" name="stairs">
-        <Slider min={1} max={10} tooltipVisible tipFormatter={value => `${value}`} />
-      </Form.Item>
-      <Form.Item label="Number of Bedrooms" name="bedrooms">
-        <Slider min={1} max={10} tooltipVisible tipFormatter={value => `${value}`} />
-      </Form.Item>
-      <Form.Item label="Pictures" name="pictures">
-        <Input type="file" multiple />
-      </Form.Item>
-      <Form.Item label="Description" name="description">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item label="Contact to Ask" name="contact">
-        <AutoComplete
-          options={contactOptions}
-          placeholder="Start typing..."
-          filterOption={(inputValue, option) =>
-            option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}/>
-      </Form.Item>
+        <Form.Item label="Number of Bathrooms" name="bathrooms">
+          <Slider
+            min={1}
+            max={5}
+            tooltipVisible
+            tipFormatter={(value) => `${value}`}
+          />
+        </Form.Item>
+        <Form.Item label="Number of Stairs" name="stairs">
+          <Slider
+            min={1}
+            max={10}
+            tooltipVisible
+            tipFormatter={(value) => `${value}`}
+          />
+        </Form.Item>
+        <Form.Item label="Number of Bedrooms" name="bedrooms">
+          <Slider
+            min={1}
+            max={10}
+            tooltipVisible
+            tipFormatter={(value) => `${value}`}
+          />
+        </Form.Item>
+        <Form.Item label="Pictures" name="pictures">
+          <Input type="file" multiple />
+        </Form.Item>
+        <Form.Item label="Description" name="description">
+          <Input.TextArea />
+        </Form.Item>
+        <Form.Item label="Contact to Ask" name="contact">
+          <AutoComplete
+            options={contactOptions}
+            placeholder="Start typing..."
+            filterOption={(inputValue, option) =>
+              option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
+              -1
+            }
+          />
+        </Form.Item>
       </>
     );
   };
 
   const renderFormFields = () => {
     switch (entityType) {
-      case 'property':
+      case "property":
         return renderPropertyFields();
 
-      case 'building':
+      case "building":
         return renderBuildingFields();
 
-      case 'apartment':
+      case "apartment":
         return renderApartmentFields();
 
       default:
@@ -262,39 +429,43 @@ const PropertyForm = () => {
     }
   };
 
-const handleSubmit = async (values:any) => {
+  const handleSubmit = async (values: any) => {
     // Perform any necessary processing or validation before submitting
-    console.log('Submitting form:', values);
+    console.log("Submitting form:", values);
     delete values.entityType;
 
     try {
       await API.graphql({
-      query: createProperty,
-      variables: {
-        input: {
-          name : values.name,
-          description : values.description,
-          zipCode : values.zipCode,
-          areaSize : values.areaSize,
-          country : values.country,
-          // picture : values.picture,
-          userID : "01", // values.userID,
-          // id : values.id,
+        query: createProperty,
+        variables: {
+          input: {
+            name: values.name,
+            description: values.description,
+            zipCode: values.zipCode,
+            areaSize: values.areaSize,
+            country: values.country,
+            // picture : values.picture,
+            userID: "01", // values.userID,
+            // id : values.id,
+          },
         },
-      },
-    });
-        console.log('Form submitted successfully');
-        message.success('Form submitted successfully');
+      });
+      console.log("Form submitted successfully");
+      message.success("Form submitted successfully");
     } catch (error) {
-        console.error('Error submitting form:', error);
-        message.error('Error submitting form');
+      console.error("Error submitting form:", error);
+      message.error("Error submitting form");
     }
   };
 
   return (
-        <Form onFinish={handleSubmit}>
+    <Form onFinish={handleSubmit}>
       {/* ... other common fields */}
-      <Form.Item label="Entity Type" name="entityType" rules={[{ required: true, message: 'Please select the entity type' }]}>
+      <Form.Item
+        label="Entity Type"
+        name="entityType"
+        rules={[{ required: true, message: "Please select the entity type" }]}
+      >
         <Select onChange={handleEntityTypeChange}>
           <Option value="property">Property</Option>
           <Option value="building">Building</Option>
@@ -304,7 +475,7 @@ const handleSubmit = async (values:any) => {
 
       {renderFormFields()}
 
-       <Form.Item>
+      <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
